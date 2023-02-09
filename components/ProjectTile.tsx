@@ -79,7 +79,7 @@ export const ProjectTile: FunctionComponent<TileProps> = ({title, image, descrip
                     {description}
                 </p>
 
-                <a href="" target="_blank">
+                <a href="components" target="_blank">
                     <button className="flex mx-auto rounded-xl text-lg font-bold px-6 py-2 mt-4 bg-gray-500 transition ease-in duration-200 hover:scale-110 hover:bg-green-500">View Project</button>
                 </a>
             </div>

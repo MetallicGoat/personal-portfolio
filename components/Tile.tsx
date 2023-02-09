@@ -24,7 +24,7 @@ interface TileProps {
     hashTags: string[];
 }
 
-const Tile: FunctionComponent<TileProps> = ({title, image, description,  hashTags}) => {
+export const Tile: FunctionComponent<TileProps> = ({title, image, description,  hashTags}) => {
     return(
         <div className="bg-gray-200 border-4 basis-1/2 sm:basis-1/3 lg:basis-1/4 flex-1 max-w-sm rounded-xl overflow-hidden shadow-lg" >
             <Image className="w-full" src={image} alt="Image failed to load!"/>
@@ -56,5 +56,3 @@ const HashTag: FunctionComponent<HashTagProps> = ({hashTags}) => {
 
     return <div className="px-6 pt-4 pb-2">{tags}</div>
 };
-
-export default Tile;

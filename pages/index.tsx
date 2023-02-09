@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Tile from "./components/Tile"
 import Image from "next/image";
 
 import blank_img from "@/public/blank_img.jpg";
@@ -12,7 +11,8 @@ import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.w
 
 import {BsDiscord, BsFillMoonStarsFill, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent, useState} from "react";
-import {CompatibleBubble, ProjectStatus, ProjectTile} from "@/pages/components/ProjectTile";
+import {ProjectTile, CompatibleBubble, ProjectStatus} from "@/components/ProjectTile";
+import {Tile} from "@/components/Tile";
 
 export default function Home() {
 
