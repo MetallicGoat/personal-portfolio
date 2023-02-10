@@ -6,6 +6,8 @@ import mbedwars_icon from "@/public/logos/mbedwars.png";
 import spigot_icon from "@/public/logos/spigot.png";
 import papermc_icon from "@/public/logos/papermc.png";
 
+import {BsGithub} from 'react-icons/bs';
+
 export enum ProjectStatus {
     Ongoing = 'ACTIVE DEVELOPMENT',
     OnHold = 'ON HOLD',
@@ -16,13 +18,13 @@ export enum ProjectStatus {
 function getStatusClass(status: ProjectStatus) {
     switch (status) {
         case ProjectStatus.Ongoing:
-            return 'bg-lime-500';
+            return 'bg-gradient-to-r from-green-500 to-lime-500';
         case ProjectStatus.OnHold:
-            return 'bg-yellow-400';
+            return 'bg-gradient-to-r from-yellow-600 to-yellow-400';
         case ProjectStatus.Retired:
-            return 'bg-red-400';
+            return 'bg-gradient-to-r from-red-600 to-red-400';
         case ProjectStatus.MaintenanceMode:
-            return 'bg-indigo-400';
+            return 'bg-gradient-to-r from-indigo-600 to-indigo-400';
 
     }
 }
@@ -60,17 +62,21 @@ interface TileProps {
 
 export const ProjectTile: FunctionComponent<TileProps> = ({title, image, description, bubbles, status}) => {
     return (
-        <div
-            className="bg-gray-200 border-2 sm:border-4 basis-1/2 xs:basis-1/3 lg:basis-1/4 flex-1 max-w-sm rounded-xl overflow-hidden shadow-lg">
+        <div className="h-full bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
 
             <div className="relative">
                 <Image className="w-full" src={image} alt="Image failed to load!"/>
+
+                <a className="absolute rounded-full bg-white z-10 inset-0 w-1/6 h-1/6 h p-2 m-2 xs:m-1 sm:m-2 border-4 border-gray-500 ease-in duration-150 hover:bg-gray-400 hover:border-gray-600" href="test" target="_blank">
+                    <BsGithub className="w-full h-full text-gray-600"/>
+                </a>
+
                 <Bubbles className="absolute w-full inset-0 flex flex-col items-end gap-2 xs:gap-1 sm:gap-2 p-2 xs:p-1 sm:p-2" bubbles={bubbles}/>
             </div>
 
             <h3 className={`border-t-4 border-b-4 border-gray-500 font-bold text-center px-2 ${getStatusClass(status)}`}>Status: {status}</h3>
 
-            <div className="px-1 md:p-3 py-2 sm:py-4">
+            <div className="px-1 md:p-3 py-2 sm:py-4 h-full">
                 <h1 className="font-bold text-lg sm:text-xl sm:mb-2">
                     {title}
                 </h1>
@@ -78,10 +84,6 @@ export const ProjectTile: FunctionComponent<TileProps> = ({title, image, descrip
                 <p className="text-xs sm:text-lg text-gray-700 text-base">
                     {description}
                 </p>
-
-                <a href="components" target="_blank">
-                    <button className="flex mx-auto rounded-xl text-lg font-bold px-6 py-2 mt-4 bg-gray-500 transition ease-in duration-200 hover:scale-110 hover:bg-green-500">View Project</button>
-                </a>
             </div>
         </div>
     )

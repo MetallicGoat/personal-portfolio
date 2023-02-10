@@ -29,7 +29,6 @@ export default function Home() {
             <main className="bg-white dark:bg-gray-900 px-5 sm:px-8 md:px-10 xl:px-20">
 
                 {/* INTRO SECTION */}
-
                 <section className="min-h-screen flex flex-col">
                     <nav className="py-6 lg:py-10 flex justify-between">
                         <h1 className="text-md sm:text-xl lg:text-2xl">Portfolio</h1>
@@ -54,7 +53,7 @@ export default function Home() {
                     <div
                         className="lg:flex lg:flex-row lg:justify-between lg:items-center lg:h-full lg:my-auto lg:pb-20">
                         <div className=" text-center lg:text-left">
-                            <h2 className="text-4xl sm:text-5xl py-2 font-medium font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">
+                            <h2 className="text-4xl sm:text-5xl py-2 font-medium font-extrabold animated-text-color">
                                 Christian Azzam
                             </h2>
 
@@ -106,7 +105,7 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <div className="flex flex-row flex-wrap justify-center px-3 py-4 xs:px-0 gap-5 xs:gap-2 sm:gap-5 sm:py-10 ">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center px-3 py-4 xs:px-0 gap-5 xs:gap-2 sm:gap-5 sm:py-10 ">
 
                         <ProjectTile
                             title="MBedwars"
