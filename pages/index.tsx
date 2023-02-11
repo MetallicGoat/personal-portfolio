@@ -11,12 +11,13 @@ import phaser_game_img from "@/public/personalprojects/phaser-space-game.png";
 import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
 import is4p_img from "@/public/personalprojects/is4p.png";
 
-import drone_img from "@/public/photos/drone-beach.jpg";
+import drone_beach_img from "@/public/photos/drone-beach.jpg";
+import drone_beach_sunset_img from "@/public/photos/sunset-beach.jpg";
 
 import {BsDiscord, BsFillMoonStarsFill, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent, useState} from "react";
-import {CompatibleBubble, ProjectStatus, ProjectTile} from "@/components/ProjectTile";
-import {Tile} from "@/components/Tile";
+import {CompatibleBubble, ProjectStatus, ProjectCard} from "@/components/ProjectCard";
+import {PhotoCard} from "@/components/PhotoCard";
 
 export default function Home() {
 
@@ -109,9 +110,9 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10 ">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10">
 
-                        <ProjectTile
+                        <ProjectCard
                             title="MBedwars"
                             link="https://github.com/MBedwars"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.Paper]}
@@ -120,7 +121,7 @@ export default function Home() {
                             status={ProjectStatus.Ongoing}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="MBedwars Tweaks"
                             link="https://github.com/MetallicGoat/MBedwarsTweaks"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
@@ -129,7 +130,7 @@ export default function Home() {
                             status={ProjectStatus.Ongoing}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="Extra-Special-Items"
                             link="https://github.com/MetallicGoat/Extra-Special-Items"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
@@ -138,7 +139,7 @@ export default function Home() {
                             status={ProjectStatus.Ongoing}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="Prize Commands"
                             link="https://github.com/MetallicGoat/PrizeCommands"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
@@ -147,7 +148,7 @@ export default function Home() {
                             status={ProjectStatus.MaintenanceMode}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="Phaser Space Game"
                             link="https://github.com/MetallicGoat/PhaserSpaceGame"
                             bubbles={[CompatibleBubble.JavaScript]}
@@ -156,7 +157,7 @@ export default function Home() {
                             status={ProjectStatus.OnHold}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="IS4P"
                             link="https://github.com/MetallicGoat/infinite-support-4-paws"
                             bubbles={[CompatibleBubble.JavaScript]}
@@ -165,7 +166,7 @@ export default function Home() {
                             status={ProjectStatus.OnHold}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="Gen-Splitter"
                             link="https://github.com/MetallicGoat/Gen-Splitting"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
@@ -174,7 +175,7 @@ export default function Home() {
                             status={ProjectStatus.MaintenanceMode}
                         />
 
-                        <ProjectTile
+                        <ProjectCard
                             title="Fireball Jumping"
                             link="https://github.com/MetallicGoat/FB-Knockback"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
@@ -196,13 +197,13 @@ export default function Home() {
                             These are some photos I have taken
                         </p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center px-3 py-4 xs:px-0 gap-5 xs:gap-2 sm:gap-5 sm:py-10 ">
-                        <Tile title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drone_img}/>
-                        <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10">
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drone_beach_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={drone_beach_sunset_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
                     </div>
                 </section>
             </main>
