@@ -55,23 +55,27 @@ function getCompatibleBubbleImage(type: CompatibleBubble) {
 interface TileProps {
     title: string
     description: string;
+    link: string;
     image: StaticImageData;
     bubbles: CompatibleBubble[];
     status: ProjectStatus;
 }
 
-export const ProjectTile: FunctionComponent<TileProps> = ({title, image, description, bubbles, status}) => {
+export const ProjectTile: FunctionComponent<TileProps> = ({title, image, link, description, bubbles, status}) => {
     return (
-        <div className="h-full bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
+        <div className="relative max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
+            <Bubbles
+                className="absolute inset-0 z-50"
+                bubbles={bubbles}
+                link={link}
+            />
 
-            <div className="relative">
-                <Image className="w-full" src={image} alt="Image failed to load!"/>
+            <div className="relative flex justify-center max-h-60 sm:h-72 overflow-hidden">
+                {/*Background*/}
+                <Image className="absolute blur-xl inset-0 h-full w-full" src={image} alt="Image failed to load!"/>
 
-                <a className="absolute rounded-full bg-white z-10 inset-0 w-1/6 h-1/6 h p-2 m-2 xs:m-1 sm:m-2 border-4 border-gray-500 ease-in duration-150 hover:bg-gray-400 hover:border-gray-600" href="test" target="_blank">
-                    <BsGithub className="w-full h-full text-gray-600"/>
-                </a>
-
-                <Bubbles className="absolute w-full inset-0 flex flex-col items-end gap-2 xs:gap-1 sm:gap-2 p-2 xs:p-1 sm:p-2" bubbles={bubbles}/>
+                {/*Real Image*/}
+                <Image className="z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
             </div>
 
             <h3 className={`border-t-4 border-b-4 border-gray-500 font-bold text-center px-2 ${getStatusClass(status)}`}>Status: {status}</h3>
@@ -86,21 +90,24 @@ export const ProjectTile: FunctionComponent<TileProps> = ({title, image, descrip
                 </p>
             </div>
         </div>
+
     )
 }
 
-interface HashTagProps {
+interface BubblesProps {
     bubbles: CompatibleBubble[];
+    link: string
     className: string;
 }
 
-const Bubbles: FunctionComponent<HashTagProps> = ({bubbles, className}) => {
+const Bubbles: FunctionComponent<BubblesProps> = ({bubbles, className, link}) => {
     const tags: React.ReactNode[] = [];
+
 
     bubbles.forEach(bubble => {
         tags.push(
             <Image
-                className="rounded-full w-1/6 bg-white text-sm font-semibold text-gray-700 border-4 border-gray-500"
+                className="rounded-full w-2/6 bg-white text-sm font-semibold text-gray-700 border-4 border-gray-500"
                 width="1000"
                 height="1000"
                 src={getCompatibleBubbleImage(bubble)}
@@ -109,5 +116,14 @@ const Bubbles: FunctionComponent<HashTagProps> = ({bubbles, className}) => {
         )
     });
 
-    return <div className={className}>{tags}</div>
+    return (
+        <div className={`flex justify-between ${className}`}>
+            <a className="rounded-full bg-white w-16 h-16 p-2 m-2 xs:m-1 sm:m-2 border-4 border-gray-500 ease-in duration-150 hover:bg-gray-400 hover:border-gray-600"
+               href={link} target="_blank" rel="noreferrer noopener">
+                <BsGithub className="w-full h-full text-gray-600"/>
+            </a>
+
+            <div className=" w-1/2 flex flex-col items-end gap-2 xs:gap-1 sm:gap-2 p-2 xs:p-1 sm:p-2">{tags}</div>
+        </div>
+    )
 };

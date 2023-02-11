@@ -7,11 +7,15 @@ import tweaks_img from "@/public/personalprojects/tweaks.png";
 import extra_special_items_img from "@/public/personalprojects/extra-special-items.png";
 import prize_commands_img from "@/public/personalprojects/prize-commands.png";
 import gen_splitter_img from "@/public/personalprojects/gen-splitter.png";
+import phaser_game_img from "@/public/personalprojects/phaser-space-game.png";
 import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
+import is4p_img from "@/public/personalprojects/is4p.png";
+
+import drone_img from "@/public/photos/drone-beach.jpg";
 
 import {BsDiscord, BsFillMoonStarsFill, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent, useState} from "react";
-import {ProjectTile, CompatibleBubble, ProjectStatus} from "@/components/ProjectTile";
+import {CompatibleBubble, ProjectStatus, ProjectTile} from "@/components/ProjectTile";
 import {Tile} from "@/components/Tile";
 
 export default function Home() {
@@ -105,10 +109,11 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center px-3 py-4 xs:px-0 gap-5 xs:gap-2 sm:gap-5 sm:py-10 ">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10 ">
 
                         <ProjectTile
                             title="MBedwars"
+                            link="https://github.com/MBedwars"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.Paper]}
                             description="This project was NOT created by me, I help maintain it (I am not the main maintainer). It is the largest project I work on by a mile. It is made up of over 600 files. It is closed source, and it generally goes for 20 euros a copy. I have learned so much from working on this project, and have had so much fun playing around with what it can do. This is a CLOSED SOURCE project."
                             image={mbedwars_img}
@@ -117,6 +122,7 @@ export default function Home() {
 
                         <ProjectTile
                             title="MBedwars Tweaks"
+                            link="https://github.com/MetallicGoat/MBedwarsTweaks"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
                             description="By far, my largest personal project (I contribute to larger projects). I have a very hate/love relationship with this project. I have rewritten so many parts of this project so many times as my java skills have improved over time."
                             image={tweaks_img}
@@ -125,6 +131,7 @@ export default function Home() {
 
                         <ProjectTile
                             title="Extra-Special-Items"
+                            link="https://github.com/MetallicGoat/Extra-Special-Items"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
                             description="My favorite MBedwars addon! I created it to add some fun new items into the game. I learned a lot about timers/schedulers in java while working on this project. I find it the most enjoyable to work on as I get to be creative with how my custom items work."
                             image={extra_special_items_img}
@@ -133,6 +140,7 @@ export default function Home() {
 
                         <ProjectTile
                             title="Prize Commands"
+                            link="https://github.com/MetallicGoat/PrizeCommands"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
                             description="My least favorite project. It is a very useful MBedwars addon, but not much fun to work on. It makes it easy for users to reward their players for playing games, and progressing. "
                             image={prize_commands_img}
@@ -140,7 +148,26 @@ export default function Home() {
                         />
 
                         <ProjectTile
+                            title="Phaser Space Game"
+                            link="https://github.com/MetallicGoat/PhaserSpaceGame"
+                            bubbles={[CompatibleBubble.JavaScript]}
+                            description="A very basic idle game created with JavaScript using the Phaser library. The purpose of the project was for me to learn JavaScript. "
+                            image={phaser_game_img}
+                            status={ProjectStatus.OnHold}
+                        />
+
+                        <ProjectTile
+                            title="IS4P"
+                            link="https://github.com/MetallicGoat/infinite-support-4-paws"
+                            bubbles={[CompatibleBubble.JavaScript]}
+                            description="A website for a dog rescue called infinite support four paws. I had to put this project hold, but plan to come back to it soon. The plan is to move to next js (currently is using react and react-router), and migrate from css modules, to tailwind css"
+                            image={is4p_img}
+                            status={ProjectStatus.OnHold}
+                        />
+
+                        <ProjectTile
                             title="Gen-Splitter"
+                            link="https://github.com/MetallicGoat/Gen-Splitting"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
                             description="The oldest one of my project's that I still maintain. An addon for MBedwars that splits resources equally amongst players. Its very simple, but very effective."
                             image={gen_splitter_img}
@@ -149,6 +176,7 @@ export default function Home() {
 
                         <ProjectTile
                             title="Fireball Jumping"
+                            link="https://github.com/MetallicGoat/FB-Knockback"
                             bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
                             description="One of my very first java projects. I created it for MBedwars, but before I joined as a contributor. It became much more popular than I thought it would, which inspired me to continue learning java. I have retired it, I have built its features directly into MBedwars, and MBedwars Tweaks. Somehow it still has over 100 users according to BStats."
                             image={fireball_jumping_img}
@@ -168,8 +196,8 @@ export default function Home() {
                             These are some photos I have taken
                         </p>
                     </div>
-                    <div className="flex flex-row flex-wrap justify-center gap-4 lg:gap-12 sm:gap-10 py-4 sm:py-10 ">
-                        <Tile title="Test" hashTags={["fnn", "fff", "yay"]} description="stupid" image={blank_img}/>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center px-3 py-4 xs:px-0 gap-5 xs:gap-2 sm:gap-5 sm:py-10 ">
+                        <Tile title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drone_img}/>
                         <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
                         <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
                         <Tile title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
