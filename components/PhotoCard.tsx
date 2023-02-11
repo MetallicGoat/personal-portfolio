@@ -17,7 +17,7 @@ export const PhotoCard: FunctionComponent<TileProps> = ({title, image, descripti
                 <Image className="absolute blur-xl inset-0 h-full w-full" src={image} alt="Image failed to load!"/>
 
                 {/*Real Image*/}
-                <Image className="z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
+                <Image className= "z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
             </div>
 
             <div className="px-6 py-4">

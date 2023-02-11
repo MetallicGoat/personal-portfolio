@@ -11,8 +11,19 @@ import phaser_game_img from "@/public/personalprojects/phaser-space-game.png";
 import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
 import is4p_img from "@/public/personalprojects/is4p.png";
 
-import drone_beach_img from "@/public/photos/drone-beach.jpg";
-import drone_beach_sunset_img from "@/public/photos/sunset-beach.jpg";
+import bike_trip_img from "@/public/photos/bike_trip.jpg";
+import canyon_img from "@/public/photos/canyon.jpg";
+import chipmunk_img from "@/public/photos/chipmunk.jpg";
+import drone_beach_img from "@/public/photos/drone_beach.jpg";
+import drunk_dog_img from "@/public/photos/drunk_dog.jpg";
+import enzo_snow_img from "@/public/photos/enzo_snow.jpg";
+import enzo_upsidedown_img from "@/public/photos/enzo_upsidedown.jpg";
+import lizard_img from "@/public/photos/lizard.jpg";
+import lizard_on_post_img from "@/public/photos/lizard_on_post.jpg";
+import milo_chair_img from "@/public/photos/milo_chair.jpg";
+import milo_stump_img from "@/public/photos/milo_stump.jpg";
+import mountain_img from "@/public/photos/mountain.jpg";
+import sunset_beach_img from "@/public/photos/sunset_beach.jpg";
 
 import {BsDiscord, BsFillMoonStarsFill, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent, useState} from "react";
@@ -69,9 +80,9 @@ export default function Home() {
                             <p className="text-md mx-auto sm:text-lg md:text-xl text-gray-800 max-w-md sm:max-w-xl">
                                 I am an aspiring software developer from Canada. I am currently in high school, and I
                                 generally go by MetallicGoat online. I have taught myself Java through coding spigot
-                                plugins, and I am currently trying to teach myself Javascript, html, and css. This site
-                                contains some projects I have worked on, some photos I have taken, and some stories
-                                about them.
+                                plugins, and I am currently trying to teach myself Javascript, html, and css through
+                                the making of this site. This site contains some projects I have worked on, some
+                                photos I have taken, and some background about them.
                             </p>
 
                             <Socials className="hidden lg:block mr-20"/>
@@ -198,12 +209,19 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10">
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={bike_trip_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={canyon_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={chipmunk_img}/>
                         <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drone_beach_img}/>
-                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={drone_beach_sunset_img}/>
-                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
-                        <PhotoCard title="Test" hashTags={["fnn", "fff"]} description="Very very cool" image={blank_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drunk_dog_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={enzo_snow_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={enzo_upsidedown_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={lizard_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={lizard_on_post_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={milo_chair_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={milo_stump_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={mountain_img}/>
+                        <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={sunset_beach_img}/>
                     </div>
                 </section>
             </main>
