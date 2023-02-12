@@ -55,6 +55,13 @@ a {
   }
 }
 
-.img-glow {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.hidden {
+    opacity: 0;
+    transform: translateY(3rem);
+    transition: opacity .6s ease-in-out, transform 1.2s ease-in-out;
+}
+
+.slide-in-bottom {
+    opacity: 1;
+    transform: translateY(0);
 }

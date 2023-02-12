@@ -1,5 +1,6 @@
 import Image, {StaticImageData} from "next/image";
 import React, {FunctionComponent} from "react";
+import SlideIn from "@/components/SlideIn";
 
 interface TileProps {
     title: string
@@ -10,6 +11,7 @@ interface TileProps {
 
 export const PhotoCard: FunctionComponent<TileProps> = ({title, image, description, hashTags}) => {
     return (
+        <SlideIn>
         <div className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
 
             <div className="relative flex justify-center bg-gray-300 max-h-60 sm:h-72 overflow-hidden">
@@ -28,7 +30,7 @@ export const PhotoCard: FunctionComponent<TileProps> = ({title, image, descripti
             </div>
 
             <HashTag hashTags={hashTags}/>
-        </div>
+        </div></SlideIn>
     )
 }
 
