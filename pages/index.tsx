@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from "next/image";
 
-import blank_img from "@/public/blank_img.jpg";
 import mbedwars_img from "@/public/logos/mbedwars.png";
 import tweaks_img from "@/public/personalprojects/tweaks.png";
 import extra_special_items_img from "@/public/personalprojects/extra-special-items.png";

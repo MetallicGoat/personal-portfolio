@@ -12,11 +12,9 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children }) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("slide-in-bottom");
-                } else {
-                    entry.target.classList.remove("slide-in-bottom");
                 }
             },
-            { threshold: 0.1 }
+            { threshold: 0.06 }
         );
 
         observer.observe(ref.current!);
@@ -27,7 +25,7 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children }) => {
     }, []);
 
     return (
-        <div ref={ref} className="hidden sm:block">
+        <div ref={ref} className="hidden-revealable">
             {children}
         </div>
     );
