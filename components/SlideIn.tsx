@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 interface RevealOnScrollProps {
     children: React.ReactNode;
@@ -6,13 +6,14 @@ interface RevealOnScrollProps {
 
 const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children }) => {
     const ref = useRef<HTMLDivElement>(null);
+    let bool = false;
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting)
                     entry.target.classList.add("slide-in-bottom");
-                }
+
             },
             { threshold: 0.06 }
         );
@@ -20,7 +21,7 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children }) => {
         observer.observe(ref.current!);
 
         return () => {
-            observer.unobserve(ref.current!);
+            //observer.unobserve(ref.current!);
         };
     }, []);
 

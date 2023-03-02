@@ -1,25 +1,26 @@
 import Image, {StaticImageData} from "next/image";
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, useState} from "react";
 import SlideIn from "@/components/SlideIn";
 
-interface TileProps {
+
+interface PhotoCardProps {
     title: string
     description: string;
     image: StaticImageData;
     hashTags: string[];
 }
 
-export const PhotoCard: FunctionComponent<TileProps> = ({title, image, description, hashTags}) => {
+export const PhotoCard: FunctionComponent<PhotoCardProps> = ({title, image, description, hashTags}) => {
     return (
-        <SlideIn>
-        <div className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
-
+        <div
+            className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
             <div className="relative flex justify-center bg-gray-300 max-h-60 sm:h-72 overflow-hidden">
                 {/*Background*/}
-                <Image className="absolute blur-xl inset-0 h-full w-full" src={image} alt="Image failed to load!"/>
+                <Image className="absolute blur-xl inset-0 h-full w-full" src={image}
+                       alt="Image failed to load!"/>
 
                 {/*Real Image*/}
-                <Image className= "z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
+                <Image className="z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
             </div>
 
             <div className="px-6 py-4">
@@ -30,7 +31,7 @@ export const PhotoCard: FunctionComponent<TileProps> = ({title, image, descripti
             </div>
 
             <HashTag hashTags={hashTags}/>
-        </div></SlideIn>
+        </div>
     )
 }
 
