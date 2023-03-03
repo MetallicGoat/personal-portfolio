@@ -1,6 +1,5 @@
 import Image, {StaticImageData} from "next/image";
-import React, {FunctionComponent, useState} from "react";
-import SlideIn from "@/components/SlideIn";
+import React, {FunctionComponent} from "react";
 
 
 interface PhotoCardProps {
@@ -13,8 +12,9 @@ interface PhotoCardProps {
 export const PhotoCard: FunctionComponent<PhotoCardProps> = ({title, image, description, hashTags}) => {
     return (
         <div
-            className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
-            <div className="relative flex justify-center bg-gray-300 max-h-60 sm:h-72 overflow-hidden">
+            className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
+
+            <div className="relative flex justify-center bg-gray-300 dark:bg-neutral-700 max-h-60 sm:h-72 overflow-hidden">
                 {/*Background*/}
                 <Image className="absolute blur-xl inset-0 h-full w-full" src={image}
                        alt="Image failed to load!"/>
@@ -24,8 +24,8 @@ export const PhotoCard: FunctionComponent<PhotoCardProps> = ({title, image, desc
             </div>
 
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{title}</div>
-                <p className="text-gray-700 text-base">
+                <h1 className="font-bold text-xl mb-2 dark:text-white">{title}</h1>
+                <p className="text-gray-700 text-base dark:text-gray-300">
                     {description}
                 </p>
             </div>
@@ -47,7 +47,7 @@ const HashTag: FunctionComponent<HashTagProps> = ({hashTags}) => {
         tags.push(
             <span
                 key={val}
-                className="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                className="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-neutral-700 dark:text-gray-300">
                 #{tag}
             </span>
         )

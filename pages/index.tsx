@@ -6,28 +6,27 @@ import {FunctionComponent, useState} from "react";
 import ProjectsSection from "@/components/ProjectsSection";
 
 export default function Home() {
-
     const [darkMode, setDarkMode] = useState(false);
 
     return (
-        <div>
+        <div className={darkMode ? "dark" : ""}>
             <Head>
                 <title>Portfolio</title>
                 <meta name="description" content="blah"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
-            <main className="bg-white dark:bg-gray-900 px-5 sm:px-8 md:px-10 xl:px-20">
+            <main className="ease-in duration-300 bg-white px-5 sm:px-8 md:px-10 xl:px-20 dark:bg-black">
 
                 {/* INTRO SECTION */}
                 <section className="min-h-screen flex flex-col">
                     <nav className="py-6 lg:py-10 flex justify-between">
-                        <h1 className="text-md sm:text-xl lg:text-2xl">Portfolio</h1>
+                        <h1 className="text-md sm:text-xl lg:text-2xl dark:text-white">Portfolio</h1>
                         <ul className="flex items-center">
                             <li>
                                 <BsFillMoonStarsFill
                                     onClick={() => setDarkMode(!darkMode)}
-                                    className="cursor-pointer text-xl sm:text-2xl lg:text-3xl"
+                                    className="cursor-pointer text-xl sm:text-2xl lg:text-3xl dark:text-white"
                                 />
                             </li>
 
@@ -48,11 +47,11 @@ export default function Home() {
                                 Christian Azzam
                             </h2>
 
-                            <h3 className="text-lg md:text-2xl font-bold py-2 text-gray-800 ">
+                            <h3 className="text-lg md:text-2xl font-bold py-2 text-gray-800 dark:text-white">
                                 AKA - MetallicGoat
                             </h3>
 
-                            <p className="text-md lg:text-lg mx-auto text-gray-800 max-w-md sm:max-w-xl">
+                            <p className="text-md lg:text-lg mx-auto text-gray-800 max-w-md sm:max-w-xl dark:text-white">
                                 I am an aspiring software developer from Canada. I am currently in high school, and I
                                 generally go by MetallicGoat online. I have taught myself Java through coding spigot
                                 plugins, and I am currently trying to teach myself Javascript, html, and css through
@@ -99,14 +98,14 @@ interface HashTagProps {
 const Socials: FunctionComponent<HashTagProps> = ({className}) => {
     return (
         <div className={className}>
-            <div className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600">
+            <div className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400 dark:text-gray-400">
 
                 <a href="https://github.com/MetallicGoat" target="blank_">
-                    <BsGithub className="transition ease-in duration-200 hover:scale-110 hover:text-gray-900"/>
+                    <BsGithub className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>
 
-                <BsDiscord className="transition ease-in duration-200 hover:scale-110 hover:text-gray-900"/>
-                <BsInstagram className="transition ease-in duration-200 hover:scale-110 hover:text-gray-900"/>
+                <BsDiscord className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                <BsInstagram className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
             </div>
         </div>
     )

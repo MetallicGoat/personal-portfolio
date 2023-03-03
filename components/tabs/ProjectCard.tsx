@@ -63,14 +63,14 @@ interface TileProps {
 
 export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, description, bubbles, status}) => {
     return (
-        <div className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg">
+        <div className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg dark:border-neutral-700">
             <Bubbles
                 className="absolute inset-0 z-50"
                 bubbles={bubbles}
                 link={link}
             />
 
-            <div className="relative flex justify-center bg-gray-300 max-h-60 sm:h-72 overflow-hidden">
+            <div className="relative flex justify-center bg-gray-300 dark:bg-neutral-700 max-h-60 sm:h-72 overflow-hidden">
                 {/*Background*/}
                 <Image className="absolute blur-xl inset-0 h-full w-full" src={image} alt="Image failed to load!"/>
 
@@ -78,14 +78,14 @@ export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, d
                 <Image className="z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
             </div>
 
-            <h3 className={`border-t-4 border-b-4 border-gray-500 font-bold text-center px-2 ${getStatusClass(status)}`}>Status: {status}</h3>
+            <h3 className={`border-t-4 border-b-4 border-gray-500 dark:border-neutral-700 font-bold text-center px-2 dark:text-white ${getStatusClass(status)}`}>Status: {status}</h3>
 
-            <div className="px-1 md:p-3 py-2 h-full">
-                <h1 className="font-bold text-lg sm:mb-1">
+            <div className="px-1 md:p-3 py-2 h-full dark:bg-neutral-900">
+                <h1 className="font-bold text-lg sm:mb-1 dark:text-white">
                     {title}
                 </h1>
 
-                <p className="text-sm text-gray-700 text-base">
+                <p className="text-sm text-gray-700 text-base dark:text-gray-300">
                     {description}
                 </p>
             </div>
@@ -108,7 +108,7 @@ const Bubbles: FunctionComponent<BubblesProps> = ({bubbles, className, link}) =>
     bubbles.forEach(bubble => {
         tags.push(
             <Image
-                className="rounded-full w-2/6 bg-white text-sm font-semibold text-gray-700 border-4 border-gray-500"
+                className="rounded-full w-2/6 bg-white text-sm font-semibold text-gray-700 border-4 border-gray-500 dark:bg-black"
                 width="1000"
                 height="1000"
                 src={getCompatibleBubbleImage(bubble)}
@@ -120,10 +120,10 @@ const Bubbles: FunctionComponent<BubblesProps> = ({bubbles, className, link}) =>
     });
 
     return (
-        <div className={`flex justify-between ${className}`}>
-            <a className="rounded-full bg-white w-16 h-16 p-2 m-2 xs:m-1 sm:m-2 border-4 border-gray-500 ease-in duration-150 hover:bg-gray-400 hover:border-gray-600"
+        <div className={`flex justify-between  ${className}`}>
+            <a className="rounded-full bg-white w-16 h-16 p-2 m-2 xs:m-1 sm:m-2 border-4 border-gray-500 ease-in duration-150 hover:bg-gray-400 hover:border-gray-600 dark:bg-black"
                href={link} target="_blank" rel="noreferrer noopener">
-                <BsGithub className="w-full h-full text-gray-600"/>
+                <BsGithub className="w-full h-full text-gray-600 dark:text-gray-400"/>
             </a>
 
             <div className=" w-1/2 flex flex-col items-end gap-2 xs:gap-1 sm:gap-2 p-2 xs:p-1 sm:p-2">{tags}</div>

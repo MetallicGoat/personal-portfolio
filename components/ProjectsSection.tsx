@@ -1,5 +1,7 @@
-import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/ProjectCard";
-import {PhotoCard} from "@/components/PhotoCard";
+import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/tabs/ProjectCard";
+import {PhotoCard} from "@/components/tabs/PhotoCard";
+import {ProgressCard} from "@/components/tabs/ProgressCard";
+import {useState} from "react";
 
 // Projects
 import mbedwars_img from "@/public/logos/mbedwars.png";
@@ -25,25 +27,28 @@ import milo_chair_img from "@/public/photos/milo_chair.jpg";
 import milo_stump_img from "@/public/photos/milo_stump.jpg";
 import mountain_img from "@/public/photos/mountain.jpg";
 import sunset_beach_img from "@/public/photos/sunset_beach.jpg";
-import {useState} from "react";
 
 export default function ProjectsSection() {
     const [selectedOption, setSelectedOption] = useState(1);
 
-    let optionClasses = "w-1/3 h-full flex justify-center items-center cursor-pointer z-10";
+    let optionClasses = "w-1/3 h-full flex justify-center items-center cursor-pointer z-10 transition ease-in duration-200";
+    let sliderClasses = "absolute top-0 left-0 w-1/3 h-full rounded-full transition-all ease-in-out duration-1000 z-20";
     let component = null;
 
     switch (selectedOption) {
         case 1:
             component = <Projects/>;
+            sliderClasses += " bg-blue-400";
             break;
         case 2:
-            optionClasses += " -translate-x-full";
+            optionClasses += " -translate-x-full ";
+            sliderClasses += " bg-red-400";
             component = <Photos/>;
             break;
         case 3:
-            optionClasses += " -translate-x-full -translate-x-full";
-            component = <TodoSection/>;
+            optionClasses += " -translate-x-full";
+            sliderClasses += " bg-green-400";
+            component = <Progress/>;
             break;
         default:
             break;
@@ -51,24 +56,27 @@ export default function ProjectsSection() {
 
     return (
         <div>
-            <div className="relative mb-6 w-64 mx-auto h-8 w-full h-full bg-gray-300 rounded-full flex items-center justify-center">
+            <div className="relative shadow-lg border-2 md:border-4 border-gray-400 mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 w-full h-full bg-gray-300 dark:border-neutral-700 dark:bg-neutral-900 rounded-full flex items-center justify-center">
 
                 {/* Options */}
-                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50" onClick={() => setSelectedOption(1)}>
-                    <span className="text-center">Projects</span>
+                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
+                     onClick={() => setSelectedOption(1)}>
+                    <span className="text-lg md:text-xl text-center font-bold select-none">Projects</span>
                 </div>
 
-                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50" onClick={() => setSelectedOption(2)}>
-                    <span className="text-center">Photos</span>
+                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
+                     onClick={() => setSelectedOption(2)}>
+                    <span className="text-lg md:text-xl text-center font-bold select-none">Photos</span>
                 </div>
 
-                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50" onClick={() => setSelectedOption(3)}>
-                    <span className="text-center">TODO</span>
+                <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
+                     onClick={() => setSelectedOption(3)}>
+                    <span className="text-lg md:text-xl text-center font-bold select-none">Progress</span>
                 </div>
 
                 {/* Slider */}
                 <div
-                    className="absolute top-0 left-0 w-1/3 h-full bg-blue-500 rounded-full transition-all ease-in-out duration-300 z-20"
+                    className={sliderClasses}
                     style={{transform: `translateX(${(selectedOption - 1) * (300 / 3)}%)`}}
                 />
             </div>
@@ -83,7 +91,7 @@ function Projects() {
         <div>
             <div>
                 <h3 className="text-3xl py-1 dark:text-white">Software Projects</h3>
-                <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
+                <p className="text-lg py-2 leading-8 text-gray-800 dark:text-gray-200">
                     These are some projects I have worked on. The little bubble over top of the icons show what
                     the project was made for, and what it&apos;s made with. Most are completely my own, from
                     start to finish, and for the ones that are not (ie. collaborative project) it will be
@@ -177,42 +185,169 @@ function Photos() {
         <div>
             <div>
                 <h3 className="text-3xl py-1 dark:text-white">Photos</h3>
-                <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
+
+                <p className="text-lg py-2 leading-8 text-gray-800 dark:text-gray-200">
                     These are some photos I have taken
                 </p>
             </div>
 
             <div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center sm:place-items-stretch px-3 py-4 xs:px-0 gap-5 sm:py-10">
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={bike_trip_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={canyon_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={chipmunk_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drone_beach_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={drunk_dog_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={enzo_snow_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach"
-                           image={enzo_upsidedown_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={lizard_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach"
-                           image={lizard_on_post_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={milo_chair_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={milo_stump_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={mountain_img}/>
-                <PhotoCard title="Test" hashTags={["fnn", "fff", "yay"]} description="beach" image={sunset_beach_img}/>
+
+                <PhotoCard
+                    title="Bike Trip"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={bike_trip_img}
+                />
+
+                <PhotoCard
+                    title="Marble Canyon"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={canyon_img}
+                />
+
+                <PhotoCard
+                    title="Chipmunk"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={chipmunk_img}
+                />
+
+                <PhotoCard
+                    title="Turks and Caicos"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={drone_beach_img}
+                />
+
+                <PhotoCard
+                    title="New Puppy"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={drunk_dog_img}
+                />
+
+                <PhotoCard
+                    title="Enzo"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={enzo_snow_img}
+                />
+
+                <PhotoCard
+                    title="Sleepin' Enzo"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={enzo_upsidedown_img}
+                />
+
+                <PhotoCard
+                    title="Lizard"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={lizard_img}
+                />
+
+                <PhotoCard
+                    title="Climbing Lizard"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={lizard_on_post_img}
+                />
+
+                <PhotoCard
+                    title="Resting Milo"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={milo_chair_img}
+                />
+
+                <PhotoCard
+                    title="Stump Milo"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={milo_stump_img}
+                />
+
+                <PhotoCard
+                    title="Mountain"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={mountain_img}
+                />
+
+                <PhotoCard
+                    title="Sunset Beach"
+                    hashTags={["fnn", "fff", "yay"]}
+                    description="beach"
+                    image={sunset_beach_img}
+                />
             </div>
         </div>
     );
 }
 
-function TodoSection() {
+function Progress() {
     return (
         <div>
-            <div>
-                <h3 className="text-3xl py-1 dark:text-white">TODO SECTION</h3>
-                <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-                    Content here
-                </p>
-            </div>
+            <h3 className="text-3xl py-1 dark:text-white">Website Progress</h3>
+            <p className="text-lg py-2 leading-8 text-gray-800 dark:text-gray-200">
+                I started this website with very little experience with Typescript, Tailwind, and Next.js.
+                This section was created to document my progress over time,
+                and to document my learning of web development.
+            </p>
+
+            <ProgressCard date={"March 2nd 2023"} changes={[
+                "Improved the styling of the content slider",
+                "Added progress tracking content section",
+                "Added titles to Photos",
+                "Implemented dark mode"
+            ]}/>
+
+            <ProgressCard date={"March 1st 2023"} changes={[
+                "Fixed some weird rendering on small displays",
+                "Added 'slider' to content section, allowing users to choose what content they want to view.",
+                "Learned how to do basic conditional rendering",
+                "Temporally disabled SlideIn animation, until bugs can be fixed"
+            ]}/>
+
+            <ProgressCard date={"February 27th 2023"} changes={[
+                "Improve SlideIn animation on photo cards",
+                "Fixed Photos section never gets rendered on small displays"
+            ]}/>
+
+            <ProgressCard date={"February 12th 2023"} changes={[
+                "Added scroll animation",
+            ]}/>
+
+            <ProgressCard date={"February 11th 2023"} changes={[
+                "Added new photos to Photos section",
+                "Fixes/Improvements to page styling"
+            ]}/>
+
+            <ProgressCard date={"February 10th 2023"} changes={[
+                "Added some new Projects to Projects section",
+                "Better support for weird screen sizes",
+                "Misc improvements to Project cards (especially compatibility bubbles)"
+            ]}/>
+
+            <ProgressCard date={"February 9th 2023"} changes={[
+                "Added fancy RGB animated name text (Based on the code I used for the Mars weather app project)",
+                "Make Project status bar on projects cards look cleaner",
+                "Added github links to projects cards"
+            ]}/>
+
+            <ProgressCard date={"February 8th 2023"} changes={[
+                "Learned how to link Github project to Vercel and started hosting this website",
+                "Fixed a small bug casing the app not to build properly"
+            ]}/>
+
+            <ProgressCard date={"February 3rd 2023"} changes={[
+                "Started the portfolio website project",
+                "Created using create-next-app"
+            ]}/>
         </div>
     )
 }
