@@ -196,92 +196,92 @@ function Photos() {
 
                 <PhotoCard
                     title="Bike Trip"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["camping", "biking", "400km"]}
+                    description="Beginning of a 400km bike trip from Grand Bend to Manitoulin Island"
                     image={bike_trip_img}
                 />
 
                 <PhotoCard
                     title="Marble Canyon"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["Alberta", "waterfall"]}
+                    description="My favourite canyon in Alberta"
                     image={canyon_img}
                 />
 
                 <PhotoCard
                     title="Chipmunk"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["Alberta", "friendly"]}
+                    description="Friendly chipmunk, who would eat food right out of your hand"
                     image={chipmunk_img}
                 />
 
                 <PhotoCard
                     title="Turks and Caicos"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["beach", "travel", "blue"]}
+                    description="Drone shot of the beach at Turks and Caicos"
                     image={drone_beach_img}
                 />
 
                 <PhotoCard
                     title="New Puppy"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["puppy", "drunk", "sleepin'"]}
+                    description="New puppy is really tiered after playing. She fell asleep with a wine bottle under her paw"
                     image={drunk_dog_img}
                 />
 
                 <PhotoCard
-                    title="Enzo"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    title="Snowy Nose"
+                    hashTags={["snow", "feed-me", "dogs"]}
+                    description="Enzo came inside after playing in the snow"
                     image={enzo_snow_img}
                 />
 
                 <PhotoCard
                     title="Sleepin' Enzo"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["tried", "dogs", "passed-out"]}
+                    description="Enzo sleeping between two pillows"
                     image={enzo_upsidedown_img}
                 />
 
                 <PhotoCard
                     title="Lizard"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["tiny"]}
+                    description="Lizard in Turks and Cacios"
                     image={lizard_img}
                 />
 
                 <PhotoCard
                     title="Climbing Lizard"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["sticky-feet", "fast-climber"]}
+                    description="Lizard climg an umbrella in Costa Rica"
                     image={lizard_on_post_img}
                 />
 
                 <PhotoCard
                     title="Resting Milo"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["hot", "dogs", "summer"]}
+                    description="Milo resting on hos favourite chair in the summer"
                     image={milo_chair_img}
                 />
 
                 <PhotoCard
                     title="Stump Milo"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["hiking", "dogs"]}
+                    description="Milo sitting on a stump half-way through his walk"
                     image={milo_stump_img}
                 />
 
                 <PhotoCard
                     title="Mountain"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["Alberta", "vacation"]}
+                    description="Mountain in alberta shot on a dock on the lake"
                     image={mountain_img}
                 />
 
                 <PhotoCard
                     title="Sunset Beach"
-                    hashTags={["fnn", "fff", "yay"]}
-                    description="beach"
+                    hashTags={["sunset", "beach", "drone"]}
+                    description="Sunset on the beach in Turks and Cacios, Shot on my drone"
                     image={sunset_beach_img}
                 />
             </div>
@@ -298,6 +298,11 @@ function Progress() {
                 This section was created to document my progress over time,
                 and to document my learning of web development.
             </p>
+
+            <ProgressCard date={"March 3rd 2023"} changes={[
+                "Added dummy resume (for testing)",
+                "Added Descriptions/hashtags to photos",
+            ]}/>
 
             <ProgressCard date={"March 2nd 2023"} changes={[
                 "Improved the styling of the content slider",

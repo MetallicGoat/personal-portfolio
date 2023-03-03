@@ -31,10 +31,12 @@ export default function Home() {
                             </li>
 
                             <li>
-                                <a
+                                <button
                                     className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-2 rounded-md ml-4 sm:ml-8 lg:text-xl"
-                                    href="#">Resume
-                                </a>
+                                    onClick={
+                                        openResume
+                                    }>Resume
+                                </button>
                             </li>
                         </ul>
                     </nav>
@@ -71,7 +73,7 @@ export default function Home() {
                                 width="0"
                                 height="0"
                                 sizes="100vw"
-                                className="w-full h-auto rounded-3xl"
+                                className="w-full h-auto rounded-3xl border-4 border-neutral-700 dark:border-neutral-300"
                             />
 
                         </div>
@@ -98,15 +100,23 @@ interface HashTagProps {
 const Socials: FunctionComponent<HashTagProps> = ({className}) => {
     return (
         <div className={className}>
-            <div className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400 dark:text-gray-400">
+            <div
+                className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400 dark:text-gray-400">
 
                 <a href="https://github.com/MetallicGoat" target="blank_">
-                    <BsGithub className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                    <BsGithub
+                        className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>
 
-                <BsDiscord className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
-                <BsInstagram className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                <BsDiscord
+                    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                <BsInstagram
+                    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
             </div>
         </div>
     )
+}
+
+function openResume() {
+    window.open("/pdfs/resume.pdf", '_blank');
 }
