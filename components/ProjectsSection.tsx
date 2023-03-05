@@ -299,6 +299,10 @@ function Progress() {
                 and to document my learning of web development.
             </p>
 
+            <ProgressCard date={"March 4th 2023"} changes={[
+                "Added Page load animation"
+            ]}/>
+
             <ProgressCard date={"March 3rd 2023"} changes={[
                 "Added dummy resume (for testing)",
                 "Added Descriptions/hashtags to photos",
