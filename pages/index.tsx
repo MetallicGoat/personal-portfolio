@@ -27,7 +27,7 @@ export default function Home() {
                         className="py-6 lg:py-10 flex justify-between"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 1, delay: .5 }}
                     >
                         <h1 className="text-md sm:text-xl lg:text-2xl dark:text-white">Portfolio</h1>
                         <ul className="flex items-center">
@@ -53,7 +53,7 @@ export default function Home() {
                         className="md:flex md:flex-row md:justify-between md:items-center md:h-full md:my-auto md:pb-20"
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 1, delay: .5 }}
                     >
                         <div className="text-center md:text-left">
                             <h2
