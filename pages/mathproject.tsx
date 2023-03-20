@@ -53,7 +53,7 @@ const MathProjectPage: NextPage = () => {
 
 
     return (
-        <div className="pt-2 w-full min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <div className="pt-2 w-full min-h-screen flex flex-col items-center justify-center">
             <h1 className="text-4xl mb-4 font-bold p-3">Calculus ToolBox</h1>
             <div className="w-full flex justify-around items-center">
                 <div>
@@ -145,7 +145,7 @@ const MathProjectPage: NextPage = () => {
                         )}
 
                         <div className="flex items-center">
-                            <label htmlFor="animateToggle" className="mr-2">Animate:</label>
+                            <label htmlFor="animateToggle" className="mr-2 mb-2">Animate:</label>
                             <input type="checkbox" id="animateToggle" checked={animate}
                                    onChange={() => {
                                        handleToggleAnimation();
