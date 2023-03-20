@@ -300,7 +300,7 @@ function Progress() {
             </p>
 
             <ProgressCard date={"March 18th 2023"} changes={[
-                "Added under construction banner",
+                "Added under construction banner"
             ]}/>
 
             <ProgressCard date={"March 17th 2023"} changes={[

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {evaluate} from 'mathjs';
+import {abs, evaluate} from 'mathjs';
 
 type GraphProps = {
     equation: string;
@@ -7,12 +7,17 @@ type GraphProps = {
     version: number;
     animate: boolean;
     speed: number;
+    findArea: boolean;
+    method: string;
+    startX: number;
+    endX: number;
+    stepAmount: number;
 };
 
-const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed}) => {
+const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, findArea, method, stepAmount, startX, endX}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animationFrameIdRef = useRef<number | null>(null);
-    const stepSize = .01; // Smaller number = better resolution
+    const pointDistance = .01; // Smaller number = better resolution
     const pointsPerFrame = speed; // Speed = how many points get drawn per frame sent
 
     useEffect(() => {
@@ -89,14 +94,14 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed})
                 ctx.beginPath();
 
                 for (let i = 0; i < pointsPerFrame; i++) {
-                    const currentX = x + i * stepSize;
+                    const currentX = x + i * pointDistance;
                     const yValue = evaluate(equation, {x: currentX / xScale});
                     const canvasX = currentX + xAxis;
                     const canvasY = yAxis - yValue * yScale;
 
                     if (canvasY >= 0 && canvasY <= height) {
                         if (i === 0) {
-                            ctx.moveTo(currentX - stepSize + xAxis, yAxis - evaluate(equation, {x: (currentX - stepSize) / xScale}) * yScale);
+                            ctx.moveTo(currentX - pointDistance + xAxis, yAxis - evaluate(equation, {x: (currentX - pointDistance) / xScale}) * yScale);
                         }
                         ctx.lineTo(canvasX, canvasY);
                     }
@@ -104,8 +109,10 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed})
 
                 ctx.stroke();
 
-                if (x + pointsPerFrame * stepSize < xAxis) {
-                    animationFrameIdRef.current = requestAnimationFrame(() => drawAnimatedLine(x + stepSize * pointsPerFrame));
+                if (x + pointsPerFrame * pointDistance < xAxis) {
+                    animationFrameIdRef.current = requestAnimationFrame(() => {
+                        drawAnimatedLine(x + pointDistance * pointsPerFrame)
+                    });
                 } else {
                     animationFrameIdRef.current = null;
                 }
@@ -115,7 +122,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed})
             const drawInstantGraph = () => {
                 ctx.beginPath();
 
-                for (let x = -xAxis; x <= xAxis; x += stepSize) {
+                for (let x = -xAxis; x <= xAxis; x += pointDistance) {
                     const yValue = evaluate(equation, {x: x / xScale});
                     const canvasX = x + xAxis;
                     const canvasY = yAxis - yValue * yScale;
@@ -139,7 +146,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed})
                     if (canvasY >= 0 && canvasY <= height) {
                         break;
                     }
-                    startX += stepSize;
+                    startX += pointDistance;
                 }
                 drawAnimatedLine(startX);
             } else {
@@ -147,10 +154,43 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed})
             }
         };
 
-        // RESULT STUFF
-        drawAxis()
+
+        const findAreaEstimate = () => {
+            if(findArea) {
+                ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
+                ctx.strokeStyle = "rgb(150, 0, 0)";
+                ctx.lineWidth = .2;
+
+                const stepSize = (endX - startX) / stepAmount;
+                console.log(stepSize)
+
+                // 3 steps
+                for (let currX = startX; currX < (startX + (stepAmount * stepSize)); currX += stepSize) {
+                    if (abs(xScale * currX) > xAxis)
+                        break;
+
+                    let x = currX;
+
+                    switch(method){
+                        case "LRAM": x = currX; break;
+                        case "RRAM": x = currX + stepSize; break;
+                        case "MRAM": x = currX + (stepSize/2); break;
+                    }
+
+                    const rectY = evaluate(equation, {x: x});
+
+                    // Draw the rectangle with the fill and stroke colors
+                    ctx.fillRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                    ctx.strokeRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                }
+            }
+        }
+
+        // Draw :)
+        drawAxis();
         drawGridLines();
-        drawGraph()
+        findAreaEstimate();
+        drawGraph();
     };
 
 

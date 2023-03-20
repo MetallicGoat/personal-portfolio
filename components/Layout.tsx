@@ -26,7 +26,7 @@ const Layout = ({children}: Props) => {
                     <h1 className="text-yellow-700 font-bold">This Website is Still Under Constitution!</h1>
 
                     <button
-                        className="absolute right-5 text-2xl text-yellow-700"
+                        className="absolute pl-5 right-5 text-2xl text-yellow-700"
                         onClick={() => setShowBanner(false)}
                     >
                         <FiX/>
