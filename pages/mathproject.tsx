@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {NextPage} from "next";
 import Graph from "@/components/Graph";
-import {evaluate} from 'mathjs';
 import {ProgressCard} from "@/components/tabs/ProgressCard";
+import {evaluate} from "mathjs";
 
 export enum IssueType {
     NoIssue = "No Issue",
@@ -27,6 +27,8 @@ const MathProjectPage: NextPage = () => {
 
     const handleGraph = () => {
         // Test the Equation
+
+        console.log(parseQuadraticFunction("4x^2 + 5x + 3"))
 
         if (equation.length > 0) {
             try {
@@ -72,7 +74,7 @@ const MathProjectPage: NextPage = () => {
                 </div>
 
                 <div className="p-4 text-center">
-                    <h1 className="text-2xl pb-2" >Options</h1>
+                    <h1 className="text-2xl pb-2">Options</h1>
                     <div className="flex flex-col items-center">
                         <input
                             className="border border-gray-400 p-2 mb-2"
@@ -212,3 +214,29 @@ const MathProjectPage: NextPage = () => {
 };
 
 export default MathProjectPage;
+
+function parseQuadraticFunction(funcStr: string): { a: number; b: number; c: number } | null {
+    const regex = /^([+-]?\d*(\.\d+)?x\^2)?\s*([+-]?\s*\d*(\.\d+)?x)?\s*([+-]?\s*\d+(\.\d+)?)?$/;
+    const match = funcStr.replace(/\s+/g, '').match(regex);
+
+    if (!match) {
+        return null;
+    }
+
+    const [, aTerm, , bTerm, , cTerm] = match;
+
+    const parseTerm = (term: string, degree: number): number => {
+        if (!term) return 0;
+        const coefficient = term.replace(/x(\^2)?/, '');
+        return parseFloat(coefficient || (degree === 2 ? '1' : '-1'));
+    };
+
+    const a = parseTerm(aTerm, 2);
+    const b = parseTerm(bTerm, 1);
+    const c = parseFloat(cTerm || '0');
+
+    return { a, b, c };
+}
+
+
+

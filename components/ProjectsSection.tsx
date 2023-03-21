@@ -301,7 +301,9 @@ function Progress() {
 
             <ProgressCard date={"March 20th 2023"} changes={[
                 "NavBar is now displayed on every page",
-                "Added dropdown to NavBar to select the page you want to visit"
+                "Added dropdown to NavBar to select the page you want to visit",
+                "Added 3D effect on GitHub profile image",
+                "Improved animations"
             ]}/>
 
             <ProgressCard date={"March 18th 2023"} changes={[

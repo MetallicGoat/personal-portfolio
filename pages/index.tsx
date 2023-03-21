@@ -4,6 +4,7 @@ import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent, useState} from "react";
 import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/ProjectsSection";
+import {InteractiveImage} from "@/components/utils/InteractiveImage";
 
 export default function Home() {
 
@@ -16,9 +17,9 @@ export default function Home() {
 
                 <motion.div
                     className="md:flex md:flex-row md:justify-between md:items-center md:h-full md:my-auto md:pb-20"
-                    initial={{opacity: 0, y: 50}}
+                    initial={{opacity: 0, y: 30}}
                     animate={{opacity: 1, y: 0}}
-                    transition={{duration: 1, delay: .5}}
+                    transition={{duration: .3}}
                 >
                     <div className="text-center md:text-left">
                         <h2
@@ -48,17 +49,13 @@ export default function Home() {
                     </div>
 
                     <div
-                        className="flex justify-end mx-auto lg:mx-0 relative py-3 sm:my-6 md:pl-8 w-9/12 h-9/12 md:w-3/5 md:h-3/5 lg:w-2/5 lg:h-2/5"
+                        className="flex justify-center md:justify-end mx-auto lg:mx-0 relative py-3 sm:my-6 md:pl-8 w-9/12 h-9/12 md:w-3/5 md:h-3/5 lg:w-2/5 lg:h-2/5"
                     >
-                        <Image
+                        <InteractiveImage
                             src="https://github.com/MetallicGoat.png"
                             alt="GitHub profile picture"
-                            width="0"
-                            height="0"
-                            sizes="100vw"
-                            className="w-full h-auto rounded-3xl border-4 border-neutral-700 dark:border-neutral-300"
+                            className="w-full rounded-3xl border-4 border-neutral-700 dark:border-neutral-300"
                         />
-
                     </div>
 
                     <Socials className="md:hidden"/>
