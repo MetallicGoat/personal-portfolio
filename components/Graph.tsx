@@ -53,7 +53,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
         const drawAxis = () => {
             ctx.beginPath();
             ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2;
             ctx.moveTo(0, yAxis);
             ctx.lineTo(width, yAxis);
             ctx.moveTo(xAxis, 0);
@@ -64,7 +64,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
         // Use this to draw the grid lines
         const drawGridLines = () => {
             ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2;
 
             // Draw vertical gridlines
             for (let x = xAxis % xScale; x < width; x += xScale) {
@@ -136,7 +136,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
             };
 
             ctx.strokeStyle = 'blue';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
 
             if (animate) {
                 let startX = -xAxis;
@@ -187,6 +187,9 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
         }
 
         // Draw :)
+        ctx.fillStyle = 'rgb(255, 255, 255)';
+        ctx.fillRect(0, 0, width, height)
+
         drawAxis();
         drawGridLines();
         findAreaEstimate();
@@ -195,8 +198,8 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
 
 
     return (
-        <div>
-            <canvas ref={canvasRef} width="500" height="500" className="border border-black"></canvas>
+        <div className="w-full">
+            <canvas ref={canvasRef} width={1000} height={1000} className="border border-black shadow-xl w-full h-auto"></canvas>
         </div>
     );
 };

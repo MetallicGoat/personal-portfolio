@@ -16,7 +16,7 @@ const MathProjectPage: NextPage = () => {
     const [scale, setScale] = useState<number>(10);
     const [version, setVersion] = useState<number>(0);
     const [animate, setAnimate] = useState<boolean>(true);
-    const [animationSpeed, setAnimationSpeed] = useState<number>(400);
+    const [animationSpeed, setAnimationSpeed] = useState<number>(500);
     const [issue, setIssue] = useState<IssueType>(IssueType.NoIssue);
 
     const [findArea, setFindArea] = useState(false);
@@ -27,9 +27,6 @@ const MathProjectPage: NextPage = () => {
 
     const handleGraph = () => {
         // Test the Equation
-
-        console.log(parseQuadraticFunction("4x^2 + 5x + 3"))
-
         if (equation.length > 0) {
             try {
                 evaluate(equation, {x: 1});
@@ -55,10 +52,10 @@ const MathProjectPage: NextPage = () => {
 
 
     return (
-        <div className="pt-2 w-full min-h-screen flex flex-col items-center justify-center">
-            <h1 className="text-4xl mb-4 font-bold p-3">Calculus ToolBox</h1>
-            <div className="w-full flex justify-around items-center">
-                <div>
+        <div className="pt-2 w-full">
+            <h1 className="text-4xl mb-4 font-bold p-3 text-center">Calculus ToolBox</h1>
+            <div className="flex flex-col items-center md:items-start md:flex-row md:justify-around">
+                <div className="px-5 xs:px-10 md:px-0 w-full sm:w-5/6 md:w-1/2 xl:w-2/5">
                     <Graph
                         equation={equation}
                         scale={scale * 2}
@@ -73,8 +70,8 @@ const MathProjectPage: NextPage = () => {
                     />
                 </div>
 
-                <div className="p-4 text-center">
-                    <h1 className="text-2xl pb-2">Options</h1>
+                <div className="p-4 md:p-0">
+                    <h1 className="text-2xl pb-2 text-center">Options</h1>
                     <div className="flex flex-col items-center">
                         <input
                             className="border border-gray-400 p-2 mb-2"
@@ -192,6 +189,11 @@ const MathProjectPage: NextPage = () => {
                     "Trapezoid rule has not yet been implemented."
                 ]}/>
 
+                <br/>
+
+                <ProgressCard date="March 21 2023" changes={[
+                    "Improved styling & small device support",
+                ]}/>
                 <ProgressCard date="March 19 2023" changes={[
                     "Added ability to calculate area under curves with LRAM, RRAM, MRAM",
                     "Improved styling in fixed some input bugs"
@@ -214,29 +216,5 @@ const MathProjectPage: NextPage = () => {
 };
 
 export default MathProjectPage;
-
-function parseQuadraticFunction(funcStr: string): { a: number; b: number; c: number } | null {
-    const regex = /^([+-]?\d*(\.\d+)?x\^2)?\s*([+-]?\s*\d*(\.\d+)?x)?\s*([+-]?\s*\d+(\.\d+)?)?$/;
-    const match = funcStr.replace(/\s+/g, '').match(regex);
-
-    if (!match) {
-        return null;
-    }
-
-    const [, aTerm, , bTerm, , cTerm] = match;
-
-    const parseTerm = (term: string, degree: number): number => {
-        if (!term) return 0;
-        const coefficient = term.replace(/x(\^2)?/, '');
-        return parseFloat(coefficient || (degree === 2 ? '1' : '-1'));
-    };
-
-    const a = parseTerm(aTerm, 2);
-    const b = parseTerm(bTerm, 1);
-    const c = parseFloat(cTerm || '0');
-
-    return { a, b, c };
-}
-
 
 
