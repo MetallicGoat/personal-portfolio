@@ -1,31 +1,24 @@
 import React, {useEffect, useRef} from 'react';
+import {GraphInfo} from '../pages/mathproject';
 import {abs, evaluate} from 'mathjs';
 
 type GraphProps = {
-    equation: string;
-    scale: number;
+    graphInfo: GraphInfo;
     version: number;
-    animate: boolean;
-    speed: number;
-    findArea: boolean;
-    method: string;
-    startX: number;
-    endX: number;
-    stepAmount: number;
 };
 
-const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, findArea, method, stepAmount, startX, endX}) => {
+const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animationFrameIdRef = useRef<number | null>(null);
     const pointDistance = .01; // Smaller number = better resolution
-    const pointsPerFrame = speed; // Speed = how many points get drawn per frame sent
+    const pointsPerFrame = graphInfo.speed; // Speed = how many points get drawn per frame sent
 
     useEffect(() => {
         if (animationFrameIdRef.current)
             cancelAnimationFrame(animationFrameIdRef.current);
 
         // Redraw the graph!
-        drawGraph(equation);
+        drawGraph(graphInfo.function);
 
         // Suppress this because we only want it to update on this one event
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,8 +34,8 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
 
         const width = canvas.width;
         const height = canvas.height;
-        const xScale = width / scale;
-        const yScale = height / scale;
+        const xScale = width / graphInfo.getScale();
+        const yScale = height / graphInfo.getScale();
         const yAxis = Math.floor(height / 2);
         const xAxis = Math.floor(width / 2);
 
@@ -138,7 +131,7 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
             ctx.strokeStyle = 'blue';
             ctx.lineWidth = 3;
 
-            if (animate) {
+            if (graphInfo.animate) {
                 let startX = -xAxis;
                 while (startX < xAxis) {
                     const yValue = evaluate(equation, {x: startX / xScale});
@@ -156,22 +149,24 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
 
 
         const findAreaEstimate = () => {
-            if(findArea) {
+            if(graphInfo.findArea) {
                 ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
                 ctx.strokeStyle = "rgb(150, 0, 0)";
                 ctx.lineWidth = .2;
 
-                const stepSize = (endX - startX) / stepAmount;
-                console.log(stepSize)
+                const stepSize = (graphInfo.endX - graphInfo.startX) / graphInfo.stepAmount;
+                let estimate = 0;
 
                 // 3 steps
-                for (let currX = startX; currX < (startX + (stepAmount * stepSize)); currX += stepSize) {
+                for (let currX = graphInfo.startX; currX < (graphInfo.startX + (graphInfo.stepAmount * stepSize)); currX += stepSize) {
                     if (abs(xScale * currX) > xAxis)
                         break;
 
+                    console.log("TEST")
+
                     let x = currX;
 
-                    switch(method){
+                    switch(graphInfo.findAreaMethod){
                         case "LRAM": x = currX; break;
                         case "RRAM": x = currX + stepSize; break;
                         case "MRAM": x = currX + (stepSize/2); break;
@@ -179,10 +174,14 @@ const Graph: React.FC<GraphProps> = ({equation, scale, version, animate, speed, 
 
                     const rectY = evaluate(equation, {x: x});
 
+                    estimate += (rectY * stepSize);
+
                     // Draw the rectangle with the fill and stroke colors
                     ctx.fillRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
                     ctx.strokeRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
                 }
+
+                console.log("estimate " + estimate);
             }
         }
 
