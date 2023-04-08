@@ -1,127 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NextPage} from "next";
 import Graph from "@/components/Graph";
 import {ProgressCard} from "@/components/tabs/ProgressCard";
-
-export enum IssueType {
-    NoIssue = "No Issue",
-    MissingEquation = "Missing Equation",
-    InvalidEquation = "Invalid Equation",
-    ScaleToSmall = "Scale must be greater than 0"
-}
-
-export class GraphInfo {
-    function: string;
-    scale: number = 10;
-    speed: number;
-    animate: boolean;
-    findArea: boolean;
-    findAreaMethod: string;
-    startX: number;
-    endX: number;
-    stepAmount: number;
-    extraFeatures = false;
-    quadValues = [0, 0, 0];
-    private readonly onChange: () => void;
-
-    constructor(
-        fun: string,
-        scale: number,
-        animate: boolean,
-        animateSpeed: number,
-        findArea: boolean,
-        findAreaMethod: string,
-        startX: number,
-        endX: number,
-        stepAmount: number,
-        onChange: () => void)
-    {
-        this.onChange = onChange;
-        this.function = fun;
-        this.scale = scale
-        this.animate = animate;
-        this.speed = animateSpeed;
-        this.findArea = findArea;
-        this.findAreaMethod = findAreaMethod;
-        this.startX = startX;
-        this.endX = endX;
-        this.stepAmount = stepAmount;
-    };
-
-    static cloneFromInstance(instance: GraphInfo): GraphInfo {
-        const newInstance = new GraphInfo(
-            instance.function,
-            instance.scale,
-            instance.animate,
-            instance.speed,
-            instance.findArea,
-            instance.findAreaMethod,
-            instance.startX,
-            instance.endX,
-            instance.stepAmount,
-            instance.onChange);
-
-        // Not in constructor
-        newInstance.extraFeatures = instance.extraFeatures;
-        newInstance.quadValues = instance.quadValues.slice();
-
-        return newInstance;
-    }
-
-    setSpeed(speed: number){
-        this.speed = speed;
-        this.onChange();
-    }
-
-    getScale(): number {
-        return this.scale * 2;
-    }
-
-    setScale(scale: number){
-        if(scale < 0)
-            return
-
-        this.scale = scale;
-        this.onChange();
-    }
-
-    getIssue(): IssueType {
-
-        // if (equation.length > 0) {
-        //     try {
-        //         evaluate(equation, {x: 1});
-        //         setIssue(IssueType.NoIssue)
-        //     } catch (e) {
-        //         setIssue(IssueType.InvalidEquation)
-        //     }
-        // } else {
-        //     setIssue(IssueType.MissingEquation)
-        // }
-        //
-        // if (scale <= 0)
-        //     setIssue(IssueType.ScaleToSmall)
-
-        return IssueType.NoIssue;
-    }
-
-    setAnyFunction(fun: string){
-        this.function = fun;
-        this.extraFeatures = false;
-        this.onChange();
-    }
-
-    setWeirdFunction(a: number, b: number, c: number){
-        this.function = a + "x^2 + " + b + "x + " + c;
-        this.extraFeatures = true;
-        this.quadValues = [a, b, c];
-        this.onChange();
-    }
-}
+import {CalculateMethod, GraphInfo, IssueType} from "@/components/utils/GraphInfo";
 
 const MathProjectPage: NextPage = () => {
     const [equationType, setEquationType] = useState('Function');
     const [version, setVersion] = useState<number>(0);
-    const [issue, setIssue] = useState<IssueType>(IssueType.NoIssue);
     const [graphInfo, setGraphInfo] = useState<GraphInfo | null>(null);
 
     useEffect(() => {
@@ -131,7 +16,7 @@ const MathProjectPage: NextPage = () => {
             true,
             500,
             false,
-            "MRAM",
+            CalculateMethod.MRAM,
             -7,
             2,
             15,
@@ -151,6 +36,9 @@ const MathProjectPage: NextPage = () => {
         return <div>Loading...</div>;
     }
 
+    const handleSelectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        graphInfo.setFindAreaMethod(event.target.value as CalculateMethod);
+    };
 
     const handleGraph = () => {
         // Set and update
@@ -233,7 +121,7 @@ const MathProjectPage: NextPage = () => {
                             <label htmlFor="findArea" className="mr-2 mb-2 dark:text-white">Calculate Area:</label>
                             <input type="checkbox" id="findArea" checked={graphInfo.findArea}
                                    onChange={() => {
-                                       graphInfo.findArea = !graphInfo.findArea;
+                                       graphInfo.setFindArea(!graphInfo.findArea);
                                    }}
                             />
                         </div>
@@ -243,15 +131,14 @@ const MathProjectPage: NextPage = () => {
                                 <div className="w-full mb-2">
                                     <select
                                         value={graphInfo.findAreaMethod}
-                                        onChange={(e) => {
-                                            graphInfo.findAreaMethod = e.target.value;
-                                        }}
+                                        onChange={(handleSelectionChange)}
                                         className="border border-gray-400 p-1 w-full"
                                     >
-                                        <option value="RRAM">RRAM</option>
-                                        <option value="LRAM">LRAM</option>
-                                        <option value="MRAM">MRAM</option>
-                                        <option value="Trapezoid">Trapezoid Rule</option>
+                                        {Object.values(CalculateMethod).map((method) => (
+                                            <option key={method} value={method}>
+                                                {method}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
 
@@ -260,7 +147,7 @@ const MathProjectPage: NextPage = () => {
                                     type="number"
                                     placeholder="Start"
                                     value={graphInfo.startX}
-                                    onChange={(event) => graphInfo.startX = parseFloat(event.target.value)}
+                                    onChange={(event) => graphInfo.setStartX(parseFloat(event.target.value))}
                                 />
 
                                 <input
@@ -268,7 +155,7 @@ const MathProjectPage: NextPage = () => {
                                     type="number"
                                     placeholder="End"
                                     value={graphInfo.endX}
-                                    onChange={(event) => graphInfo.endX = parseFloat(event.target.value)}
+                                    onChange={(event) => graphInfo.setEndX(parseFloat(event.target.value))}
                                 />
 
                                 <input
@@ -276,7 +163,7 @@ const MathProjectPage: NextPage = () => {
                                     type="number"
                                     placeholder="# of rectangles"
                                     value={graphInfo.stepAmount}
-                                    onChange={(event) => graphInfo.stepAmount = parseFloat(event.target.value)}
+                                    onChange={(event) => graphInfo.setStepAmount(parseFloat(event.target.value))}
                                 />
                             </div>
                         )}
@@ -285,8 +172,7 @@ const MathProjectPage: NextPage = () => {
                             <label htmlFor="animateToggle" className="mr-2 mb-2 dark:text-white">Animate:</label>
                             <input type="checkbox" id="animateToggle" checked={graphInfo.animate}
                                    onChange={() => {
-                                       graphInfo.animate = !graphInfo.animate
-                                       handleGraph();
+                                       graphInfo.setAnimate(!graphInfo.animate);
                                    }}
                             />
                         </div>
@@ -308,9 +194,9 @@ const MathProjectPage: NextPage = () => {
                             </div>
                         )}
 
-                        {issue != IssueType.NoIssue && (
-                            <div className="text-red-600 mb-3">FAILED TO GRAPH: {issue}!</div>
-                        )}
+                        {/*TODO {issue != IssueType.NoIssue && (*/}
+                        {/*    <div className="text-red-600 mb-3">FAILED TO GRAPH: {issue}!</div>*/}
+                        {/*)}*/}
 
                         <button className="bg-blue-500 text-white text-lg px-4 py-2 rounded mb-2" onClick={handleGraph}>
                             Graph
@@ -329,6 +215,11 @@ const MathProjectPage: NextPage = () => {
 
                 <br/>
 
+                <ProgressCard date="April 8 2023" changes={[
+                    "Fixed bug where some control panel buttons were not working/updating properly",
+                    "Fixed Area Calculator would sometimes add an extra an extra rectangle",
+                    "Implemented Trapezoid rule"
+                ]}/>
                 <ProgressCard date="April 6 2023" changes={[
                     "Simplify graph logic, and make more modular",
                 ]}/>

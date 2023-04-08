@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
-import {GraphInfo} from '../pages/mathproject';
 import {abs, evaluate} from 'mathjs';
+import {CalculateMethod, GraphInfo} from "@/components/utils/GraphInfo";
 
 type GraphProps = {
     graphInfo: GraphInfo;
@@ -156,32 +156,51 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
                 const stepSize = (graphInfo.endX - graphInfo.startX) / graphInfo.stepAmount;
                 let estimate = 0;
+                let currX = graphInfo.startX
 
                 // 3 steps
-                for (let currX = graphInfo.startX; currX < (graphInfo.startX + (graphInfo.stepAmount * stepSize)); currX += stepSize) {
+                for (let pos = 0; pos < graphInfo.stepAmount; pos++) {
                     if (abs(xScale * currX) > xAxis)
                         break;
 
-                    console.log("TEST")
+                    if(graphInfo.findAreaMethod != CalculateMethod.TRULE) {
+                        let x = currX; // LRAM as fall back
 
-                    let x = currX;
+                        switch (graphInfo.findAreaMethod) {
+                            case CalculateMethod.LRAM:
+                                x = currX;
+                                break;
+                            case CalculateMethod.RRAM:
+                                x = currX + stepSize;
+                                break;
+                            case CalculateMethod.MRAM:
+                                x = currX + (stepSize / 2);
+                                break;
+                        }
 
-                    switch(graphInfo.findAreaMethod){
-                        case "LRAM": x = currX; break;
-                        case "RRAM": x = currX + stepSize; break;
-                        case "MRAM": x = currX + (stepSize/2); break;
+                        const rectY = evaluate(equation, {x: x});
+
+                        estimate += (rectY * stepSize);
+
+                        // Draw the rectangle with the fill and stroke colors
+                        ctx.fillRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                        ctx.strokeRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                    } else {
+                        const startY = evaluate(equation, {x: currX});
+                        const endY = evaluate(equation, {x: currX + stepSize});
+
+                        ctx.beginPath();
+                        ctx.moveTo(xAxis + (xScale * currX), yAxis); // Bottom-left point
+                        ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis); // Bottom-right point
+                        ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis - (yScale * endY)); // Top-right point
+                        ctx.lineTo(xAxis + (xScale * currX), yAxis - (yScale * startY)); // Top-left point
+                        ctx.closePath();
+                        ctx.stroke();
+                        ctx.fill()
                     }
 
-                    const rectY = evaluate(equation, {x: x});
-
-                    estimate += (rectY * stepSize);
-
-                    // Draw the rectangle with the fill and stroke colors
-                    ctx.fillRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
-                    ctx.strokeRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                    currX += stepSize
                 }
-
-                console.log("estimate " + estimate);
             }
         }
 
