@@ -111,47 +111,26 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                 }
             };
 
-            // This function graphs the line instantly
-            const drawInstantGraph = () => {
-                ctx.beginPath();
-
-                for (let x = -xAxis; x <= xAxis; x += pointDistance) {
-                    const yValue = evaluate(equation, {x: x / xScale});
-                    const canvasX = x + xAxis;
-                    const canvasY = yAxis - yValue * yScale;
-
-                    if (canvasY >= 0 && canvasY <= height) {
-                        ctx.lineTo(canvasX, canvasY);
-                    }
-                }
-
-                ctx.stroke();
-            };
-
             ctx.strokeStyle = 'blue';
             ctx.lineWidth = 3;
 
-            if (graphInfo.animate) {
-                let startX = -xAxis;
-                while (startX < xAxis) {
-                    const yValue = evaluate(equation, {x: startX / xScale});
-                    const canvasY = yAxis - yValue * yScale;
-                    if (canvasY >= 0 && canvasY <= height) {
-                        break;
-                    }
-                    startX += pointDistance;
+            let startX = -xAxis;
+            while (startX < xAxis) {
+                const yValue = evaluate(equation, {x: startX / xScale});
+                const canvasY = yAxis - yValue * yScale;
+                if (canvasY >= 0 && canvasY <= height) {
+                    break;
                 }
-                drawAnimatedLine(startX);
-            } else {
-                drawInstantGraph();
+                startX += pointDistance;
             }
+            drawAnimatedLine(startX);
         };
 
 
         const findAreaEstimate = () => {
-            if(graphInfo.findArea) {
-                ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
-                ctx.strokeStyle = "rgb(150, 0, 0)";
+            if (graphInfo.findAreaMethod != CalculateMethod.DISABLED) {
+                ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
+                ctx.strokeStyle = "rgb(255, 0, 0)";
                 ctx.lineWidth = .2;
 
                 const stepSize = (graphInfo.endX - graphInfo.startX) / graphInfo.stepAmount;
@@ -163,7 +142,12 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                     if (abs(xScale * currX) > xAxis)
                         break;
 
-                    if(graphInfo.findAreaMethod != CalculateMethod.TRULE) {
+                    if (pos % 2 == 0)
+                        ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+                    else
+                        ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
+
+                    if (graphInfo.findAreaMethod != CalculateMethod.TRULE) {
                         let x = currX; // LRAM as fall back
 
                         switch (graphInfo.findAreaMethod) {
@@ -190,6 +174,7 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                         const endY = evaluate(equation, {x: currX + stepSize});
 
                         ctx.beginPath();
+                        // TODO optimize
                         ctx.moveTo(xAxis + (xScale * currX), yAxis); // Bottom-left point
                         ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis); // Bottom-right point
                         ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis - (yScale * endY)); // Top-right point
@@ -217,7 +202,8 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
     return (
         <div className="w-full">
-            <canvas ref={canvasRef} width={1000} height={1000} className="border border-black shadow-xl w-full h-auto"></canvas>
+            <canvas ref={canvasRef} width={1000} height={1000}
+                    className="border border-black shadow-xl w-full h-auto"></canvas>
         </div>
     );
 };

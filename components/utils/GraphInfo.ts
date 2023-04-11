@@ -9,15 +9,14 @@ export enum CalculateMethod {
     MRAM = "MRAM",
     RRAM = "RRAM",
     LRAM = "LRAM",
-    TRULE = "Trapezoid rule"
+    TRULE = "Trapezoid rule",
+    DISABLED = "Disabled"
 }
 
 export class GraphInfo {
     function: string;
     scale: number = 10;
     speed: number;
-    animate: boolean;
-    findArea: boolean;
     findAreaMethod: CalculateMethod;
     startX: number;
     endX: number;
@@ -29,9 +28,7 @@ export class GraphInfo {
     constructor(
         fun: string,
         scale: number,
-        animate: boolean,
         animateSpeed: number,
-        findArea: boolean,
         findAreaMethod: CalculateMethod,
         startX: number,
         endX: number,
@@ -41,9 +38,7 @@ export class GraphInfo {
         this.onChange = onChange;
         this.function = fun;
         this.scale = scale
-        this.animate = animate;
         this.speed = animateSpeed;
-        this.findArea = findArea;
         this.findAreaMethod = findAreaMethod;
         this.startX = startX;
         this.endX = endX;
@@ -54,9 +49,7 @@ export class GraphInfo {
         const newInstance = new GraphInfo(
             instance.function,
             instance.scale,
-            instance.animate,
             instance.speed,
-            instance.findArea,
             instance.findAreaMethod,
             instance.startX,
             instance.endX,
@@ -90,17 +83,7 @@ export class GraphInfo {
         this.onChange()
     }
 
-    setFindArea(findArea: boolean) {
-        this.findArea = findArea;
-        this.onChange()
-    }
-
-    setAnimate(animate: boolean) {
-        this.animate = animate;
-        this.onChange()
-    }
-
-    setSpeed(speed: number){
+    setSpeed(speed: number, max: number){
         this.speed = speed;
         this.onChange();
     }
