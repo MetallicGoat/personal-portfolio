@@ -53,7 +53,7 @@ const NavBar: React.FC<NavBarProps> = ({darkMode, setDarkMode, currentPath}) => 
 
     return (
         <motion.nav
-            className="py-6 lg:py-10 flex justify-between"
+            className="py-6 flex justify-between"
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: .3}}

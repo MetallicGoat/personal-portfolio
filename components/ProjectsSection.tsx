@@ -1,7 +1,7 @@
 import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/tabs/ProjectCard";
 import {PhotoCard} from "@/components/tabs/PhotoCard";
 import {ProgressCard} from "@/components/tabs/ProgressCard";
-import {useState} from "react";
+import React, {useState} from "react";
 
 // Projects
 import mbedwars_img from "@/public/logos/mbedwars.png";
@@ -298,6 +298,10 @@ function Progress() {
                 This section was created to document my progress over time,
                 and to document my learning of web development.
             </p>
+
+            <ProgressCard date="April 13 2023" changes={[
+                "Improved NavBar styling",
+            ]}/>
 
             <ProgressCard date={"March 20th 2023"} changes={[
                 "NavBar is now displayed on every page",

@@ -13,6 +13,7 @@ const MathProjectPage: NextPage = () => {
         const initialGraphInfo = new GraphInfo(
             "abs(x) * sin(x)",
             10,
+            10,
             500,
             CalculateMethod.DISABLED,
             -7,
@@ -47,9 +48,9 @@ const MathProjectPage: NextPage = () => {
     const titleClassNames = "text-xs dark:text-white";
 
     return (
-        <div className="pt-2 w-full">
-            <h1 className="text-4xl mb-4 font-bold p-3 text-center dark:text-white">Calculus ToolBox</h1>
-            <div className="flex flex-col items-center md:items-start md:flex-row md:justify-around">
+        <div className="w-full">
+            <h1 className="text-2xl mb-4 font-bold text-center dark:text-white">Calculus ToolBox</h1>
+            <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-around">
                 <div className="px-5 xs:px-10 md:px-0 w-full sm:w-5/6 md:w-1/2 xl:w-2/5">
                     <Graph
                         graphInfo={graphInfo}
@@ -58,9 +59,9 @@ const MathProjectPage: NextPage = () => {
                 </div>
 
                 <div className="p-4 md:p-0">
-                    <h1 className="text-2xl pb-2 text-center font-bold dark:text-white">Options</h1>
+                    <h1 className="text-xl text-center font-bold dark:text-white">Options</h1>
 
-                    <div className="flex flex-col lg:flex-row">
+                    <div className="flex flex-col sm:flex-row">
                         <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-700">
 
                             <h1 className={titleClassNames}>Scale</h1>
@@ -80,7 +81,7 @@ const MathProjectPage: NextPage = () => {
                             <h1 className={titleClassNames}>Equation</h1>
                             {equationType == "Function" && (
                                 <input
-                                    className="border border-gray-400 p-2 mb-2"
+                                    className="border border-gray-400 p-2 mb-2 w-full"
                                     type="text"
                                     placeholder="Enter equation (e.g. x^2)"
                                     value={graphInfo.function}
@@ -89,51 +90,51 @@ const MathProjectPage: NextPage = () => {
                             )}
 
                             {equationType == "Quad" && (
-                                <div>
+                                <div className="flex">
                                     <input
-                                        className="border border-gray-400 p-2 mb-2"
+                                        className="border border-gray-400 p-2 mb-2 w-full"
                                         type="number"
                                         placeholder="a"
-                                        value={graphInfo.scale}
-                                        onChange={(event) => graphInfo.scale = parseFloat(event.target.value)}
+                                        value={graphInfo.scaleX}
+                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
                                     />
                                     <input
-                                        className="border border-gray-400 p-2 mb-2"
+                                        className="border border-gray-400 p-2 mb-2 w-full"
                                         type="number"
                                         placeholder="b"
-                                        value={graphInfo.scale}
-                                        onChange={(event) => graphInfo.scale = parseFloat(event.target.value)}
+                                        value={graphInfo.scaleX}
+                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
                                     />
                                     <input
-                                        className="border border-gray-400 p-2 mb-2"
+                                        className="border border-gray-400 p-2 mb-2 w-full"
                                         type="number"
                                         placeholder="c"
-                                        value={graphInfo.scale}
-                                        onChange={(event) => graphInfo.scale = parseFloat(event.target.value)}
+                                        value={graphInfo.scaleX}
+                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
                                     />
                                 </div>
                             )}
 
                             <h1 className={titleClassNames}>Scale X</h1>
                             <input
-                                className="border border-gray-400 p-2 mb-2"
+                                className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
                                 placeholder="Enter scale"
-                                value={graphInfo.scale}
-                                onChange={(event) => graphInfo.setScale(parseFloat(event.target.value))}
+                                value={graphInfo.scaleX}
+                                onChange={(event) => graphInfo.setScaleX(parseFloat(event.target.value))}
                             />
 
                             <h1 className={titleClassNames}>Scale Y</h1>
                             <input
-                                className="border border-gray-400 p-2 mb-2"
+                                className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
                                 placeholder="Enter scale"
-                                value={graphInfo.scale}
-                                onChange={(event) => graphInfo.setScale(parseFloat(event.target.value))}
+                                value={graphInfo.scaleY}
+                                onChange={(event) => graphInfo.setScaleY(parseFloat(event.target.value))}
                             />
 
                             <h1 className={titleClassNames}>Animation Speed</h1>
-                            <div className="flex items-center space-x-4 mb-2">
+                            <div className="flex items-center space-x-4 mb-2 w-full">
                                 <input
                                     type="range"
                                     id="animationSpeed"
@@ -165,7 +166,7 @@ const MathProjectPage: NextPage = () => {
 
                             <h1 className={titleClassNames}>Start X</h1>
                             <input
-                                className="border border-gray-400 p-2 mb-2"
+                                className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
                                 placeholder="Start"
                                 value={graphInfo.startX}
@@ -174,7 +175,7 @@ const MathProjectPage: NextPage = () => {
 
                             <h1 className={titleClassNames}>End X</h1>
                             <input
-                                className="border border-gray-400 p-2 mb-2"
+                                className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
                                 placeholder="End"
                                 value={graphInfo.endX}
@@ -183,7 +184,7 @@ const MathProjectPage: NextPage = () => {
 
                             <h1 className={titleClassNames}># of Rectangles</h1>
                             <input
-                                className="border border-gray-400 p-2 mb-2"
+                                className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
                                 placeholder="# of rectangles"
                                 value={graphInfo.stepAmount}
@@ -215,6 +216,9 @@ const MathProjectPage: NextPage = () => {
             <br/>
             <br/>
 
+            <ProgressCard date="April 13 2023" changes={[
+                "Fixed XScale and YScale do the same thing",
+            ]}/>
             <ProgressCard date="April 10 2023" changes={[
                 "Fixed bug where some control panel buttons were not working/updating properly",
                 "Improved styling for larger devices + fixed dark mode support",

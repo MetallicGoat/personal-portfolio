@@ -34,8 +34,8 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
         const width = canvas.width;
         const height = canvas.height;
-        const xScale = width / graphInfo.getScale();
-        const yScale = height / graphInfo.getScale();
+        const xScale = width / graphInfo.getScaleX();
+        const yScale = height / graphInfo.getScaleY();
         const yAxis = Math.floor(height / 2);
         const xAxis = Math.floor(width / 2);
 
@@ -111,8 +111,8 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                 }
             };
 
-            ctx.strokeStyle = 'blue';
-            ctx.lineWidth = 3;
+            ctx.strokeStyle = "rgba(0,72,255,0.75)";
+            ctx.lineWidth = 2.5;
 
             let startX = -xAxis;
             while (startX < xAxis) {
@@ -173,6 +173,8 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                         const startY = evaluate(equation, {x: currX});
                         const endY = evaluate(equation, {x: currX + stepSize});
 
+                        estimate += ((startY + endY) / 2) * stepSize; // Area of trapezoid
+
                         ctx.beginPath();
                         // TODO optimize
                         ctx.moveTo(xAxis + (xScale * currX), yAxis); // Bottom-left point
@@ -186,6 +188,7 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
                     currX += stepSize
                 }
+                console.log(estimate)
             }
         }
 

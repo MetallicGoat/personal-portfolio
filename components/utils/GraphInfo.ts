@@ -15,7 +15,8 @@ export enum CalculateMethod {
 
 export class GraphInfo {
     function: string;
-    scale: number = 10;
+    scaleX: number = 10;
+    scaleY: number = 10;
     speed: number;
     findAreaMethod: CalculateMethod;
     startX: number;
@@ -27,7 +28,8 @@ export class GraphInfo {
 
     constructor(
         fun: string,
-        scale: number,
+        scaleX: number,
+        scaleY: number,
         animateSpeed: number,
         findAreaMethod: CalculateMethod,
         startX: number,
@@ -37,7 +39,8 @@ export class GraphInfo {
     {
         this.onChange = onChange;
         this.function = fun;
-        this.scale = scale
+        this.scaleX = scaleX
+        this.scaleY = scaleY
         this.speed = animateSpeed;
         this.findAreaMethod = findAreaMethod;
         this.startX = startX;
@@ -48,7 +51,8 @@ export class GraphInfo {
     static cloneFromInstance(instance: GraphInfo): GraphInfo {
         const newInstance = new GraphInfo(
             instance.function,
-            instance.scale,
+            instance.scaleX,
+            instance.scaleY,
             instance.speed,
             instance.findAreaMethod,
             instance.startX,
@@ -88,15 +92,27 @@ export class GraphInfo {
         this.onChange();
     }
 
-    getScale(): number {
-        return this.scale * 2;
+    getScaleX(): number {
+        return this.scaleX * 2;
     }
 
-    setScale(scale: number){
-        if(scale < 0)
+    getScaleY(): number {
+        return this.scaleY * 2;
+    }
+
+    setScaleX(scaleX: number){
+        if(scaleX < 0)
             return
 
-        this.scale = scale;
+        this.scaleX = scaleX;
+        this.onChange();
+    }
+
+    setScaleY(scaleY: number){
+        if(scaleY < 0)
+            return
+
+        this.scaleY = scaleY;
         this.onChange();
     }
 
