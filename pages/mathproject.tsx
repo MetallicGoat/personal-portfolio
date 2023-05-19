@@ -5,6 +5,7 @@ import {ProgressCard} from "@/components/tabs/ProgressCard";
 import {CalculateMethod, GraphInfo, IssueType} from "@/components/utils/GraphInfo";
 
 const MathProjectPage: NextPage = () => {
+    const [issue, setIssue] = useState<boolean>(false);
     const [version, setVersion] = useState<number>(0);
     const [graphInfo, setGraphInfo] = useState<GraphInfo | null>(null);
 
@@ -40,8 +41,12 @@ const MathProjectPage: NextPage = () => {
 
     const handleGraph = () => {
         // Set and update
-        if (graphInfo.getIssue() == IssueType.NoIssue)
+        if (graphInfo.getIssue() == IssueType.NoIssue) {
+            setIssue(false)
             setVersion((prev) => prev + 1);
+        } else {
+            setIssue(true)
+        }
     };
 
     const titleClassNames = "text-xs dark:text-white";
@@ -162,12 +167,11 @@ const MathProjectPage: NextPage = () => {
                                 onChange={(event) => graphInfo.setStepAmount(parseFloat(event.target.value))}
                             />
                         </div>
-
-                        {/*TODO {issue != IssueType.NoIssue && (*/}
-                        {/*    <div className="text-red-600 mb-3">FAILED TO GRAPH: {issue}!</div>*/}
-                        {/*)}*/}
-
                     </div>
+
+                    {issue && (
+                        <div className="w-3/4 text-red-600 mb-3 text-center mx-auto">FAILED TO GRAPH: Check to make sure your equation is valid! It is case sensitive!</div>
+                    )}
 
                     <button className="flex mx-auto bg-blue-500 text-white text-lg px-4 py-2 rounded m-2"
                             onClick={handleGraph}>
@@ -196,6 +200,9 @@ const MathProjectPage: NextPage = () => {
             <br/>
             <br/>
 
+            <ProgressCard date="May 19 2023" changes={[
+                "Fix web app crashing when entering invalid equation",
+            ]}/>
             <ProgressCard date="May 18 2023" changes={[
                 "Remove the specific quadratic formula mode, as it can be handled by the regular equation type anyway",
                 "Use LRAM by default (instead of having it disabled)",

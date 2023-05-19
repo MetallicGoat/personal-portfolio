@@ -1,3 +1,5 @@
+import {evaluate} from "mathjs";
+
 export enum IssueType {
     NoIssue = "No Issue",
     MissingEquation = "Missing Equation",
@@ -115,6 +117,12 @@ export class GraphInfo {
     }
 
     getIssue(): IssueType {
+
+        try {
+            evaluate(this.function, {x: 1});
+        } catch (e) {
+            return IssueType.InvalidEquation
+        }
 
         // if (equation.length > 0) {
         //     try {
