@@ -15,7 +15,7 @@ export default function App({Component, pageProps}: AppProps) {
         <div className={darkMode ? "dark" : ""}>
             <Head>
                 <title>Portfolio</title>
-                <meta name="description" content="blah"/>
+                <meta name="description" content="Christian Azzam's Website (JavaScript < TypeScript < Java)"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 

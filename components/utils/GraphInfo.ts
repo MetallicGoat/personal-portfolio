@@ -22,7 +22,6 @@ export class GraphInfo {
     startX: number;
     endX: number;
     stepAmount: number;
-    extraFeatures = false;
     quadValues = [0, 0, 0];
     private readonly onChange: () => void;
 
@@ -61,7 +60,6 @@ export class GraphInfo {
             instance.onChange);
 
         // Not in constructor
-        newInstance.extraFeatures = instance.extraFeatures;
         newInstance.quadValues = instance.quadValues.slice();
 
         return newInstance;
@@ -137,14 +135,6 @@ export class GraphInfo {
 
     setAnyFunction(fun: string){
         this.function = fun;
-        this.extraFeatures = false;
-        this.onChange();
-    }
-
-    setWeirdFunction(a: number, b: number, c: number){
-        this.function = a + "x^2 + " + b + "x + " + c;
-        this.extraFeatures = true;
-        this.quadValues = [a, b, c];
         this.onChange();
     }
 }

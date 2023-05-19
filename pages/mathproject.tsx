@@ -5,7 +5,6 @@ import {ProgressCard} from "@/components/tabs/ProgressCard";
 import {CalculateMethod, GraphInfo, IssueType} from "@/components/utils/GraphInfo";
 
 const MathProjectPage: NextPage = () => {
-    const [equationType, setEquationType] = useState('Function');
     const [version, setVersion] = useState<number>(0);
     const [graphInfo, setGraphInfo] = useState<GraphInfo | null>(null);
 
@@ -15,7 +14,7 @@ const MathProjectPage: NextPage = () => {
             10,
             10,
             500,
-            CalculateMethod.DISABLED,
+            CalculateMethod.LRAM,
             -7,
             2,
             15,
@@ -64,56 +63,28 @@ const MathProjectPage: NextPage = () => {
                     <div className="flex flex-col sm:flex-row">
                         <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-700">
 
-                            <h1 className={titleClassNames}>Scale</h1>
-                            <div className="w-full mb-2">
-                                <select
-                                    value={equationType}
-                                    onChange={(e) => {
-                                        setEquationType(e.target.value);
-                                    }}
-                                    className="border border-gray-400 p-1 w-full"
-                                >
-                                    <option value="Function">Any Function</option>
-                                    <option value="Quad">Quadratic (more features)</option>
-                                </select>
-                            </div>
+                            {/*<h1 className={titleClassNames}>Scale</h1>*/}
+                            {/*<div className="w-full mb-2">*/}
+                            {/*    <select*/}
+                            {/*        value={equationType}*/}
+                            {/*        onChange={(e) => {*/}
+                            {/*            setEquationType(e.target.value);*/}
+                            {/*        }}*/}
+                            {/*        className="border border-gray-400 p-1 w-full"*/}
+                            {/*    >*/}
+                            {/*        <option value="Function">Any Function</option>*/}
+                            {/*        <option value="Quad">Quadratic (more features)</option>*/}
+                            {/*    </select>*/}
+                            {/*</div>*/}
 
                             <h1 className={titleClassNames}>Equation</h1>
-                            {equationType == "Function" && (
-                                <input
-                                    className="border border-gray-400 p-2 mb-2 w-full"
-                                    type="text"
-                                    placeholder="Enter equation (e.g. x^2)"
-                                    value={graphInfo.function}
-                                    onChange={(event) => graphInfo.setAnyFunction(event.target.value)}
-                                />
-                            )}
-
-                            {equationType == "Quad" && (
-                                <div className="flex">
-                                    <input
-                                        className="border border-gray-400 p-2 mb-2 w-full"
-                                        type="number"
-                                        placeholder="a"
-                                        value={graphInfo.scaleX}
-                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
-                                    />
-                                    <input
-                                        className="border border-gray-400 p-2 mb-2 w-full"
-                                        type="number"
-                                        placeholder="b"
-                                        value={graphInfo.scaleX}
-                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
-                                    />
-                                    <input
-                                        className="border border-gray-400 p-2 mb-2 w-full"
-                                        type="number"
-                                        placeholder="c"
-                                        value={graphInfo.scaleX}
-                                        onChange={(event) => graphInfo.scaleX = parseFloat(event.target.value)}
-                                    />
-                                </div>
-                            )}
+                            <input
+                                className="border border-gray-400 p-2 mb-2 w-full"
+                                type="text"
+                                placeholder="Enter equation (e.g. x^2)"
+                                value={graphInfo.function}
+                                onChange={(event) => graphInfo.setAnyFunction(event.target.value)}
+                            />
 
                             <h1 className={titleClassNames}>Scale X</h1>
                             <input
@@ -202,10 +173,19 @@ const MathProjectPage: NextPage = () => {
                             onClick={handleGraph}>
                         Graph
                     </button>
+                    <a href="https://github.com/MetallicGoat/personal-portfolio" target="_blank" className="w-min flex mx-auto bg-green-600 text-white text-lg px-4 py-2 rounded m-2"
+                            onClick={handleGraph} rel="noreferrer">
+                        Code
+                    </a>
                 </div>
             </div>
 
             <br/>
+
+            <ProgressCard date="TODO section" changes={[
+                "Animate the red areas as the graph line is animated (cause it would be cool)",
+                "Display the estimate"
+            ]}/>
 
             <ProgressCard date="Known Issues" changes={[
                 "The Grapher does not handle steep asymptotes well. This is because the grapher plots a bunch of points an then draws a line to each point afterward, but if the points are far apart (like a steep asymptote), it may fail. A good example of this is tan(x) with a scale of 10 at a fast animation speed",
@@ -216,6 +196,13 @@ const MathProjectPage: NextPage = () => {
             <br/>
             <br/>
 
+            <ProgressCard date="May 18 2023" changes={[
+                "Remove the specific quadratic formula mode, as it can be handled by the regular equation type anyway",
+                "Use LRAM by default (instead of having it disabled)",
+                "Misc changes to labels",
+                "Add Source code link",
+                "Added TODO"
+            ]}/>
             <ProgressCard date="April 13 2023" changes={[
                 "Fixed XScale and YScale do the same thing",
             ]}/>
