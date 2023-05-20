@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {abs, evaluate} from 'mathjs';
+import {abs, evaluate, round} from 'mathjs';
 import {CalculateMethod, GraphInfo} from "@/components/utils/GraphInfo";
 
 type GraphProps = {
@@ -32,6 +32,7 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
         if (!ctx) return;
 
+        ctx.font = "32px Arial";
         const width = canvas.width;
         const height = canvas.height;
         const xScale = width / graphInfo.getScaleX();
@@ -135,60 +136,77 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
 
                 const stepSize = (graphInfo.endX - graphInfo.startX) / graphInfo.stepAmount;
                 let estimate = 0;
+                let estimateTotal = 0;
                 let currX = graphInfo.startX
 
                 // 3 steps
                 for (let pos = 0; pos < graphInfo.stepAmount; pos++) {
-                    if (abs(xScale * currX) > xAxis)
-                        break;
+                    const startX = currX * xScale
 
                     if (pos % 2 == 0)
                         ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     else
                         ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
 
+                    let currRectArea = 0
+
                     if (graphInfo.findAreaMethod != CalculateMethod.TRULE) {
                         let x = currX; // LRAM as fall back
+                        let offset = 0
 
                         switch (graphInfo.findAreaMethod) {
                             case CalculateMethod.LRAM:
+                                offset = 0;
                                 x = currX;
                                 break;
                             case CalculateMethod.RRAM:
+                                offset = stepSize * xScale;
                                 x = currX + stepSize;
                                 break;
                             case CalculateMethod.MRAM:
+                                offset = (stepSize / 2) * xScale
                                 x = currX + (stepSize / 2);
                                 break;
                         }
 
                         const rectY = evaluate(equation, {x: x});
 
-                        estimate += (rectY * stepSize);
+                        currRectArea = (rectY * stepSize);
 
                         // Draw the rectangle with the fill and stroke colors
-                        ctx.fillRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
-                        ctx.strokeRect(xAxis + (xScale * currX), yAxis, xScale * stepSize, -(yScale * rectY));
+                        ctx.fillRect(xAxis + startX, yAxis, xScale * stepSize, -(yScale * rectY));
+                        ctx.strokeRect(xAxis + startX, yAxis, xScale * stepSize, -(yScale * rectY));
+
+                        ctx.fillStyle = "rgba(255, 0, 0, .8)";
+                        ctx.fillRect(xAxis + startX + offset - 3, yAxis + -(yScale * rectY) - 3, 6, 6);
+
                     } else {
                         const startY = evaluate(equation, {x: currX});
                         const endY = evaluate(equation, {x: currX + stepSize});
 
-                        estimate += ((startY + endY) / 2) * stepSize; // Area of trapezoid
+                        currRectArea = ((startY + endY) / 2) * stepSize; // Area of trapezoid
 
                         ctx.beginPath();
-                        // TODO optimize
-                        ctx.moveTo(xAxis + (xScale * currX), yAxis); // Bottom-left point
-                        ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis); // Bottom-right point
-                        ctx.lineTo((xAxis + (xScale * currX)) + (xScale * stepSize), yAxis - (yScale * endY)); // Top-right point
-                        ctx.lineTo(xAxis + (xScale * currX), yAxis - (yScale * startY)); // Top-left point
+                        ctx.moveTo(xAxis + startX, yAxis); // Bottom-left point
+                        ctx.lineTo((xAxis + startX) + (xScale * stepSize), yAxis); // Bottom-right point
+                        ctx.lineTo((xAxis + startX) + (xScale * stepSize), yAxis - (yScale * endY)); // Top-right point
+                        ctx.lineTo(xAxis + startX, yAxis - (yScale * startY)); // Top-left point
                         ctx.closePath();
                         ctx.stroke();
                         ctx.fill()
                     }
 
+                    currRectArea = round(currRectArea * 100000) / 100000
+
+                    estimateTotal += abs(currRectArea)
+                    estimate += currRectArea
+
                     currX += stepSize
                 }
-                console.log(estimate)
+
+                ctx.fillStyle = "rgb(255, 0, 0)";
+                ctx.fillText("Integral Approx: " + estimate.toPrecision(8), 10, (yAxis * 2) - 10)
+                ctx.fillText("Combined Area: " + estimateTotal.toPrecision(8), 10, (yAxis * 2) - 40)
             }
         }
 

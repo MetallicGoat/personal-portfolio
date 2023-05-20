@@ -53,14 +53,14 @@ const NavBar: React.FC<NavBarProps> = ({darkMode, setDarkMode, currentPath}) => 
 
     return (
         <motion.nav
-            className="py-6 flex justify-between"
+            className="pt-4 pb-1 flex justify-between"
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: .3}}
         >
             <div className="relative inline-block text-left" ref={dropdownRef}>
                 <button
-                    className="flex h-full items-center justify-center space-x-1 text-md sm:text-xl lg:text-2xl dark:text-white focus:outline-none"
+                    className="flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
                     <span>{getCurrentPageName()}</span>
@@ -92,13 +92,13 @@ const NavBar: React.FC<NavBarProps> = ({darkMode, setDarkMode, currentPath}) => 
                 <li>
                     <BsFillMoonStarsFill
                         onClick={() => setDarkMode(!darkMode)}
-                        className="cursor-pointer text-xl sm:text-2xl lg:text-3xl dark:text-white"
+                        className="cursor-pointer text-xl sm:text-2xl dark:text-white"
                     />
                 </li>
 
                 <li>
                     <button
-                        className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-2 rounded-md ml-4 sm:ml-8 lg:text-xl"
+                        className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg"
                         onClick={openResume}
                     >
                         Resume

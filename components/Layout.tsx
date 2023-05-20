@@ -11,28 +11,29 @@ const Layout = ({children}: Props) => {
 
     return (
         <div>
-            <Transition
-                show={showBanner}
-                enter="transition-opacity delay-5 duration-500"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-500"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-            >
+            {/*TODO Per page rendering*/}
+            {/*<Transition*/}
+            {/*    show={showBanner}*/}
+            {/*    enter="transition-opacity delay-5 duration-500"*/}
+            {/*    enterFrom="opacity-0"*/}
+            {/*    enterTo="opacity-100"*/}
+            {/*    leave="transition-opacity duration-500"*/}
+            {/*    leaveFrom="opacity-100"*/}
+            {/*    leaveTo="opacity-0"*/}
+            {/*>*/}
 
-                <div className="border-4 border-yellow-700 bg-amber-200 p-2 flex items-center text-dark flex justify-center">
-                    <FiAlertTriangle className="text-2xl mr-2 text-yellow-700"/>
-                    <h1 className="text-yellow-700 font-bold">This Website is Still Under Constitution!</h1>
+            {/*    <div className="border-4 border-yellow-700 bg-amber-200 p-2 flex items-center text-dark justify-center">*/}
+            {/*        <FiAlertTriangle className="text-2xl mr-2 text-yellow-700"/>*/}
+            {/*        <h1 className="text-yellow-700 font-bold">This Website is Still Under Construction!</h1>*/}
 
-                    <button
-                        className="absolute pl-5 right-5 text-2xl text-yellow-700"
-                        onClick={() => setShowBanner(false)}
-                    >
-                        <FiX/>
-                    </button>
-                </div>
-            </Transition>
+            {/*        <button*/}
+            {/*            className="absolute pl-5 right-5 text-2xl text-yellow-700"*/}
+            {/*            onClick={() => setShowBanner(false)}*/}
+            {/*        >*/}
+            {/*            <FiX/>*/}
+            {/*        </button>*/}
+            {/*    </div>*/}
+            {/*</Transition>*/}
             {children}
         </div>
     );

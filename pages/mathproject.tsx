@@ -53,34 +53,20 @@ const MathProjectPage: NextPage = () => {
 
     return (
         <div className="w-full">
-            <h1 className="text-2xl mb-4 font-bold text-center dark:text-white">Calculus ToolBox</h1>
-            <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-around">
-                <div className="px-5 xs:px-10 md:px-0 w-full sm:w-5/6 md:w-1/2 xl:w-2/5">
+            <h1 className="text-2xl sm:text-3xl mb-2 font-bold text-center animated-text-color">Calculus ToolBox</h1>
+            <div className="flex flex-col items-center  lg:flex-row lg:justify-around bg-slate-50 dark:bg-gray-800 rounded-2xl">
+                <div className="w-5/6 md:w-2/3 lg:w-2/5 xl:w-1/3 my-5 lg:m-5 border-gray-200 dark:border-gray-500 border-8 rounded-lg">
                     <Graph
                         graphInfo={graphInfo}
                         version={version}
                     />
                 </div>
 
-                <div className="p-4 md:p-0">
-                    <h1 className="text-xl text-center font-bold dark:text-white">Options</h1>
+                <div className="p-4 lg:p-0">
+                    <h1 className="text-xl xl:text-2xl text-center font-bold dark:text-white">Options</h1>
 
                     <div className="flex flex-col sm:flex-row">
-                        <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-700">
-
-                            {/*<h1 className={titleClassNames}>Scale</h1>*/}
-                            {/*<div className="w-full mb-2">*/}
-                            {/*    <select*/}
-                            {/*        value={equationType}*/}
-                            {/*        onChange={(e) => {*/}
-                            {/*            setEquationType(e.target.value);*/}
-                            {/*        }}*/}
-                            {/*        className="border border-gray-400 p-1 w-full"*/}
-                            {/*    >*/}
-                            {/*        <option value="Function">Any Function</option>*/}
-                            {/*        <option value="Quad">Quadratic (more features)</option>*/}
-                            {/*    </select>*/}
-                            {/*</div>*/}
+                        <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-500">
 
                             <h1 className={titleClassNames}>Equation</h1>
                             <input
@@ -124,7 +110,7 @@ const MathProjectPage: NextPage = () => {
                             </div>
                         </div>
 
-                        <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-700">
+                        <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-500">
                             <h1 className={titleClassNames}>Calculate Method</h1>
                             <div className="w-full mb-2">
                                 <select
@@ -162,7 +148,7 @@ const MathProjectPage: NextPage = () => {
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="# of rectangles"
+                                placeholder="# of rectangles or tapizoids"
                                 value={graphInfo.stepAmount}
                                 onChange={(event) => graphInfo.setStepAmount(parseFloat(event.target.value))}
                             />
@@ -170,45 +156,45 @@ const MathProjectPage: NextPage = () => {
                     </div>
 
                     {issue && (
-                        <div className="w-3/4 text-red-600 mb-3 text-center mx-auto">FAILED TO GRAPH: Check to make sure your equation is valid! It is case sensitive!</div>
+                        <div className="w-3/4 text-red-600 mb-3 text-center mx-auto">FAILED TO GRAPH: Check to make sure
+                            your equation is valid! It is case sensitive!</div>
                     )}
 
                     <button className="flex mx-auto bg-blue-500 text-white text-lg px-4 py-2 rounded m-2"
                             onClick={handleGraph}>
                         Graph
                     </button>
-                    <a href="https://github.com/MetallicGoat/personal-portfolio" target="_blank" className="w-min flex mx-auto bg-green-600 text-white text-lg px-4 py-2 rounded m-2"
-                            onClick={handleGraph} rel="noreferrer">
-                        Code
-                    </a>
                 </div>
             </div>
 
+            <div className="flex justify-center">
+                <a href="https://github.com/MetallicGoat/personal-portfolio" target="_blank"
+                   className="text-center bg-green-600 text-white text-lg px-4 py-2 rounded m-4"
+                   onClick={handleGraph} rel="noreferrer">
+                    Source Code
+                </a>
+            </div>
+
             <br/>
-
-            <ProgressCard date="TODO section" changes={[
-                "Animate the red areas as the graph line is animated (cause it would be cool)",
-                "Display the estimate"
-            ]}/>
-
             <ProgressCard date="Known Issues" changes={[
                 "The Grapher does not handle steep asymptotes well. This is because the grapher plots a bunch of points an then draws a line to each point afterward, but if the points are far apart (like a steep asymptote), it may fail. A good example of this is tan(x) with a scale of 10 at a fast animation speed",
-                "Some equations with holes or that are not continuous can cause errors.",
-                "Using capital letters in your equations will break it. For example using Tan(x) will break the site, but tan(x) will work without issues",
             ]}/>
 
             <br/>
             <br/>
 
             <ProgressCard date="May 19 2023" changes={[
-                "Fix web app crashing when entering invalid equation",
+                "Fix web app crashing when entering an invalid equation",
+                "Fix red areas do not get rendered if the the scale is to small",
+                "Display integral estimations (Total area, and integral approximation)",
+                "Added intersection markers for the red areas",
+                "Huge styling improvements"
             ]}/>
             <ProgressCard date="May 18 2023" changes={[
                 "Remove the specific quadratic formula mode, as it can be handled by the regular equation type anyway",
                 "Use LRAM by default (instead of having it disabled)",
                 "Misc changes to labels",
-                "Add Source code link",
-                "Added TODO"
+                "Add Source code link"
             ]}/>
             <ProgressCard date="April 13 2023" changes={[
                 "Fixed XScale and YScale do the same thing",

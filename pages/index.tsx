@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
-import {FunctionComponent, useState} from "react";
+import {FunctionComponent} from "react";
 import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/ProjectsSection";
 import {InteractiveImage} from "@/components/utils/InteractiveImage";
