@@ -21,8 +21,8 @@ export class GraphInfo {
     scaleY: number = 10;
     speed: number;
     findAreaMethod: CalculateMethod;
-    startX: number;
-    endX: number;
+    startX: string;
+    endX: string;
     stepAmount: number;
     quadValues = [0, 0, 0];
     private readonly onChange: () => void;
@@ -33,8 +33,8 @@ export class GraphInfo {
         scaleY: number,
         animateSpeed: number,
         findAreaMethod: CalculateMethod,
-        startX: number,
-        endX: number,
+        startX: string,
+        endX: string,
         stepAmount: number,
         onChange: () => void)
     {
@@ -72,14 +72,22 @@ export class GraphInfo {
         this.onChange();
     }
 
-    setStartX(startX: number){
+    setStartX(startX: string){
         this.startX = startX;
         this.onChange();
     }
 
-    setEndX(endX: number){
+    setEndX(endX: string){
         this.endX = endX;
         this.onChange();
+    }
+
+    getStartX(){
+        return parseFloat(this.startX);
+    }
+
+    getEndX(){
+        return parseFloat(this.endX)
     }
 
     setFindAreaMethod(findAreaMethod: CalculateMethod) {

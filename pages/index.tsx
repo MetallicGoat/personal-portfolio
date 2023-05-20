@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent} from "react";
 import {motion} from 'framer-motion';

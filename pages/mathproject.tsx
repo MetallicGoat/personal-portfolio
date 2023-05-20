@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {motion} from 'framer-motion';
 import {NextPage} from "next";
 import Graph from "@/components/Graph";
 import {ProgressCard} from "@/components/tabs/ProgressCard";
@@ -14,11 +15,11 @@ const MathProjectPage: NextPage = () => {
             "abs(x) * sin(x)",
             10,
             10,
-            500,
-            CalculateMethod.LRAM,
-            -7,
-            2,
-            15,
+            450,
+            CalculateMethod.RRAM,
+            "-7",
+            "2",
+            25,
             () => {
                 setGraphInfo((prevInstance) => {
                     if (prevInstance) {
@@ -52,7 +53,12 @@ const MathProjectPage: NextPage = () => {
     const titleClassNames = "text-xs dark:text-white";
 
     return (
-        <div className="w-full">
+        <motion.div
+            className="w-full"
+            initial={{opacity: 0, y: 30}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: .5}}
+        >
             <h1 className="text-2xl sm:text-3xl mb-2 font-bold text-center animated-text-color">Calculus ToolBox</h1>
             <div className="flex flex-col items-center  lg:flex-row lg:justify-around bg-slate-50 dark:bg-gray-800 rounded-2xl">
                 <div className="w-5/6 md:w-2/3 lg:w-2/5 xl:w-1/3 my-5 lg:m-5 border-gray-200 dark:border-gray-500 border-8 rounded-lg">
@@ -81,7 +87,7 @@ const MathProjectPage: NextPage = () => {
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="Enter scale"
+                                placeholder="Enter X Scale"
                                 value={graphInfo.scaleX}
                                 onChange={(event) => graphInfo.setScaleX(parseFloat(event.target.value))}
                             />
@@ -90,7 +96,7 @@ const MathProjectPage: NextPage = () => {
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="Enter scale"
+                                placeholder="Enter Y Scale"
                                 value={graphInfo.scaleY}
                                 onChange={(event) => graphInfo.setScaleY(parseFloat(event.target.value))}
                             />
@@ -111,7 +117,7 @@ const MathProjectPage: NextPage = () => {
                         </div>
 
                         <div className="bg-gray-200 p-3 m-3 rounded-xl dark:bg-gray-500">
-                            <h1 className={titleClassNames}>Calculate Method</h1>
+                            <h1 className={titleClassNames}>Calculation Method</h1>
                             <div className="w-full mb-2">
                                 <select
                                     value={graphInfo.findAreaMethod}
@@ -130,25 +136,25 @@ const MathProjectPage: NextPage = () => {
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="Start"
+                                placeholder="Start X"
                                 value={graphInfo.startX}
-                                onChange={(event) => graphInfo.setStartX(parseFloat(event.target.value))}
+                                onChange={(event) => graphInfo.setStartX(event.target.value)}
                             />
 
                             <h1 className={titleClassNames}>End X</h1>
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="End"
+                                placeholder="End X"
                                 value={graphInfo.endX}
-                                onChange={(event) => graphInfo.setEndX(parseFloat(event.target.value))}
+                                onChange={(event) => graphInfo.setEndX(event.target.value)}
                             />
 
-                            <h1 className={titleClassNames}># of Rectangles</h1>
+                            <h1 className={titleClassNames}># of Rectangles or Trapezoids</h1>
                             <input
                                 className="border border-gray-400 p-2 mb-2 w-full"
                                 type="number"
-                                placeholder="# of rectangles or tapizoids"
+                                placeholder="# of rectangles or trapezoids"
                                 value={graphInfo.stepAmount}
                                 onChange={(event) => graphInfo.setStepAmount(parseFloat(event.target.value))}
                             />
@@ -186,12 +192,13 @@ const MathProjectPage: NextPage = () => {
             <ProgressCard date="May 19 2023" changes={[
                 "Fix web app crashing when entering an invalid equation",
                 "Fix red areas do not get rendered if the the scale is to small",
-                "Display integral estimations (Total area, and integral approximation)",
+                "Fix issues with entering negative StartX and EndX values",
+                "Now Displaying integral estimations on graph canvas (Total area, and integral approximation)",
                 "Added intersection markers for the red areas",
-                "Huge styling improvements"
+                "Huge styling improvements (especially in dark mode)"
             ]}/>
             <ProgressCard date="May 18 2023" changes={[
-                "Remove the specific quadratic formula mode, as it can be handled by the regular equation type anyway",
+                "Removed the mode for quadratic formulas, as it was redundant",
                 "Use LRAM by default (instead of having it disabled)",
                 "Misc changes to labels",
                 "Add Source code link"
@@ -234,7 +241,7 @@ const MathProjectPage: NextPage = () => {
             ]}/>
 
             <br/>
-        </div>
+        </motion.div>
     );
 };
 

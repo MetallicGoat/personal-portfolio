@@ -134,10 +134,10 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                 ctx.strokeStyle = "rgb(255, 0, 0)";
                 ctx.lineWidth = .2;
 
-                const stepSize = (graphInfo.endX - graphInfo.startX) / graphInfo.stepAmount;
+                const stepSize = (graphInfo.getEndX() - graphInfo.getStartX()) / graphInfo.stepAmount;
                 let estimate = 0;
                 let estimateTotal = 0;
-                let currX = graphInfo.startX
+                let currX = graphInfo.getStartX()
 
                 // 3 steps
                 for (let pos = 0; pos < graphInfo.stepAmount; pos++) {
@@ -177,7 +177,7 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                         ctx.fillRect(xAxis + startX, yAxis, xScale * stepSize, -(yScale * rectY));
                         ctx.strokeRect(xAxis + startX, yAxis, xScale * stepSize, -(yScale * rectY));
 
-                        ctx.fillStyle = "rgba(255, 0, 0, .8)";
+                        ctx.fillStyle = "rgba(255, 0, 0)";
                         ctx.fillRect(xAxis + startX + offset - 3, yAxis + -(yScale * rectY) - 3, 6, 6);
 
                     } else {
@@ -194,6 +194,13 @@ const Graph: React.FC<GraphProps> = ({graphInfo, version}) => {
                         ctx.closePath();
                         ctx.stroke();
                         ctx.fill()
+
+                        ctx.fillStyle = "rgba(255, 0, 0)";
+                        ctx.fillRect(xAxis + startX - 3, yAxis + -(yScale * startY) - 3, 6, 6);
+
+                        // Last Marker
+                        if(pos + 1 == graphInfo.stepAmount)
+                            ctx.fillRect((xScale * stepSize) + xAxis + startX - 3, yAxis + -(yScale * endY) - 3, 6, 6);
                     }
 
                     currRectArea = round(currRectArea * 100000) / 100000
