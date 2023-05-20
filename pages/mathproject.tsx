@@ -59,8 +59,9 @@ const MathProjectPage: NextPage = () => {
             animate={{opacity: 1, y: 0}}
             transition={{duration: .5}}
         >
-            <h1 className="text-2xl sm:text-3xl mb-2 font-bold text-center animated-text-color">Calculus ToolBox</h1>
-            <div className="flex flex-col items-center  lg:flex-row lg:justify-around bg-slate-50 dark:bg-gray-800 rounded-2xl">
+            <h1 className="text-2xl sm:text-3xl font-bold text-center animated-text-color">Calculus ToolBox</h1>
+            <h2 className="text-lg sm:text-xl mb-2 font-bold text-center dark:text-white">By: Chritian Azzam</h2>
+            <div className="flex flex-col items-center lg:flex-row lg:justify-around bg-slate-50 ease-in duration-300 dark:bg-gray-800 rounded-2xl">
                 <div className="w-5/6 md:w-2/3 lg:w-2/5 xl:w-1/3 my-5 lg:m-5 border-gray-200 dark:border-gray-500 border-8 rounded-lg">
                     <Graph
                         graphInfo={graphInfo}
@@ -68,7 +69,14 @@ const MathProjectPage: NextPage = () => {
                     />
                 </div>
 
-                <div className="p-4 lg:p-0">
+                <div className="">
+
+                    {/*For smaller screens*/}
+                    <button className="lg:hidden ease-in duration-200 hover:scale-105 flex mx-auto bg-blue-500 hover:bg-blue-600 text-white text-lg px-4 py-1 mb-3 rounded"
+                            onClick={handleGraph}>
+                        Graph
+                    </button>
+
                     <h1 className="text-xl xl:text-2xl text-center font-bold dark:text-white">Options</h1>
 
                     <div className="flex flex-col sm:flex-row">
@@ -166,7 +174,7 @@ const MathProjectPage: NextPage = () => {
                             your equation is valid! It is case sensitive!</div>
                     )}
 
-                    <button className="flex mx-auto bg-blue-500 text-white text-lg px-4 py-2 rounded m-2"
+                    <button className="hidden lg:block ease-in duration-200 hover:scale-105 mx-auto bg-blue-500 hover:bg-blue-600 text-white text-lg px-4 py-1 rounded m-2"
                             onClick={handleGraph}>
                         Graph
                     </button>
@@ -175,8 +183,7 @@ const MathProjectPage: NextPage = () => {
 
             <div className="flex justify-center">
                 <a href="https://github.com/MetallicGoat/personal-portfolio" target="_blank"
-                   className="text-center bg-green-600 text-white text-lg px-4 py-2 rounded m-4"
-                   onClick={handleGraph} rel="noreferrer">
+                   className="ease-in duration-200 hover:scale-105 text-center bg-green-600 hover:bg-green-700 text-white text-lg px-4 py-1 rounded m-4" rel="noreferrer">
                     Source Code
                 </a>
             </div>
@@ -189,6 +196,10 @@ const MathProjectPage: NextPage = () => {
             <br/>
             <br/>
 
+            <ProgressCard date="May 20 2023" changes={[
+                "Fix graph was being re-rendered in some cases when it did not need to",
+                "Even more styling improvements"
+            ]}/>
             <ProgressCard date="May 19 2023" changes={[
                 "Fix web app crashing when entering an invalid equation",
                 "Fix red areas do not get rendered if the the scale is to small",

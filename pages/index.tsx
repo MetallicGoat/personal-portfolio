@@ -21,7 +21,7 @@ export default function Home() {
                 >
                     <div className="text-center md:text-left">
                         <h2
-                            className="text-4xl lg:text-5xl py-2 font-medium font-extrabold animated-text-color"
+                            className="text-4xl lg:text-5xl py-2 font-extrabold animated-text-color"
                         >
                             Christian Azzam
                         </h2>
@@ -78,7 +78,7 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
     return (
         <div className={className}>
             <div
-                className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400 dark:text-gray-400"
+                className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400"
             >
 
                 <a href="https://github.com/MetallicGoat" target="blank_">
