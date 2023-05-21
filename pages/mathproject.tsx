@@ -60,7 +60,7 @@ const MathProjectPage: NextPage = () => {
             transition={{duration: .5}}
         >
             <h1 className="text-2xl sm:text-3xl font-bold text-center animated-text-color">Calculus ToolBox</h1>
-            <h2 className="text-lg sm:text-xl mb-2 font-bold text-center dark:text-white">By: Chritian Azzam</h2>
+            <h2 className="text-lg sm:text-xl mb-2 font-bold text-center dark:text-white">By: Christian Azzam</h2>
             <div className="flex flex-col items-center lg:flex-row lg:justify-around bg-slate-50 ease-in duration-300 dark:bg-gray-800 rounded-2xl">
                 <div className="w-5/6 md:w-2/3 lg:w-2/5 xl:w-1/3 my-5 lg:m-5 border-gray-200 dark:border-gray-500 border-8 rounded-lg">
                     <Graph
