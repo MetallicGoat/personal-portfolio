@@ -299,16 +299,20 @@ function Progress() {
                 and to document my learning of web development.
             </p>
 
-            <ProgressCard date="May 20 2023" changes={[
+            <ProgressCard date="December 28 2023" changes={[
+                "Added latest open source contribution component",
+            ]}/>
+
+            <ProgressCard date="May 20th 2023" changes={[
                 "Updated resume",
             ]}/>
 
-            <ProgressCard date="May 19 2023" changes={[
+            <ProgressCard date="May 19th 2023" changes={[
                 "Nerfed NavBar Size",
                 "Removed under construction banner"
             ]}/>
 
-            <ProgressCard date="April 13 2023" changes={[
+            <ProgressCard date="April 13th 2023" changes={[
                 "Improved NavBar styling",
             ]}/>
 

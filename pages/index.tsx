@@ -2,6 +2,7 @@ import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent} from "react";
 import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/ProjectsSection";
+import LastCommit from "@/components/utils/LastCommit";
 import {InteractiveImage} from "@/components/utils/InteractiveImage";
 
 export default function Home() {
@@ -59,8 +60,9 @@ export default function Home() {
                     <Socials className="md:hidden"/>
                 </motion.div>
 
-
             </section>
+
+            <LastCommit username="MetallicGoat"/>
 
             {/*Projects or Photos*/}
             <section className="py-10">
