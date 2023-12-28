@@ -36,11 +36,12 @@ export default function Home() {
                         <p
                             className="text-md lg:text-lg mx-auto text-gray-800 max-w-md sm:max-w-xl dark:text-white"
                         >
-                            I am an aspiring software developer from Canada. I am currently in high school, and I
-                            generally go by MetallicGoat online. I have taught myself Java through coding spigot
-                            plugins, and I am currently trying to teach myself Javascript, html, and css through
-                            the making of this site. This site contains some projects I have worked on, some
-                            photos I have taken, and some background about them.
+                            I am an 18 year old aspiring software developer from Canada. I am currently enrolled in my first of
+                            Engineering Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
+                            I am self taught in Java, and have 3 years of experience with it. I learned Java though working on Spigot
+                            plugins, and I am currently trying to teach myself Javascript, HTML, and css through
+                            the making of this site. This portfolio contains some projects I have worked on, some
+                            photos I have taken, as well as some background about them.
                         </p>
 
                         <Socials className="hidden md:block mr-20"/>
