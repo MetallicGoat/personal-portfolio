@@ -8,7 +8,7 @@ import Head from "next/head";
 
 export default function App({Component, pageProps}: AppProps) {
 
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const router = useRouter();
 
     return (
