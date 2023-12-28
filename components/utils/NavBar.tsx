@@ -1,9 +1,9 @@
-// components/NavBar.tsx
-import React, {useEffect, useRef, useState} from 'react';
-import {motion} from 'framer-motion';
-import NavLink from './NavLink';
-import {BsFillMoonStarsFill} from 'react-icons/bs';
-import {FiChevronDown} from 'react-icons/fi';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { BsFillMoonStarsFill } from 'react-icons/bs';
+import { FiChevronDown } from 'react-icons/fi';
 
 interface NavBarProps {
     darkMode: boolean;
@@ -11,96 +11,74 @@ interface NavBarProps {
     currentPath: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({darkMode, setDarkMode, currentPath}) => {
+// Define the shape of page names.
+type PageNames = {
+    [key: string]: string;
+};
+
+const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
+    // Variants for the dropdown animation.
     const dropdownVariants = {
-        open: {opacity: 1, scale: 1, display: 'block'},
-        closed: {opacity: 0, scale: 0.95, transitionEnd: {display: 'none'}},
+        open: { opacity: 1, scale: 1, display: 'block' },
+        closed: { opacity: 0, scale: 0.95, transitionEnd: { display: 'none' } },
     };
 
-    const handleDocumentClick = (event: MouseEvent) => {
-        if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
-            setDropdownOpen(false);
-        }
-    };
-
+    // Handle clicks outside the dropdown.
     useEffect(() => {
-        document.addEventListener('mousedown', handleDocumentClick);
-
-        return () => {
-            document.removeEventListener('mousedown', handleDocumentClick);
+        const handleDocumentClick = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setDropdownOpen(false);
+            }
         };
+
+        document.addEventListener('mousedown', handleDocumentClick);
+        return () => document.removeEventListener('mousedown', handleDocumentClick);
     }, []);
 
-    const handleNavLinkClick = () => {
-        setDropdownOpen(false);
-    };
+    // Define page names and get the current page name.
+    const pageNames: PageNames = { '/': 'Home', '/mathproject': 'Math Project' };
+    const currentPageName = pageNames[currentPath] || 'Home';
 
-    // TODO temporary
-    const getCurrentPageName = () => {
-        switch (currentPath) {
-            case '/':
-                return 'Home';
-            case '/mathproject':
-                return 'Math Project';
-            default:
-                return 'Home';
-        }
-    };
+    // Function to create navigation links.
+    const createNavLink = (href: string, label: string) => (
+        <Link href={href} key={href}>
+            <span className={`block px-4 py-2 text-sm cursor-pointer ${router.pathname === href ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'} ${darkMode ? 'text-white bg-gray-800 hover:bg-gray-700 hover:text-white' : ''}`} role="menuitem" onClick={() => setDropdownOpen(false)}>
+                {label}
+            </span>
+        </Link>
+    );
 
+    // Filter and map navigation links.
+    const navLinks = [
+        { href: '/', label: 'Home' },
+        { href: '/mathproject', label: 'Math Project' }
+    ].filter(link => link.href !== currentPath).map(link => createNavLink(link.href, link.label));
 
     return (
-        <motion.nav
-            className="pt-4 pb-1 flex justify-between"
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            transition={{duration: .3}}
-        >
+        <motion.nav className="pt-4 pb-1 flex justify-between" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }}>
             <div className="relative inline-block text-left" ref={dropdownRef}>
-                <button
-                    className="flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
-                    <span>{getCurrentPageName()}</span>
-                    <FiChevronDown className="w-4 h-4"/>
+                <button className="flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                    <span>{currentPageName}</span>
+                    <FiChevronDown className="w-4 h-4" />
                 </button>
 
-                <motion.div
-                    className="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                    initial="closed"
-                    animate={dropdownOpen ? 'open' : 'closed'}
-                    variants={dropdownVariants}
-                    transition={{duration: 0.2}}
-                >
+                <motion.div className={`origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 ${darkMode ? 'bg-gray-800 text-white shadow-gray-900' : 'bg-white text-gray-900'}`} initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants} transition={{ duration: 0.2 }}>
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                        {currentPath !== '/' && (
-                            <NavLink href="/" className="cursor-pointer" onClick={handleNavLinkClick}>
-                                Home
-                            </NavLink>
-                        )}
-                        {currentPath !== '/mathproject' && (
-                            <NavLink href="/mathproject" className="cursor-pointer" onClick={handleNavLinkClick}>
-                                Math Project
-                            </NavLink>
-                        )}
+                        {navLinks}
                     </div>
                 </motion.div>
             </div>
+
             <ul className="flex items-center">
                 <li>
-                    <BsFillMoonStarsFill
-                        onClick={() => setDarkMode(!darkMode)}
-                        className="cursor-pointer text-xl sm:text-2xl dark:text-white"
-                    />
+                    <BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl sm:text-2xl dark:text-white" />
                 </li>
-
                 <li>
-                    <button
-                        className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg"
-                        onClick={openResume}
-                    >
+                    <button className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg" onClick={openResume}>
                         Resume
                     </button>
                 </li>

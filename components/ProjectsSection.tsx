@@ -303,6 +303,7 @@ function Progress() {
                 "Added latest open source contribution component",
                 "Updated about me text",
                 "Default to dark mode",
+                "Fixed some navbar issues"
             ]}/>
 
             <ProgressCard date="May 20th 2023" changes={[
