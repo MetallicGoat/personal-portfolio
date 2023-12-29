@@ -21,21 +21,21 @@ const LinkParticles = () => {
 
     const options: ISourceOptions = useMemo(
         () => ({
-            fpsLimit: 60,
+            fpsLimit: 120,
             style: {
                 position: "absolute",
                 index: -1
             },
             particles: {
                 color: {
-                    value: "#9d9d9d",
+                    value: "#c3c3c3",
                 },
                 links: {
                     color: "#9d9d9d",
-                    distance: 200,
+                    distance: 175,
                     enable: true,
-                    opacity: 0.3,
-                    width: 2.5,
+                    opacity: 0.6,
+                    width: 2,
                 },
                 move: {
                     direction: "none",
@@ -51,10 +51,10 @@ const LinkParticles = () => {
                     density: {
                         enable: true,
                     },
-                    value: 100,
+                    value: 125,
                 },
                 opacity: {
-                    value: 0.3,
+                    value: 0.6,
                 },
                 shape: {
                     type: "circle",

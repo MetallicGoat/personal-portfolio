@@ -17,21 +17,21 @@ export const InteractiveImage: React.FC<InteractiveImageProps> = ({ src, alt, cl
     const rotateY = useTransform(useSpring(x, { damping: 25, stiffness: 50 }), [0, imageW], [-10, 10]);
     const rotateX = useTransform(useSpring(y, { damping: 25, stiffness: 50 }), [0, imageH], [10, -10]);
 
-    const handleMouseMove = useCallback((event: MouseEvent) => {
-        if (ref.current) {
-            const { left, top } = ref.current.getBoundingClientRect();
-            x.set(event.clientX - left);
-            y.set(event.clientY - top);
-        }
-    }, [x, y]);
+    // const handleMouseMove = useCallback((event: MouseEvent) => {
+    //     if (ref.current) {
+    //         const { left, top } = ref.current.getBoundingClientRect();
+    //         x.set(event.clientX - left);
+    //         y.set(event.clientY - top);
+    //     }
+    // }, [x, y]);
 
-    useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [handleMouseMove]);
+    // useEffect(() => {
+    //     window.addEventListener('mousemove', handleMouseMove);
+    //
+    //     return () => {
+    //         window.removeEventListener('mousemove', handleMouseMove);
+    //     };
+    // }, [handleMouseMove]);
 
     return (
         <motion.div
@@ -43,11 +43,11 @@ export const InteractiveImage: React.FC<InteractiveImageProps> = ({ src, alt, cl
         >
             <motion.div
                 className="w-full"
-                style={{
-                    rotateX: rotateX,
-                    rotateY: rotateY,
-                    transformOrigin: 'center',
-                }}
+                // style={{
+                //     rotateX: rotateX,
+                //     rotateY: rotateY,
+                //     transformOrigin: 'center',
+                // }}
                 whileTap={{ scale: 0.90 }}
             >
                 <Image className={className} src={src} alt={alt} width={imageW} height={imageH} sizes="100vw" />
