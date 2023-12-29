@@ -21,7 +21,7 @@ const LinkParticles = () => {
 
     const options: ISourceOptions = useMemo(
         () => ({
-            fpsLimit: 120,
+            fpsLimit: 60,
             style: {
                 position: "absolute",
                 index: 0
