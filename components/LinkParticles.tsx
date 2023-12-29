@@ -24,7 +24,7 @@ const LinkParticles = () => {
             fpsLimit: 60,
             style: {
                 position: "absolute",
-                index: 0
+                index: -1
             },
             particles: {
                 color: {
@@ -32,10 +32,10 @@ const LinkParticles = () => {
                 },
                 links: {
                     color: "#9d9d9d",
-                    distance: 250,
+                    distance: 200,
                     enable: true,
                     opacity: 0.3,
-                    width: 2,
+                    width: 2.5,
                 },
                 move: {
                     direction: "none",
@@ -60,7 +60,7 @@ const LinkParticles = () => {
                     type: "circle",
                 },
                 size: {
-                    value: { min: 2, max: 5 },
+                    value: { min: 2, max: 6 },
                 },
             },
             detectRetina: true,
@@ -71,7 +71,7 @@ const LinkParticles = () => {
     if (init) {
         return (
             <Particles
-                className="-z-50"
+                className="-z-10"
                 id="tsparticles"
                 particlesLoaded={particlesLoaded}
                 options={options}
