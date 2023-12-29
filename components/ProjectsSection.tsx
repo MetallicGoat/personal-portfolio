@@ -1,6 +1,7 @@
 import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/tabs/ProjectCard";
 import {PhotoCard} from "@/components/tabs/PhotoCard";
 import {ProgressCard} from "@/components/tabs/ProgressCard";
+import LinkParticles from "./LinkParticles";
 import React, {useState} from "react";
 
 // Projects
@@ -57,7 +58,6 @@ export default function ProjectsSection() {
     return (
         <div>
             <div className="relative shadow-lg border-2 md:border-4 border-gray-400 mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 w-full h-full bg-gray-300 dark:border-neutral-700 dark:bg-neutral-900 rounded-full flex items-center justify-center">
-
                 {/* Options */}
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(1)}>
@@ -303,7 +303,8 @@ function Progress() {
                 "Added latest open source contribution component",
                 "Updated about me text",
                 "Default to dark mode",
-                "Fixed some navbar issues"
+                "Fixed some navbar issues",
+                "Added home page background particles"
             ]}/>
 
             <ProgressCard date="May 20th 2023" changes={[

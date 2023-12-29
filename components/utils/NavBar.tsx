@@ -59,26 +59,26 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
     ].filter(link => link.href !== currentPath).map(link => createNavLink(link.href, link.label));
 
     return (
-        <motion.nav className="pt-4 pb-1 flex justify-between" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }}>
-            <div className="relative inline-block text-left" ref={dropdownRef}>
-                <button className="flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none" onClick={() => setDropdownOpen(!dropdownOpen)}>
+        <motion.nav className="z-50 pt-4 pb-1 flex justify-between" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }}>
+            <div className="z-50  relative inline-block text-left" ref={dropdownRef}>
+                <button className="z-50 flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none" onClick={() => setDropdownOpen(!dropdownOpen)}>
                     <span>{currentPageName}</span>
-                    <FiChevronDown className="w-4 h-4" />
+                    <FiChevronDown className="z-50 w-4 h-4" />
                 </button>
 
-                <motion.div className={`origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 ${darkMode ? 'bg-gray-800 text-white shadow-gray-900' : 'bg-white text-gray-900'}`} initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants} transition={{ duration: 0.2 }}>
-                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <motion.div className={`z-50 origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 ${darkMode ? 'bg-gray-800 text-white shadow-gray-900' : 'bg-white text-gray-900'}`} initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants} transition={{ duration: 0.2 }}>
+                    <div className="z-50 py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {navLinks}
                     </div>
                 </motion.div>
             </div>
 
-            <ul className="flex items-center">
+            <ul className="z-50 flex items-center">
                 <li>
                     <BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl sm:text-2xl dark:text-white" />
                 </li>
                 <li>
-                    <button className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg" onClick={openResume}>
+                    <button className="z-50 bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg" onClick={openResume}>
                         Resume
                     </button>
                 </li>

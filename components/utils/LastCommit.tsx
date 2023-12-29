@@ -95,7 +95,7 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
                         </tr>
                         <tr className="border-b">
-                            <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Date Of Contribution:</th>
+                            <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Latest Contribution:</th>
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{getDateString()}</td>
                         </tr>
                         <tr className="border-b">

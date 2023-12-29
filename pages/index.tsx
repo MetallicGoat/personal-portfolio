@@ -4,18 +4,21 @@ import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/ProjectsSection";
 import LastCommit from "@/components/utils/LastCommit";
 import {InteractiveImage} from "@/components/utils/InteractiveImage";
+import LinkParticles from "@/components/LinkParticles";
 
 export default function Home() {
 
     return (
         <div>
+            <LinkParticles/>
+
             {/* INTRO SECTION */}
             <section
-                className="min-h-screen flex flex-col"
+                className="z-20 min-h-screen flex flex-col"
             >
 
                 <motion.div
-                    className="md:flex md:flex-row md:justify-between md:items-center md:h-full md:my-auto md:pb-20"
+                    className="z-20 md:flex md:flex-row md:justify-between md:items-center md:h-full md:my-auto md:pb-20"
                     initial={{opacity: 0, y: 30}}
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: .3}}
@@ -39,7 +42,7 @@ export default function Home() {
                             I am an 18 year old aspiring software developer from Canada. I am currently enrolled in my first of
                             Engineering Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
                             I am self taught in Java, and have 3 years of experience with it. I learned Java though working on Spigot
-                            plugins, and I am currently trying to teach myself Javascript, HTML, and css through
+                            plugins, and I am currently trying to teach myself Javascript, HTML, and CSS through
                             the making of this site. This portfolio contains some projects I have worked on, some
                             photos I have taken, as well as some background about them.
                         </p>

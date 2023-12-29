@@ -11,6 +11,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@next/font": "13.1.6",
+    "@tsparticles/engine": "^3.0.3",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.0.3",
     "@types/mathjs": "^9.4.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
