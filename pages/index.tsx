@@ -25,13 +25,13 @@ export default function Home() {
                 >
                     <div className="text-center md:w-3/5 md:text-left pb-2 md:pb-0">
                         <h2
-                            className="text-4xl lg:text-6xl sm:py-2 font-extrabold animated-text-color"
+                            className="text-4xl lg:text-5xl xl:text-6xl sm:py-2 font-extrabold animated-text-color"
                         >
                             Christian Azzam
                         </h2>
 
                         <h3
-                            className="text-lg md:text-2xl lg:text-3xl font-bold sm:py-2 text-gray-800 dark:text-white"
+                            className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold sm:py-2 text-gray-800 dark:text-white"
                         >
                             AKA - MetallicGoat
                         </h3>

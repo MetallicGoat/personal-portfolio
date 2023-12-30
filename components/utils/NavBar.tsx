@@ -61,7 +61,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
     return (
         <motion.nav className="z-50 pt-4 pb-1 flex justify-between" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .3 }}>
             <div className="z-50  relative inline-block text-left" ref={dropdownRef}>
-                <button className="z-50 flex h-full items-center justify-center space-x-1 text-md sm:text-xl dark:text-white focus:outline-none" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <button className="z-50 flex h-full items-center justify-center space-x-1 text-md sm:text-xl md:text-2xl dark:text-white focus:outline-none" onClick={() => setDropdownOpen(!dropdownOpen)}>
                     <span>{currentPageName}</span>
                     <FiChevronDown className="z-50 w-4 h-4" />
                 </button>
@@ -75,10 +75,10 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
 
             <ul className="z-50 flex items-center">
                 <li>
-                    <BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl sm:text-2xl dark:text-white" />
+                    <BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl sm:text-2xl md:text-3xl dark:text-white" />
                 </li>
                 <li>
-                    <button className="z-50 bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 lg:text-lg" onClick={openResume}>
+                    <button className="z-50 bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 md:text-lg lg:text-2xl" onClick={openResume}>
                         Resume
                     </button>
                 </li>

@@ -252,14 +252,14 @@ function Photos() {
                 <PhotoCard
                     title="Climbing Lizard"
                     hashTags={["sticky-feet", "fast-climber"]}
-                    description="Lizard climg an umbrella in Costa Rica"
+                    description="Lizard climing an umbrella in Costa Rica"
                     image={lizard_on_post_img}
                 />
 
                 <PhotoCard
                     title="Resting Milo"
                     hashTags={["hot", "dogs", "summer"]}
-                    description="Milo resting on hos favourite chair in the summer"
+                    description="Milo resting on his favourite chair in the summer"
                     image={milo_chair_img}
                 />
 
