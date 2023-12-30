@@ -82,7 +82,7 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
                 <div className="md:flex flex-col items-center justify-center min-w-36 hidden">
                     <Image width={400} height={400} src={`https://github.com/${username}.png`}
                            alt={`${username}'s profile picture`}
-                           className="w-32 rounded-full border-4 border-black dark:border-white"
+                           className="w-32 rounded-full shadow-xl shadow-gray-300 dark:shadow-gray-800"
                     />
 
                 </div>
@@ -90,15 +90,15 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
                 <div className="flex flex-col items-center justify-center">
                     <table className="table-fixed mx-4">
                         <tbody>
-                        <tr className="border-b">
+                        <tr className="border-b dark:border-neutral-700">
                             <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Project:</th>
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
                         </tr>
-                        <tr className="border-b">
+                        <tr className="border-b dark:border-neutral-700">
                             <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Latest Contribution:</th>
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{getDateString()}</td>
                         </tr>
-                        <tr className="border-b">
+                        <tr className="border-b dark:border-neutral-700">
                             <th className="dark:text-white text-left text-wrap px-4 py-1 whitespace-normal break-words">Commit Message:</th>
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.message}</td>
                         </tr>

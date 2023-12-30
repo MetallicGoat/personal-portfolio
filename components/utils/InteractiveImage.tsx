@@ -48,7 +48,8 @@ export const InteractiveImage: React.FC<InteractiveImageProps> = ({ src, alt, cl
                 //     rotateY: rotateY,
                 //     transformOrigin: 'center',
                 // }}
-                whileTap={{ scale: 0.90 }}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
             >
                 <Image className={className} src={src} alt={alt} width={imageW} height={imageH} sizes="100vw" />
             </motion.div>

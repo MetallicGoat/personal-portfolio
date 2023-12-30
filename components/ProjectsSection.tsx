@@ -1,7 +1,6 @@
 import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/tabs/ProjectCard";
 import {PhotoCard} from "@/components/tabs/PhotoCard";
 import {ProgressCard} from "@/components/tabs/ProgressCard";
-import LinkParticles from "./LinkParticles";
 import React, {useState} from "react";
 
 // Projects
@@ -15,19 +14,19 @@ import gen_splitter_img from "@/public/personalprojects/gen-splitter.png";
 import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
 
 // Images
-import bike_trip_img from "@/public/photos/bike_trip.jpg";
-import canyon_img from "@/public/photos/canyon.jpg";
-import chipmunk_img from "@/public/photos/chipmunk.jpg";
-import drone_beach_img from "@/public/photos/drone_beach.jpg";
-import drunk_dog_img from "@/public/photos/drunk_dog.jpg";
-import enzo_snow_img from "@/public/photos/enzo_snow.jpg";
-import enzo_upsidedown_img from "@/public/photos/enzo_upsidedown.jpg";
-import lizard_img from "@/public/photos/lizard.jpg";
-import lizard_on_post_img from "@/public/photos/lizard_on_post.jpg";
-import milo_chair_img from "@/public/photos/milo_chair.jpg";
-import milo_stump_img from "@/public/photos/milo_stump.jpg";
-import mountain_img from "@/public/photos/mountain.jpg";
-import sunset_beach_img from "@/public/photos/sunset_beach.jpg";
+import bike_trip_img from "@/public/photos/bike_trip.webp";
+import canyon_img from "@/public/photos/canyon.webp";
+import chipmunk_img from "@/public/photos/chipmunk.webp";
+import drone_beach_img from "@/public/photos/drone_beach.webp";
+import drunk_dog_img from "@/public/photos/drunk_dog.webp";
+import enzo_snow_img from "@/public/photos/enzo_snow.webp";
+import enzo_upsidedown_img from "@/public/photos/enzo_upsidedown.webp";
+import lizard_img from "@/public/photos/lizard.webp";
+import lizard_on_post_img from "@/public/photos/lizard_on_post.webp";
+import milo_chair_img from "@/public/photos/milo_chair.webp";
+import milo_stump_img from "@/public/photos/milo_stump.webp";
+import mountain_img from "@/public/photos/mountain.webp";
+import sunset_beach_img from "@/public/photos/sunset_beach.webp";
 
 export default function ProjectsSection() {
     const [selectedOption, setSelectedOption] = useState(1);
@@ -57,7 +56,7 @@ export default function ProjectsSection() {
 
     return (
         <div>
-            <div className="relative shadow-lg border-2 md:border-4 border-gray-400 mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 w-full h-full bg-gray-300 dark:border-neutral-700 dark:bg-neutral-900 rounded-full flex items-center justify-center">
+            <div className="relative shadow-lg mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 bg-gray-300 dark:bg-neutral-700 rounded-full flex items-center justify-center">
                 {/* Options */}
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(1)}>
@@ -298,6 +297,11 @@ function Progress() {
                 This section was created to document my progress over time,
                 and to document my learning of web development.
             </p>
+
+            <ProgressCard date="December 28 2023" changes={[
+                "Many styling changes, including adding a new scroll indicator arrow and removing many image borders",
+                "improved performance by using .webp in some places, and not sending unnecessarily large files to the browser",
+            ]}/>
 
             <ProgressCard date="December 28 2023" changes={[
                 "Added latest open source contribution component",

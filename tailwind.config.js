@@ -10,6 +10,10 @@ module.exports = {
             fontSize: {
 
             },
+            maskImage: {
+                'gradient-to-r': 'linear-gradient(to right, #000, rgba(0, 0, 0, 0))',
+                'gradient-to-r-opacity': 'linear-gradient(to right, #000, rgba(0, 0, 0, 0.2))',
+            }
         },
         screens: {
             'xs': '500px',

@@ -5,6 +5,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import LastCommit from "@/components/utils/LastCommit";
 import {InteractiveImage} from "@/components/utils/InteractiveImage";
 import LinkParticles from "@/components/LinkParticles";
+import { BsChevronDoubleDown } from 'react-icons/bs';
 
 export default function Home() {
 
@@ -23,41 +24,46 @@ export default function Home() {
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: .3}}
                 >
-                    <div className="text-center md:text-left">
+                    <div className="text-center md:w-3/5 md:text-left pb-2 md:pb-0">
                         <h2
-                            className="text-4xl lg:text-5xl py-2 font-extrabold animated-text-color"
+                            className="text-4xl lg:text-6xl py-2 font-extrabold animated-text-color"
                         >
                             Christian Azzam
                         </h2>
 
                         <h3
-                            className="text-lg md:text-2xl font-bold py-2 text-gray-800 dark:text-white"
+                            className="text-lg md:text-2xl lg:text-3xl font-bold py-2 text-gray-800 dark:text-white"
                         >
                             AKA - MetallicGoat
                         </h3>
 
                         <p
-                            className="text-md lg:text-lg mx-auto text-gray-800 max-w-md sm:max-w-xl dark:text-white"
+                            className="leading-5 text-md lg:text-xl xl:text-2xl text-gray-800 mx-auto max-w-md md:max-w-full md:pr-10 md:mx-0 dark:text-white"
                         >
-                            I am an 18 year old aspiring software developer from Canada. I am currently enrolled in my first of
-                            Engineering Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
-                            I am self taught in Java, and have 3 years of experience with it. I learned Java though working on Spigot
-                            plugins, and I am currently trying to teach myself Javascript, HTML, and CSS through
-                            the making of this site. This portfolio contains some projects I have worked on, some
-                            photos I have taken, as well as some background about them.
+                            I am an 18 year old aspiring software developer from Canada. I am currently enrolled in my first
+                            of Engineering Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
+                            I am self taught in Java, and have 3 years of experience with it. I learned Java though working on
+                            Spigot plugins, and I am currently trying to teach myself Javascript, HTML, and CSS through
+                            the making of this site. This portfolio contains some projects I have worked on, some photos
+                            I have taken, as well as some background about them.
                         </p>
 
                         <Socials className="hidden md:block mr-20"/>
 
+                        {/* Scroll Arrow */}
+                        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2">
+                            <BsChevronDoubleDown className="animate-bounce text-4xl font-bold text-gray-600 dark:text-gray-400"/>
+                        </div>
+
                     </div>
 
                     <div
-                        className="flex justify-center md:justify-end mx-auto lg:mx-0 relative py-3 sm:my-6 md:pl-8 w-9/12 h-9/12 md:w-3/5 md:h-3/5 lg:w-2/5 lg:h-2/5"
+                        className="flex justify-center md:justify-end mx-auto md:mx-0 relative py-3 w-3/4 md:w-1/3"
                     >
                         <InteractiveImage
                             src="https://github.com/MetallicGoat.png"
                             alt="GitHub profile picture"
-                            className="w-full rounded-3xl border-4 border-neutral-700 dark:border-neutral-300"
+                            className="w-full rounded-3xl mx-auto shadow-xl shadow-gray-300 dark:shadow-gray-950"
                         />
                     </div>
 
@@ -66,10 +72,12 @@ export default function Home() {
 
             </section>
 
-            <LastCommit username="MetallicGoat"/>
+            <div className="pt-24 pb-36">
+                <LastCommit username="MetallicGoat"/>
+            </div>
 
             {/*Projects or Photos*/}
-            <section className="py-10">
+            <section>
                 <ProjectsSection/>
             </section>
         </div>
@@ -84,7 +92,7 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
     return (
         <div className={className}>
             <div
-                className="text-4xl md:text-5xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400"
+                className="text-4xl md:text-5xl lg:text-6xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400"
             >
 
                 <a href="https://github.com/MetallicGoat" target="blank_">
