@@ -2,6 +2,8 @@
 
 /.idea
 
+/unused
+
 # dependencies
 /node_modules
 /.pnp
