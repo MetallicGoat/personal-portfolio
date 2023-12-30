@@ -5,7 +5,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import LastCommit from "@/components/utils/LastCommit";
 import {InteractiveImage} from "@/components/utils/InteractiveImage";
 import LinkParticles from "@/components/LinkParticles";
-import { BsChevronDoubleDown } from 'react-icons/bs';
+import {BsChevronDoubleDown} from 'react-icons/bs';
 
 export default function Home() {
 
@@ -17,7 +17,6 @@ export default function Home() {
             <section
                 className="z-20 min-h-screen flex flex-col"
             >
-
                 <motion.div
                     className="z-20 md:flex md:flex-row md:justify-between md:items-center md:h-full md:my-auto md:pb-20"
                     initial={{opacity: 0, y: 30}}
@@ -40,21 +39,17 @@ export default function Home() {
                         <p
                             className="leading-5 text-md lg:text-xl xl:text-2xl text-gray-800 mx-auto max-w-md md:max-w-full md:pr-10 md:mx-0 dark:text-white"
                         >
-                            I am an 18 year old aspiring software developer from Canada. I am currently enrolled in my first
-                            of Engineering Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
-                            I am self taught in Java, and have 3 years of experience with it. I learned Java though working on
-                            Spigot plugins, and I am currently trying to teach myself Javascript, HTML, and CSS through
-                            the making of this site. This portfolio contains some projects I have worked on, some photos
-                            I have taken, as well as some background about them.
+                            I am an 18 year old aspiring software developer from Canada. I am currently
+                            enrolled in my first year of Engineering Systems & Computing at the
+                            University of Guelph. Online, I go by MetallicGoat. I am self taught
+                            in Java, and have 3 years of experience with it. I learned Java though
+                            working on Spigot plugins, and I am currently trying to teach myself
+                            Javascript, HTML, and CSS through the making of this site. This portfolio
+                            contains some projects I have worked on, some photos I have taken, as
+                            well as some background about them.
                         </p>
 
                         <Socials className="hidden md:block mr-20"/>
-
-                        {/* Scroll Arrow */}
-                        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2">
-                            <BsChevronDoubleDown className="animate-bounce text-4xl font-bold text-gray-600 dark:text-gray-400"/>
-                        </div>
-
                     </div>
 
                     <div
@@ -68,6 +63,15 @@ export default function Home() {
                     </div>
 
                     <Socials className="md:hidden"/>
+
+                    {/* Scroll Arrow */}
+                    <div
+                        className="mx-auto md:absolute md:bottom-5 md:right-0 md:left-1/2 md:transform md:-translate-x-1/2"
+                    >
+                        <BsChevronDoubleDown
+                            className="mx-auto animate-bounce text-4xl md:text-6xl font-bold text-gray-600 dark:text-gray-400"
+                        />
+                    </div>
                 </motion.div>
 
             </section>
