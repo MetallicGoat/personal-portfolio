@@ -32,7 +32,7 @@ const LinkParticles = () => {
                 },
                 links: {
                     color: "#9d9d9d",
-                    distance: 175,
+                    distance: 125,
                     enable: true,
                     opacity: 0.6,
                     width: 2,
@@ -44,14 +44,14 @@ const LinkParticles = () => {
                         default: "out",
                     },
                     random: false,
-                    speed: 2,
+                    speed: 0.75,
                     straight: false,
                 },
                 number: {
                     density: {
                         enable: true,
                     },
-                    value: 125,
+                    value: 175,
                 },
                 opacity: {
                     value: 0.6,
@@ -60,7 +60,7 @@ const LinkParticles = () => {
                     type: "circle",
                 },
                 size: {
-                    value: { min: 2, max: 6 },
+                    value: { min: 1, max: 5 },
                 },
             },
             detectRetina: true,

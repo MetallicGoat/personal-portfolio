@@ -7,14 +7,14 @@ interface InteractiveImageProps extends React.HTMLAttributes<HTMLDivElement> {
     alt: string;
 }
 
-const createParticle = (x: number, y: number, width: number, height: number) => {
+const createParticle = (x: number, y: number, width: number, height: number, easterEggValue: number) => {
     const particle = document.createElement('span');
     particle.className = 'particle';
     document.body.appendChild(particle);
 
-    const size = Math.random() * 6 + 8;
+    const size = Math.random() * (easterEggValue > 50 ? 30 : 6) + 8;
+    const color = `hsl(${Math.random() * 90 + 90 + easterEggValue*4}, 70%, 50%)`;
     const rotation = Math.random() * 520;
-    const color = `hsl(${Math.random() * 90 + 90}, 70%, 50%)`;
 
     // Set only dynamic styles here
     particle.style.width = `${size}px`;
@@ -23,7 +23,7 @@ const createParticle = (x: number, y: number, width: number, height: number) => 
     particle.style.background = color;
 
     // Determine start position and direction
-    const distance = 250;
+    const distance = 300;
     const side = Math.floor(Math.random() * 4);
     let startX, startY, destinationX, destinationY;
 
@@ -59,7 +59,7 @@ const createParticle = (x: number, y: number, width: number, height: number) => 
             opacity: 0
         }
     ], {
-        duration: Math.random() * 500 + 800,
+        duration: Math.random() * 500 + 1500,
         easing: 'cubic-bezier(0, .9, .57, 1)',
         delay: Math.random() * 200
     });
@@ -69,14 +69,19 @@ const createParticle = (x: number, y: number, width: number, height: number) => 
 
 export const InteractiveImage: React.FC<InteractiveImageProps> = ({src, alt, className}) => {
     const ref = useRef<HTMLDivElement | null>(null);
+    const easterEggValue = useRef<number>(0);
 
     useEffect(() => {
         const handlePop = (e: MouseEvent) => {
             const rect = ref.current?.getBoundingClientRect();
             if (!rect) return;
 
+            easterEggValue.current++;
+
+            const currEggValue = easterEggValue.current > 10 ? easterEggValue.current - 10 : 0
+
             for (let i = 0; i < 30; i++)
-                createParticle(rect.left, rect.top, rect.width, rect.height);
+                createParticle(rect.left, rect.top, rect.width, rect.height, currEggValue);
         };
 
         const currentRef = ref.current;
