@@ -25,13 +25,13 @@ export default function Home() {
                 >
                     <div className="text-center md:w-3/5 md:text-left pb-2 md:pb-0">
                         <h2
-                            className="text-4xl lg:text-6xl py-2 font-extrabold animated-text-color"
+                            className="text-4xl lg:text-6xl sm:py-2 font-extrabold animated-text-color"
                         >
                             Christian Azzam
                         </h2>
 
                         <h3
-                            className="text-lg md:text-2xl lg:text-3xl font-bold py-2 text-gray-800 dark:text-white"
+                            className="text-lg md:text-2xl lg:text-3xl font-bold sm:py-2 text-gray-800 dark:text-white"
                         >
                             AKA - MetallicGoat
                         </h3>
@@ -66,10 +66,10 @@ export default function Home() {
 
                     {/* Scroll Arrow */}
                     <div
-                        className="mx-auto md:absolute md:bottom-5 md:right-0 md:left-1/2 md:transform md:-translate-x-1/2"
+                        className="pt-4 mx-auto md:absolute md:bottom-5 md:right-0 md:left-1/2 md:transform md:-translate-x-1/2"
                     >
                         <BsChevronDoubleDown
-                            className="mx-auto animate-bounce text-4xl md:text-6xl font-bold text-gray-600 dark:text-gray-400"
+                            className="mx-auto animate-bounce text-4xl md:text-5xl font-bold text-gray-600 dark:text-gray-400"
                         />
                     </div>
                 </motion.div>
@@ -96,7 +96,7 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
     return (
         <div className={className}>
             <div
-                className="text-4xl md:text-5xl lg:text-6xl flex justify-center gap-8 sm:gap-16 my-3 py-6 text-gray-600 dark:text-gray-400"
+                className="text-4xl md:text-5xl lg:text-6xl flex justify-center gap-8 sm:gap-16 my-3 py-2 md:py-6 text-gray-600 dark:text-gray-400"
             >
 
                 <a href="https://github.com/MetallicGoat" target="blank_">
