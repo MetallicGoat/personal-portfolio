@@ -298,6 +298,10 @@ function Progress() {
                 and to document my learning of web development.
             </p>
 
+            <ProgressCard date="December 30th 2023" changes={[
+                "Added hidden rgb mode",
+            ]}/>
+
             <ProgressCard date="December 29th 2023" changes={[
                 "Added flying particles on image click",
             ]}/>

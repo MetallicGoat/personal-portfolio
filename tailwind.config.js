@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: "class",
@@ -35,5 +37,14 @@ module.exports = {
             // => @media (min-width: 1536px) { ... }
         }
     },
-    plugins: [],
+
+    plugins: [
+        plugin(function({ addVariant, e }) {
+            addVariant('RGB', ({ modifySelectors, separator }) => {
+                modifySelectors(({ className }) => {
+                    return `.rgb-mode .${e(`RGB${separator}${className}`)}`;
+                });
+            });
+        }),
+    ],
 }

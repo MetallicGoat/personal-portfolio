@@ -58,7 +58,7 @@ export default function Home() {
                         <InteractiveImage
                             src="https://github.com/MetallicGoat.png"
                             alt="GitHub profile picture"
-                            className="w-full rounded-3xl mx-auto shadow-xl shadow-gray-300 dark:shadow-gray-950"
+                            className="w-full rounded-3xl mx-auto shadow-xl shadow-gray-300 dark:shadow-gray-950 RGB:rgb-border"
                         />
                     </div>
 

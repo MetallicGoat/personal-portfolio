@@ -16,9 +16,15 @@ type PageNames = {
     [key: string]: string;
 };
 
+function toggleRGBMode() {
+    const body = document.body;
+    body.classList.toggle('rgb-mode');
+}
+
 const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const darkToggleClicks = useRef<number>(0);
     const router = useRouter();
 
     // Variants for the dropdown animation.
@@ -75,7 +81,14 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
 
             <ul className="z-50 flex items-center">
                 <li>
-                    <BsFillMoonStarsFill onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl sm:text-2xl md:text-3xl dark:text-white" />
+                    <BsFillMoonStarsFill onClick={() => {
+                        setDarkMode(!darkMode)
+                        darkToggleClicks.current++;
+
+                        if (darkToggleClicks.current == 8)
+                            toggleRGBMode();
+
+                    }} className="cursor-pointer text-xl sm:text-2xl md:text-3xl dark:text-white" />
                 </li>
                 <li>
                     <button className="z-50 bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 md:text-lg lg:text-2xl" onClick={openResume}>

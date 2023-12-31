@@ -77,12 +77,12 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
     return (
 
         <div className="pb-10 w-fit mx-auto max-w-4xl">
-            <h2 className="dark:text-white font-bold text-xl text-center p-2 mb-4">My Latest Open Source Contribution</h2>
+            <h2 className="dark:text-white font-bold text-xl text-center p-2 mb-4 RGB:animated-text-color">My Latest Open Source Contribution</h2>
             <div className="flex">
                 <div className="md:flex flex-col items-center justify-center min-w-36 hidden">
                     <Image width={400} height={400} src={`https://github.com/${username}.png`}
                            alt={`${username}'s profile picture`}
-                           className="w-32 rounded-full shadow-xl shadow-gray-300 dark:shadow-gray-800"
+                           className="w-32 rounded-full shadow-xl shadow-gray-300 dark:shadow-gray-800 RGB:rgb-border"
                     />
 
                 </div>

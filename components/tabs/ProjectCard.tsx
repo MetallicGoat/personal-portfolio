@@ -63,7 +63,7 @@ interface TileProps {
 
 export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, description, bubbles, status}) => {
     return (
-        <div className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg dark:border-neutral-700">
+        <div className="relative w-full mx-auto max-w-sm bg-gray-200 rounded-xl overflow-hidden shadow-lg RGB:rgb-border">
             <Bubbles
                 className="absolute inset-0 z-50"
                 bubbles={bubbles}

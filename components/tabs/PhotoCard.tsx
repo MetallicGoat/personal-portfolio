@@ -12,7 +12,7 @@ interface PhotoCardProps {
 export const PhotoCard: FunctionComponent<PhotoCardProps> = ({title, image, description, hashTags}) => {
     return (
         <div
-            className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 sm:border-4 rounded-xl overflow-hidden shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
+            className="relative w-full mx-auto max-w-sm bg-gray-200 border-2 rounded-xl overflow-hidden shadow-lg dark:bg-neutral-900 RGB:rgb-border">
 
             <div className="relative flex justify-center bg-gray-300 dark:bg-neutral-700 max-h-60 sm:h-72 overflow-hidden">
                 {/*Background*/}
