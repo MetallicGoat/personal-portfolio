@@ -19,8 +19,8 @@ export const ProgressCard: FunctionComponent<ProgressCard> = ({date, changes}) =
     });
 
     return (
-        <div className="my-3 mb-5">
-            <h2 className="font-bold mb-1 text-lg dark:text-white">{date}</h2>
+        <div className="py-3 pb-5">
+            <h2 className="font-bold pb-1 text-lg dark:text-white">{date}</h2>
             <ul className="ml-6 list-disc text-gray-600 dark:text-gray-300">
                 {tags}
             </ul>

@@ -298,15 +298,17 @@ function Progress() {
                 and to document my learning of web development.
             </p>
 
+            <ProgressCard date="January 7th 2024" changes={[
+                "Updated Resume",
+                "Some styling fixes",
+            ]}/>
+
             <ProgressCard date="December 30th 2023" changes={[
                 "Added hidden rgb mode",
             ]}/>
 
             <ProgressCard date="December 29th 2023" changes={[
                 "Added flying particles on image click",
-            ]}/>
-
-            <ProgressCard date="December 28th 2023" changes={[
                 "Many styling changes, including adding a new scroll indicator arrow and removing many image borders",
                 "improved performance by using .webp in some places, and not sending unnecessarily large files to the browser",
             ]}/>
