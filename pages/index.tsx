@@ -39,8 +39,8 @@ export default function Home() {
                         <p
                             className="leading-5 text-md lg:text-xl xl:text-2xl text-gray-800 mx-auto max-w-md md:max-w-full md:pr-10 md:mx-0 dark:text-white"
                         >
-                            I am an 18 year old aspiring software developer from Canada. I am currently
-                            enrolled in my first year of Engineering Systems & Computing at the
+                            I am a 19 year old aspiring software developer from Canada. I am currently
+                            enrolled in my second year of Engineering Systems & Computing at the
                             University of Guelph. Online, I go by MetallicGoat. I am self taught
                             in Java, and have 3 years of experience with it. I learned Java though
                             working on Spigot plugins, and I am currently trying to teach myself
@@ -106,8 +106,11 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
 
                 <BsDiscord
                     className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
-                <BsInstagram
-                    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+
+                <a href="" target="blank_">
+                    <BsInstagram
+                        className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                </a>
             </div>
         </div>
     )
