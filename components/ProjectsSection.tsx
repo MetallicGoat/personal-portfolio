@@ -298,6 +298,11 @@ function Progress() {
                 and to document my learning of web development.
             </p>
 
+            <ProgressCard date="December 15th 2024" changes={[
+                "Updated to Next JS 15",
+                "Fixed whitespace on scroll in dark mode",
+            ]}/>
+
             <ProgressCard date="January 7th 2024" changes={[
                 "Updated Resume",
                 "Some styling fixes",

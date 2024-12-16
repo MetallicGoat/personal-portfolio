@@ -85,7 +85,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
                         setDarkMode(!darkMode)
                         darkToggleClicks.current++;
 
-                        if (darkToggleClicks.current == 8)
+                        if (darkToggleClicks.current == 20)
                             toggleRGBMode();
 
                     }} className="cursor-pointer text-xl sm:text-2xl md:text-3xl dark:text-white" />
