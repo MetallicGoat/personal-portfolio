@@ -1,17 +1,17 @@
 import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
 import {FunctionComponent} from "react";
 import {motion} from 'framer-motion';
-import ProjectsSection from "@/components/ProjectsSection";
-import LastCommit from "@/components/utils/LastCommit";
-import {InteractiveImage} from "@/components/utils/InteractiveImage";
-import LinkParticles from "@/components/LinkParticles";
+import ProjectsSection from "@/components/homepage/ProjectsSection";
+import LastCommit from "@/components/homepage/LastCommit";
+import {InteractiveImage} from "@/components/homepage/InteractiveImage";
+import BackgroundLinkParticles from "@/components/homepage/BackgroundLinkParticles";
 import {BsChevronDoubleDown} from 'react-icons/bs';
 
 export default function Home() {
 
     return (
         <div>
-            <LinkParticles/>
+            <BackgroundLinkParticles/>
 
             {/* INTRO SECTION */}
             <section
@@ -99,7 +99,7 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
                 className="text-4xl md:text-5xl lg:text-6xl flex justify-center gap-10 sm:gap-16 my-3 py-2 md:py-6 text-gray-600 dark:text-gray-400"
             >
 
-                <a href="https://github.com/MetallicGoat" target="blank_">
+            <a href="https://github.com/MetallicGoat" target="blank_">
                     <BsGithub
                         className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>

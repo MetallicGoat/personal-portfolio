@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {motion} from 'framer-motion';
 import {NextPage} from "next";
-import Graph from "@/components/Graph";
-import {ProgressCard} from "@/components/tabs/ProgressCard";
-import {CalculateMethod, GraphInfo, IssueType} from "@/components/utils/GraphInfo";
+import Graph from "@/components/mathproject/Graph";
+import {ProgressCard} from "@/components/homepage/cards/ProgressCard";
+import {CalculateMethod, GraphInfo, IssueType} from "@/components/mathproject/GraphInfo";
 
 const MathProjectPage: NextPage = () => {
     const [issue, setIssue] = useState<boolean>(false);

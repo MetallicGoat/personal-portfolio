@@ -4,7 +4,7 @@ import {type Container, type ISourceOptions} from "@tsparticles/engine";
 import {loadSlim} from "@tsparticles/slim";
 
 
-const LinkParticles = () => {
+const BackgroundLinkParticles = () => {
     const [init, setInit] = useState(false);
 
     useEffect(() => {
@@ -82,4 +82,4 @@ const LinkParticles = () => {
     return <></>;
 };
 
-export default LinkParticles;
+export default BackgroundLinkParticles;

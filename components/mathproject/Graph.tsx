@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {abs, evaluate, round} from 'mathjs';
-import {CalculateMethod, GraphInfo} from "@/components/utils/GraphInfo";
+import {CalculateMethod, GraphInfo} from "@/components/mathproject/GraphInfo";
 
 type GraphProps = {
     graphInfo: GraphInfo;
