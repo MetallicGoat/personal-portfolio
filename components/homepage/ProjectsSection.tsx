@@ -1,6 +1,6 @@
-import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/tabs/ProjectCard";
-import {PhotoCard} from "@/components/tabs/PhotoCard";
-import {ProgressCard} from "@/components/tabs/ProgressCard";
+import {CompatibleBubble, ProjectCard, ProjectStatus} from "@/components/homepage/cards/ProjectCard";
+import {PhotoCard} from "@/components/homepage/cards/PhotoCard";
+import {ProgressCard} from "@/components/homepage/cards/ProgressCard";
 import React, {useState} from "react";
 
 // Projects
@@ -38,16 +38,16 @@ export default function ProjectsSection() {
     switch (selectedOption) {
         case 1:
             component = <Projects/>;
-            sliderClasses += " bg-blue-400";
+            sliderClasses += " bg-blue-600";
             break;
         case 2:
             optionClasses += " -translate-x-full ";
-            sliderClasses += " bg-red-400";
+            sliderClasses += " bg-red-600";
             component = <Photos/>;
             break;
         case 3:
             optionClasses += " -translate-x-full";
-            sliderClasses += " bg-green-400";
+            sliderClasses += " bg-green-600";
             component = <Progress/>;
             break;
         default:
@@ -56,7 +56,8 @@ export default function ProjectsSection() {
 
     return (
         <div>
-            <div className="relative shadow-lg mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 bg-gray-300 dark:bg-neutral-700 rounded-full flex items-center justify-center">
+            <div
+                className="relative shadow-lg mb-14 w-5/6 sm:w-3/4 mx-auto h-10 md:h-12 bg-gray-300 dark:bg-neutral-700 rounded-full flex items-center justify-center">
                 {/* Options */}
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(1)}>
@@ -77,7 +78,10 @@ export default function ProjectsSection() {
                 <div
                     className={sliderClasses}
                     style={{transform: `translateX(${(selectedOption - 1) * (300 / 3)}%)`}}
-                />
+                >
+                    {/*Overlay to make it appear as if there is a gradiant (you cannot transition gradients nicely)*/}
+                    <div className="absolute rounded-full inset-0 bg-gradient-to-r from-transparent to-white/60 pointer-events-none"/>
+                </div>
             </div>
 
             {component}
