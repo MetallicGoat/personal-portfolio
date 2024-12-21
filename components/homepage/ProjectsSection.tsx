@@ -61,17 +61,17 @@ export default function ProjectsSection() {
                 {/* Options */}
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(1)}>
-                    <span className="text-lg md:text-xl text-center font-bold select-none">Projects</span>
+                    <span className="text-lg md:text-2xl text-center font-bold select-none">Projects</span>
                 </div>
 
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(2)}>
-                    <span className="text-lg md:text-xl text-center font-bold select-none">Photos</span>
+                    <span className="text-lg md:text-2xl text-center font-bold select-none">Photos</span>
                 </div>
 
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(3)}>
-                    <span className="text-lg md:text-xl text-center font-bold select-none">Progress</span>
+                    <span className="text-lg md:text-2xl text-center font-bold select-none">Progress</span>
                 </div>
 
                 {/* Slider */}
@@ -80,7 +80,7 @@ export default function ProjectsSection() {
                     style={{transform: `translateX(${(selectedOption - 1) * (300 / 3)}%)`}}
                 >
                     {/*Overlay to make it appear as if there is a gradiant (you cannot transition gradients nicely)*/}
-                    <div className="absolute rounded-full inset-0 bg-gradient-to-r from-transparent to-white/60 pointer-events-none"/>
+                    <div className="absolute rounded-full inset-0 bg-gradient-to-r from-transparent to-white/40 pointer-events-none"/>
                 </div>
             </div>
 

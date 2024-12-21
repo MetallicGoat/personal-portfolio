@@ -72,7 +72,7 @@ export const InteractiveImage: React.FC<InteractiveImageProps> = ({src, alt, cla
     const easterEggValue = useRef<number>(0);
 
     useEffect(() => {
-        const handlePop = (e: MouseEvent) => {
+        const handlePop = () => {
             const rect = ref.current?.getBoundingClientRect();
             if (!rect) return;
 
