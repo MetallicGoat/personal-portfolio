@@ -76,12 +76,22 @@ export default function Home() {
 
             </section>
 
-            <div className="pt-24 pb-36">
-                <LastCommit username="MetallicGoat"/>
-            </div>
+            {/*Last Contribution*/}
+            <section>
+                <div className="mt-10 mb-10">
+                    <hr className="w-full rounded-full my-10 border-2 bg-gray-300 dark:border-neutral-700"/>
+
+                    <LastCommit username="MetallicGoat"/>
+
+                    <hr className="w-full rounded-full my-10 border-2 bg-gray-300 dark:border-neutral-700"/>
+                </div>
+            </section>
+
 
             {/*Projects or Photos*/}
             <section>
+                <h1 className="text-center font-bold mb-8 text-4xl">About Me</h1>
+
                 <ProjectsSection/>
             </section>
         </div>
@@ -99,7 +109,7 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
                 className="text-4xl md:text-5xl lg:text-6xl flex justify-center gap-10 sm:gap-16 my-3 py-2 md:py-6 text-gray-600 dark:text-gray-400"
             >
 
-            <a href="https://github.com/MetallicGoat" target="blank_">
+                <a href="https://github.com/MetallicGoat" target="blank_">
                     <BsGithub
                         className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>

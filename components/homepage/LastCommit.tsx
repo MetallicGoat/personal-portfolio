@@ -21,7 +21,10 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
         (async () => {
             try {
                 const {data} = await axios.get(`https://api.github.com/users/${username}/events`);
-                const pushEvent = data.find((event: { type: string; }) => event.type === 'PushEvent');
+                const pushEvent = data.find((event: {
+                    repo: any;
+                    type: string; }) => event.type === 'PushEvent' && !event.repo.name.match(`${username}/personal-portfolio`));
+
                 if (pushEvent) {
                     const latestCommit = pushEvent.payload.commits[0];
 

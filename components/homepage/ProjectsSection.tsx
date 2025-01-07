@@ -66,7 +66,7 @@ export default function ProjectsSection() {
 
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
                      onClick={() => setSelectedOption(2)}>
-                    <span className="text-lg md:text-2xl text-center font-bold select-none">Photos</span>
+                    <span className="text-lg md:text-2xl text-center font-bold select-none">My Life</span>
                 </div>
 
                 <div className="w-1/3 h-full flex justify-center items-center cursor-pointer z-50 dark:text-white"
@@ -301,6 +301,11 @@ function Progress() {
                 This section was created to document my progress over time,
                 and to document my learning of web development.
             </p>
+
+            <ProgressCard date="Jan 7th 2025" changes={[
+                "Updated Resume",
+                "Styling improvements",
+            ]}/>
 
             <ProgressCard date="December 15th 2024" changes={[
                 "Updated to Next JS 15",

@@ -103,5 +103,5 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
 export default NavBar;
 
 function openResume() {
-    window.open("/pdfs/ResumeV2.pdf", '_blank');
+    window.open("/pdfs/ResumeV3.pdf", '_blank');
 }
