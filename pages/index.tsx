@@ -114,10 +114,10 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
                         className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>
 
-                <BsDiscord
-                    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                {/*<BsDiscord*/}
+                {/*    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>*/}
 
-                <a href="" target="blank_">
+                <a href="https://www.instagram.com/christian_azzam3" target="blank_">
                     <BsInstagram
                         className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>

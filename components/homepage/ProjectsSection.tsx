@@ -11,7 +11,8 @@ import prize_commands_img from "@/public/personalprojects/prize-commands.png";
 import phaser_game_img from "@/public/personalprojects/phaser-space-game.png";
 import is4p_img from "@/public/personalprojects/is4p.png";
 import gen_splitter_img from "@/public/personalprojects/gen-splitter.png";
-import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
+// import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
+import physics_balls from "@/public/personalprojects/physics-balls.png";
 
 // Images
 import bike_trip_img from "@/public/photos/bike_trip.webp";
@@ -109,7 +110,7 @@ function Projects() {
                     title="MBedwars"
                     link="https://github.com/MBedwars"
                     bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.Paper]}
-                    description="This project was NOT created by me, I help maintain it (I am not the main maintainer). It is the largest project I work on by a mile. It is made up of over 600 files. It is closed source, and it generally goes for 20 euros a copy. I have learned so much from working on this project, and have had so much fun playing around with what it can do. This is a CLOSED SOURCE project."
+                    description="This project was NOT created by me, I help maintain it (I am not the main maintainer). It is the largest project I work on by a mile. It is made up of over 600 files. It is closed source, and it generally goes for 20 euros a copy. I have learned so much from working on this project, and have had so much fun playing around with what it can do. This is a closed source project."
                     image={mbedwars_img}
                     status={ProjectStatus.Ongoing}
                 />
@@ -118,45 +119,18 @@ function Projects() {
                     title="MBedwars Tweaks"
                     link="https://github.com/MetallicGoat/MBedwarsTweaks"
                     bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
-                    description="By far, my largest personal project (I contribute to larger projects). I have a very hate/love relationship with this project. I have rewritten so many parts of this project so many times as my java skills have improved over time."
+                    description="By far, my largest personal project (I contribute to larger projects). I have a love/hate relationship with this project. I have rewritten so many parts of this project so many times as my java skills have improved over the years. It is a colletion of various tweaks that were deemed to insignificant as an MBedwars feature."
                     image={tweaks_img}
                     status={ProjectStatus.Ongoing}
                 />
 
                 <ProjectCard
-                    title="Extra-Special-Items"
-                    link="https://github.com/MetallicGoat/Extra-Special-Items"
-                    bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
-                    description="My favorite MBedwars addon! I created it to add some fun new items into the game. I learned a lot about timers/schedulers in java while working on this project. I find it the most enjoyable to work on as I get to be creative with how my custom items work."
-                    image={extra_special_items_img}
+                    title="Physics Balls"
+                    link="" // TODO
+                    bubbles={[]} // TODO
+                    description="An app that tries to model 2D ball physics using ridged bodies created with the Godot game engine, with Rapier. The gravity of the balls is determined by the device's accelerometer (if present), as well as touch points. I intend to post this on the Google Play Store at some point as an android app. As of early 2025, it is still closed source."
+                    image={physics_balls}
                     status={ProjectStatus.Ongoing}
-                />
-
-                <ProjectCard
-                    title="Prize Commands"
-                    link="https://github.com/MetallicGoat/PrizeCommands"
-                    bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
-                    description="My least favorite project. It is a very useful MBedwars addon, but not much fun to work on. It makes it easy for users to reward their players for playing games, and progressing. "
-                    image={prize_commands_img}
-                    status={ProjectStatus.MaintenanceMode}
-                />
-
-                <ProjectCard
-                    title="Phaser Space Game"
-                    link="https://github.com/MetallicGoat/PhaserSpaceGame"
-                    bubbles={[CompatibleBubble.JavaScript]}
-                    description="A very basic idle game created with JavaScript using the Phaser library. The purpose of the project was for me to learn JavaScript. "
-                    image={phaser_game_img}
-                    status={ProjectStatus.OnHold}
-                />
-
-                <ProjectCard
-                    title="IS4P"
-                    link="https://github.com/MetallicGoat/infinite-support-4-paws"
-                    bubbles={[CompatibleBubble.JavaScript]}
-                    description="A website for a dog rescue called infinite support four paws. I had to put this project hold, but plan to come back to it soon. The plan is to move to next js (currently is using react and react-router), and migrate from css modules, to tailwind css"
-                    image={is4p_img}
-                    status={ProjectStatus.OnHold}
                 />
 
                 <ProjectCard
@@ -169,13 +143,49 @@ function Projects() {
                 />
 
                 <ProjectCard
-                    title="Fireball Jumping"
-                    link="https://github.com/MetallicGoat/FB-Knockback"
+                    title="Prize Commands"
+                    link="https://github.com/MetallicGoat/PrizeCommands"
                     bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
-                    description="One of my very first java projects. I created it for MBedwars, but before I joined as a contributor. It became much more popular than I thought it would, which inspired me to continue learning java. I have retired it, I have built its features directly into MBedwars, and MBedwars Tweaks. Somehow it still has over 100 users according to BStats."
-                    image={fireball_jumping_img}
+                    description="My least favorite project. It is a very useful MBedwars addon, but not much fun to work on. It makes it easy for users to reward their players for playing games, and progressing. "
+                    image={prize_commands_img}
+                    status={ProjectStatus.MaintenanceMode}
+                />
+
+                <ProjectCard
+                    title="Extra-Special-Items"
+                    link="https://github.com/MetallicGoat/Extra-Special-Items"
+                    bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}
+                    description="My favorite MBedwars addon! I created it to add some fun new items into the game. I learned a lot about timers/schedulers in java while working on this project. I find it the most enjoyable to work on as I get to be creative with how my custom items work."
+                    image={extra_special_items_img}
+                    status={ProjectStatus.MaintenanceMode}
+                />
+
+                <ProjectCard
+                    title="IS4P"
+                    link="https://github.com/MetallicGoat/infinite-support-4-paws"
+                    bubbles={[CompatibleBubble.JavaScript]}
+                    description="A website for a dog rescue called infinite support four paws. I had to put this project hold (School), but plan to come back to it soon. The plan is to move to next js (currently is using react and react-router), and migrate from css modules, to tailwind css."
+                    image={is4p_img}
+                    status={ProjectStatus.OnHold}
+                />
+
+                <ProjectCard
+                    title="Phaser Space Game"
+                    link="https://github.com/MetallicGoat/PhaserSpaceGame"
+                    bubbles={[CompatibleBubble.JavaScript]}
+                    description="A very basic idle game created with JavaScript using the Phaser library. The purpose of the project was for me to learn JavaScript. "
+                    image={phaser_game_img}
                     status={ProjectStatus.Retired}
                 />
+
+                {/*<ProjectCard*/}
+                {/*    title="Fireball Jumping"*/}
+                {/*    link="https://github.com/MetallicGoat/FB-Knockback"*/}
+                {/*    bubbles={[CompatibleBubble.Java, CompatibleBubble.Spigot, CompatibleBubble.MBedwars]}*/}
+                {/*    description="One of my very first java projects. I created it for MBedwars, but before I joined as a contributor. It became much more popular than I thought it would, which inspired me to continue learning java. I have retired it, I have built its features directly into MBedwars, and MBedwars Tweaks. Somehow it still has over 100 users according to BStats."*/}
+                {/*    image={fireball_jumping_img}*/}
+                {/*    status={ProjectStatus.Retired}*/}
+                {/*/>*/}
             </div>
 
             {/* TODO view more on github button */}
@@ -301,6 +311,11 @@ function Progress() {
                 This section was created to document my progress over time,
                 and to document my learning of web development.
             </p>
+
+            <ProgressCard date="Jan 8th 2025" changes={[
+                "Updated Projects",
+                "Fixed/Removed some broken links",
+            ]}/>
 
             <ProgressCard date="Jan 7th 2025" changes={[
                 "Updated Resume",
