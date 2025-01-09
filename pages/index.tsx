@@ -1,4 +1,4 @@
-import {BsDiscord, BsGithub, BsInstagram} from 'react-icons/bs';
+import {BsDiscord, BsGithub, BsInstagram, BsLinkedin} from 'react-icons/bs';
 import {FunctionComponent} from "react";
 import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/homepage/ProjectsSection";
@@ -114,8 +114,10 @@ const Socials: FunctionComponent<HashTagProps> = ({className}) => {
                         className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
                 </a>
 
-                {/*<BsDiscord*/}
-                {/*    className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>*/}
+                <a href="https://www.linkedin.com/in/christian-azzam" target="blank_">
+                    <BsLinkedin
+                        className="ease-in duration-200 hover:scale-110 hover:text-gray-900 hover:dark:text-white"/>
+                </a>
 
                 <a href="https://www.instagram.com/christian_azzam3" target="blank_">
                     <BsInstagram
