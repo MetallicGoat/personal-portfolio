@@ -26,7 +26,18 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
                     type: string; }) => event.type === 'PushEvent' && !event.repo.name.match(`${username}/personal-portfolio`));
 
                 if (pushEvent) {
-                    const latestCommit = pushEvent.payload.commits[0];
+                    let pos = 0;
+
+                    // Eg. for a pull request, show my merge, not someone else's work
+                    // Don't want to claim something that's not mine
+                    while (pos + 1 < pushEvent.payload.commits.length) {
+                        if (pushEvent.payload.commits[0].author.name === username)
+                            break;
+
+                        pos++;
+                    }
+
+                    const latestCommit = pushEvent.payload.commits[pos];
 
                     setCommit({
                         created_at: pushEvent.created_at,
@@ -94,7 +105,7 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
                     <table className="table-fixed mx-4">
                         <tbody>
                         <tr className="border-b dark:border-neutral-700">
-                            <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Project:</th>
+                            <th className="dark:text-white min-w-52 text-left px-4 py-1 whitespace-normal break-words">Project:</th>
                             <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
                         </tr>
                         <tr className="border-b dark:border-neutral-700">
