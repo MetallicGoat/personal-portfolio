@@ -52,7 +52,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
     // Function to create navigation links.
     const createNavLink = (href: string, label: string) => (
         <Link href={href} key={href}>
-            <span className={`block px-4 py-2 text-sm cursor-pointer ${router.pathname === href ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'} ${darkMode ? 'text-white bg-gray-800 hover:bg-gray-700 hover:text-white' : ''}`} role="menuitem" onClick={() => setDropdownOpen(false)}>
+            <span className={`block px-4 py-2 text-sm cursor-pointer ${router.pathname === href ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-700 hover:bg-neutral-100'} ${darkMode ? 'text-white bg-neutral-800 hover:bg-neutral-700 hover:text-white' : ''}`} role="menuitem" onClick={() => setDropdownOpen(false)}>
                 {label}
             </span>
         </Link>
@@ -72,7 +72,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, setDarkMode, currentPath }) =
                     <FiChevronDown className="z-50 w-4 h-4" />
                 </button>
 
-                <motion.div className={`z-50 origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 ${darkMode ? 'bg-gray-800 text-white shadow-gray-900' : 'bg-white text-gray-900'}`} initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants} transition={{ duration: 0.2 }}>
+                <motion.div className={`z-50 origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 ${darkMode ? 'bg-neutral-800 text-white shadow-neutral-900' : 'bg-white text-neutral-900'}`} initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants} transition={{ duration: 0.2 }}>
                     <div className="z-50 py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {navLinks}
                     </div>

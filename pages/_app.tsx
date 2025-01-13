@@ -22,8 +22,8 @@ export default function App({Component, pageProps}: AppProps) {
     return (
         <div className={"dark:bg-black"}>
             <Head>
-                <title>Portfolio</title>
-                <meta name="description" content="Christian Azzam's Website (JavaScript < TypeScript < Java)"/>
+                <title>Christian Azzam</title>
+                <meta name="description" content="Christian Azzam's Website"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 

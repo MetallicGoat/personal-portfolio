@@ -1,9 +1,9 @@
 import React, {useRef, useEffect} from 'react';
 import {motion} from 'framer-motion';
-import Image from 'next/image';
+import Image, {StaticImageData} from 'next/image';
 
 interface InteractiveImageProps extends React.HTMLAttributes<HTMLDivElement> {
-    src: string;
+    src: StaticImageData;
     alt: string;
 }
 

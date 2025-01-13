@@ -6,6 +6,7 @@ import LastCommit from "@/components/homepage/LastCommit";
 import {InteractiveImage} from "@/components/homepage/InteractiveImage";
 import BackgroundLinkParticles from "@/components/homepage/BackgroundLinkParticles";
 import {BsChevronDoubleDown} from 'react-icons/bs';
+import profile from "@/public/pofile.jpg";
 
 export default function Home() {
 
@@ -56,7 +57,7 @@ export default function Home() {
                         className="flex justify-center md:justify-end mx-auto md:mx-0 relative pt-2 w-3/4 md:w-1/3"
                     >
                         <InteractiveImage
-                            src="https://github.com/MetallicGoat.png"
+                            src={profile}
                             alt="GitHub profile picture"
                             className="w-full rounded-3xl mx-auto shadow-xl shadow-gray-300 dark:shadow-gray-950 RGB:rgb-border"
                         />
