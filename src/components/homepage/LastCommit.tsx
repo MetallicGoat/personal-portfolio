@@ -13,6 +13,24 @@ interface CommitData {
   url: string;
 }
 
+interface GitHubEvent {
+  type: string;
+  repo: {
+    name: string;
+  };
+  payload: {
+    commits: {
+      author: {
+        name: string;
+      };
+      message: string;
+      sha: string;
+    }[];
+  };
+  created_at: string;
+}
+
+
 const LastCommit: React.FC<CommitProps> = ({username}) => {
   const [commit, setCommit] = useState<CommitData | null>(null);
 
@@ -21,10 +39,10 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
     (async () => {
       try {
         const {data} = await axios.get(`https://api.github.com/users/${username}/events`);
-        const pushEvent = data.find((event: {
-          repo: any;
-          type: string;
-        }) => event.type === 'PushEvent' && !event.repo.name.match(`${username}/personal-portfolio`));
+        const pushEvent = data.find((event: GitHubEvent) =>
+          event.type === 'PushEvent' &&
+          !event.repo.name.match(`${username}/personal-portfolio`)
+        );
 
         if (pushEvent) {
           let pos = 0;
