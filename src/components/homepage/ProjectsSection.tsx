@@ -34,7 +34,7 @@ import sunset_beach_img from "@/public/photos/sunset_beach.webp";
 export default function ProjectsSection() {
   const [selectedOption, setSelectedOption] = useState(1);
 
-  let optionClasses = "w-1/3 h-full flex justify-center items-center cursor-pointer z-10 transition ease-in duration-200";
+  // let optionClasses = "w-1/3 h-full flex justify-center items-center cursor-pointer z-10 transition ease-in duration-200";
   let sliderClasses = "absolute top-0 left-0 w-1/3 h-full rounded-full transition-all ease-in-out duration-1000 z-20";
   let component = null;
 
@@ -44,12 +44,12 @@ export default function ProjectsSection() {
       sliderClasses += " bg-blue-600";
       break;
     case 2:
-      optionClasses += " -translate-x-full ";
+      // optionClasses += " -translate-x-full ";
       sliderClasses += " bg-red-600";
       component = <Photos/>;
       break;
     case 3:
-      optionClasses += " -translate-x-full";
+      // optionClasses += " -translate-x-full";
       sliderClasses += " bg-green-600";
       component = <Progress/>;
       break;

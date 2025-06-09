@@ -94,10 +94,10 @@ export class GraphInfo {
     this.onChange()
   }
 
-  setSpeed(speed: number, max: number) {
-    this.speed = speed;
-    this.onChange();
-  }
+  // setSpeed(speed: number, max: number) {
+  //   this.speed = speed;
+  //   this.onChange();
+  // }
 
   getScaleX(): number {
     return this.scaleX * 2;
@@ -127,7 +127,7 @@ export class GraphInfo {
 
     try {
       evaluate(this.function, {x: 1});
-    } catch (e) {
+    } catch {
       return IssueType.InvalidEquation
     }
 
