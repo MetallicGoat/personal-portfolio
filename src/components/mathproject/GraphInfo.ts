@@ -94,10 +94,10 @@ export class GraphInfo {
     this.onChange()
   }
 
-  // setSpeed(speed: number, max: number) {
-  //   this.speed = speed;
-  //   this.onChange();
-  // }
+  setSpeed(speed: number, max: number) {
+    this.speed = Math.min(speed, max);
+    this.onChange();
+  }
 
   getScaleX(): number {
     return this.scaleX * 2;
