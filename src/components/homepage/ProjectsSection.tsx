@@ -11,6 +11,7 @@ import tweaks_img from "@/public/personalprojects/tweaks.png";
 import extra_special_items_img from "@/public/personalprojects/extra-special-items.png";
 import prize_commands_img from "@/public/personalprojects/prize-commands.png";
 import phaser_game_img from "@/public/personalprojects/phaser-space-game.png";
+import enviro_anti_mwp from "@/public/personalprojects/EnviroAntiMWP.png";
 import is4p_img from "@/public/personalprojects/is4p.png";
 import gen_splitter_img from "@/public/personalprojects/gen-splitter.png";
 // import fireball_jumping_img from "@/public/personalprojects/fireball-knockback.webp";
@@ -165,6 +166,15 @@ function Projects() {
 
         <ProjectCard
           title="IS4P"
+          link="https://github.com/MetallicGoat/EnviroAntiMWP"
+          bubbles={[CompatibleBubble.Java]}
+          description="A tool developed to automate repetitive and time consuming data entry tasks for a large environmental firm. This tool was initially developed by me for a friend, Braydon Affleck. Once the initial tool was built, Braydon contributed bug fixes, and UI tweaks. See the GitHub page for a more complete writeup."
+          image={enviro_anti_mwp}
+          status={ProjectStatus.OnHold}
+        />
+
+        <ProjectCard
+          title="IS4P"
           link="https://github.com/MetallicGoat/infinite-support-4-paws"
           bubbles={[CompatibleBubble.JavaScript]}
           description="A website for a dog rescue called infinite support four paws. I had to put this project hold (School), but plan to come back to it soon. The plan is to move to next js (currently is using react and react-router), and migrate from css modules, to tailwind css."
@@ -314,6 +324,11 @@ function Progress() {
         This section was created to document my progress over time,
         and to document my learning of web development.
       </p>
+
+      <ProgressCard date="July 27th 2025" changes={[
+        "Added EnviroAntiMWP Project",
+        "Updated age to calculation"
+      ]}/>
 
       <ProgressCard date="June 8th 2025" changes={[
         "Migrate from pages to app router",

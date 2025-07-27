@@ -11,6 +11,8 @@ import profile from "@/public/pofile.jpg";
 
 export default function Home() {
 
+  const yearsSince = (birthdate: Date) => Math.floor((Date.now() - birthdate.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+
   return (
     <div>
       <BackgroundLinkParticles/>
@@ -41,10 +43,10 @@ export default function Home() {
             <p
               className="text-md lg:text-xl xl:text-2xl text-gray-800 mx-auto max-w-md md:max-w-full md:pr-10 md:mx-0 dark:text-white"
             >
-              I am a 19 year old aspiring software developer from Canada. I am currently
-              enrolled in my second year of Engineering Systems & Computing at the
-              University of Guelph. Online, I go by MetallicGoat. I am self taught
-              in Java, and have 3 years of experience with it. I learned Java though
+              I am a {yearsSince(new Date("2005-05-31"))} year old aspiring software
+              developer from Canada. I am currently enrolled in my third year of Engineering
+              Systems & Computing at the University of Guelph. Online, I go by MetallicGoat.
+              I am self taught in Java, and have 3 years of experience with it. I learned Java though
               working on Spigot plugins, and I am currently trying to teach myself
               Javascript, HTML, and CSS through the making of this site. This portfolio
               contains some projects I have worked on, some photos I have taken, as

@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/common/NavBar";
 import React from "react";
 
 const geistSans = Geist({
@@ -25,10 +25,10 @@ export default function RootLayout({children,}: Readonly<{
   return (
     <html lang="en" className="dark">
     <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased ease-in duration-300 bg-white dark:bg-black`}
     >
 
-    <main className="z-10 ease-in duration-300 px-5 sm:px-8 md:px-10 xl:px-20 bg-white dark:bg-black">
+    <main className="z-10 ease-in duration-300 px-5 sm:px-8 md:px-10 xl:px-20 ">
       <NavBar/>
       {children}
     </main>
