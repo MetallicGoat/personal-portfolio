@@ -31,7 +31,9 @@ const NavBar = () => {
 
   // First Start
   useEffect(() => {
-    const curMode = localStorage.getItem('darkMode') === 'true';
+    const value = localStorage.getItem('darkMode');
+    const curMode = value == null || value === 'true';
+
     setDarkMode(curMode);
   }, []);
 
