@@ -28,12 +28,23 @@ const NavBar = () => {
   const [darkMode, setDarkMode] = useState(true);
   const pathname = usePathname();
 
+
+  // First Start
+  useEffect(() => {
+    const curMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(curMode);
+  }, []);
+
+  // On Change
   useEffect(() => {
     const root = document.documentElement;
+
     if (darkMode) {
       root.classList.add('dark');
+      localStorage.setItem('darkMode', "true");
     } else {
       root.classList.remove('dark');
+      localStorage.setItem('darkMode', "false");
     }
   }, [darkMode]);
 

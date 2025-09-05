@@ -327,7 +327,8 @@ function Progress() {
 
       <ProgressCard date="Sept 5th 2025" changes={[
         "Added Blogs Section + Perpetual Motion Blog",
-        "Redesigned the Navbar"
+        "Redesigned the Navbar",
+        "Now remembers dark mode state"
       ]}/>
 
       <ProgressCard date="July 27th 2025" changes={[
