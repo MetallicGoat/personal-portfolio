@@ -105,50 +105,56 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
     }
   };
 
-  if (!commit) return <div>Loading...</div>;
+  if (!commit)
+    return "";
 
   return (
+    <>
+      <hr className="w-full rounded-full my-10 border-2 border-gray-300 dark:border-neutral-700"/>
 
-    <div className="pb-10 w-fit mx-auto max-w-4xl">
-      <h2 className="dark:text-white font-bold text-xl text-center p-2 mb-4 RGB:animated-text-color">My Latest Open
-        Source Contribution</h2>
-      <div className="flex">
-        <div className="md:flex flex-col items-center justify-center min-w-36 hidden">
-          <Image width={400} height={400} src={`https://github.com/${username}.png`}
-                 alt={`${username}'s profile picture`}
-                 className="w-32 rounded-full shadow-xl shadow-gray-300 dark:shadow-gray-800 RGB:rgb-border"
-          />
+      <div className="pb-10 w-fit mx-auto max-w-4xl">
+        <h2 className="dark:text-white font-bold text-xl text-center p-2 mb-4 RGB:animated-text-color">My Latest Open
+          Source Contribution</h2>
+        <div className="flex">
+          <div className="md:flex flex-col items-center justify-center min-w-36 hidden">
+            <Image width={400} height={400} src={`https://github.com/${username}.png`}
+                   alt={`${username}'s profile picture`}
+                   className="w-32 rounded-full shadow-xl shadow-gray-300 dark:shadow-gray-800 RGB:rgb-border"
+            />
 
-        </div>
+          </div>
 
-        <div className="flex flex-col items-center justify-center">
-          <table className="table-fixed mx-4">
-            <tbody>
-            <tr className="border-b dark:border-neutral-700">
-              <th className="dark:text-white min-w-52 text-left px-4 py-1 whitespace-normal break-words">Project:</th>
-              <td
-                className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
-            </tr>
-            <tr className="border-b dark:border-neutral-700">
-              <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Latest Contribution:
-              </th>
-              <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{getDateString()}</td>
-            </tr>
-            <tr className="border-b dark:border-neutral-700">
-              <th className="dark:text-white text-left text-wrap px-4 py-1 whitespace-normal break-words">Commit
-                Message:
-              </th>
-              <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.message}</td>
-            </tr>
-            </tbody>
-          </table>
-          <a href={commit.url} target="_blank" rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-800 block text-center mt-2 font-bold">
-            View Contribution on GitHub
-          </a>
+          <div className="flex flex-col items-center justify-center">
+            <table className="table-fixed mx-4">
+              <tbody>
+              <tr className="border-b dark:border-neutral-700">
+                <th className="dark:text-white min-w-52 text-left px-4 py-1 whitespace-normal break-words">Project:</th>
+                <td
+                  className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
+              </tr>
+              <tr className="border-b dark:border-neutral-700">
+                <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Latest Contribution:
+                </th>
+                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{getDateString()}</td>
+              </tr>
+              <tr className="border-b dark:border-neutral-700">
+                <th className="dark:text-white text-left text-wrap px-4 py-1 whitespace-normal break-words">Commit
+                  Message:
+                </th>
+                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.message}</td>
+              </tr>
+              </tbody>
+            </table>
+            <a href={commit.url} target="_blank" rel="noopener noreferrer"
+               className="text-blue-600 hover:text-blue-800 block text-center mt-2 font-bold">
+              View Contribution on GitHub
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+
+      <hr className="w-full rounded-full my-10 border-2 border-gray-300 dark:border-neutral-700"/>
+    </>
   );
 };
 

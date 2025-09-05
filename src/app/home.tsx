@@ -83,11 +83,7 @@ export default function Home() {
       {/*Last Contribution*/}
       <section>
         <div className="mt-10 mb-10">
-          <hr className="w-full rounded-full my-10 border-2 border-gray-300 dark:border-neutral-700"/>
-
           <LastCommit username="MetallicGoat"/>
-
-          <hr className="w-full rounded-full my-10 border-2 border-gray-300 dark:border-neutral-700"/>
         </div>
       </section>
 

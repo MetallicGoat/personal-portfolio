@@ -165,7 +165,7 @@ function Projects() {
         />
 
         <ProjectCard
-          title="IS4P"
+          title="EnviroAntiMWP"
           link="https://github.com/MetallicGoat/EnviroAntiMWP"
           bubbles={[CompatibleBubble.Java]}
           description="A tool developed to automate repetitive and time consuming data entry tasks for a large environmental firm. This tool was initially developed by me for a friend, Braydon Affleck. Once the initial tool was built, Braydon contributed bug fixes, and UI tweaks. See the GitHub page for a more complete writeup."
@@ -325,13 +325,18 @@ function Progress() {
         and to document my learning of web development.
       </p>
 
+      <ProgressCard date="Sept 5th 2025" changes={[
+        "Added Blogs Section + Perpetual Motion Blog",
+        "Redesigned the Navbar"
+      ]}/>
+
       <ProgressCard date="July 27th 2025" changes={[
         "Added EnviroAntiMWP Project",
         "Updated age to calculation"
       ]}/>
 
       <ProgressCard date="June 8th 2025" changes={[
-        "Migrate from pages to app router",
+        "Migrate from Next.js pages to app router",
       ]}/>
 
       <ProgressCard date="Jan 12th 2025" changes={[

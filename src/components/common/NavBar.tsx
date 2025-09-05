@@ -1,22 +1,24 @@
 'use client'
 
-import React, {useEffect, useRef, useState} from 'react';
-import {motion} from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import {BsFillMoonStarsFill} from 'react-icons/bs';
-import {FiChevronDown} from 'react-icons/fi';
-import {usePathname} from "next/navigation";
+import { BsFillMoonStarsFill } from 'react-icons/bs';
+import { FiMenu, FiX } from 'react-icons/fi';
+import { usePathname } from "next/navigation";
 
-// Define the shape of page names.
-type PageNames = {
-  [key: string]: string;
-};
+type PageNames = { href: string; label: string }[];
 
 function toggleRGBMode() {
   const body = document.body;
   body.classList.toggle('rgb-mode');
 }
 
+const pages: PageNames = [
+  { href: '/', label: 'Home' },
+  // { href: '/mathproject', label: 'Math Project' },
+  { href: '/blogs', label: 'Blogs' },
+];
 
 const NavBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -35,86 +37,120 @@ const NavBar = () => {
     }
   }, [darkMode]);
 
-  // Variants for the dropdown animation.
-  const dropdownVariants = {
-    open: {opacity: 1, scale: 1, display: 'block'},
-    closed: {opacity: 0, scale: 0.95, transitionEnd: {display: 'none'}},
-  };
-
-  // Handle clicks outside the dropdown.
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
     };
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleDocumentClick);
+      return () => document.removeEventListener('mousedown', handleDocumentClick);
+    }
+  }, [dropdownOpen]);
 
-    document.addEventListener('mousedown', handleDocumentClick);
-    return () => document.removeEventListener('mousedown', handleDocumentClick);
-  }, []);
+  // Desktop nav links (enhanced style)
+  const desktopNavLinks = pages.map((page) => {
+    const isActive =
+      pathname === page.href ||
+      (page.href === '/blogs' && pathname.startsWith('/blogs'));
+    return (
+      <Link href={page.href} key={page.href}>
+        <span
+          className={`
+            px-5 py-3 rounded-2xl text-lg font-semibold transition-all duration-300 border
+            ${
+            isActive
+              ? 'bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-lg dark:shadow-neutral-900 border-neutral-200 dark:border-neutral-800'
+              : 'text-neutral-700 dark:text-neutral-200 border-transparent'
+          }
+            ${!isActive && 'hover:bg-neutral-100 hover:shadow-xl hover:dark:bg-neutral-900 hover:dark:shadow-neutral-900 hover:border-neutral-200 hover:dark:border-neutral-800'}
+          `}
+        >
+          {page.label}
+        </span>
+      </Link>
+    );
+  });
 
-  // Define page names and get the current page name.
-  const pageNames: PageNames = {'/': 'Home', '/mathproject': 'Math Project'};
-  const currentPageName = pageNames[pathname] || 'Home';
-
-  // Function to create navigation links.
-  const createNavLink = (href: string, label: string) => (
-    <Link href={href} key={href}>
-            <span
-              className={`block px-4 py-2 text-sm cursor-pointer ${pathname === href ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-700 hover:bg-neutral-100'} ${darkMode ? 'text-white bg-neutral-800 hover:bg-neutral-700 hover:text-white' : ''}`}
-              role="menuitem" onClick={() => setDropdownOpen(false)}>
-                {label}
-            </span>
-    </Link>
-  );
-
-  // Filter and map navigation links.
-  const navLinks = [
-    {href: '/', label: 'Home'},
-    {href: '/mathproject', label: 'Math Project'}
-  ].filter(link => link.href !== pathname).map(link => createNavLink(link.href, link.label));
+  // Mobile dropdown nav links (original, but slightly bigger)
+  const dropdownNavLinks = pages.map((page) => {
+    const isActive =
+      pathname === page.href ||
+      (page.href === '/blogs' && pathname.startsWith('/blogs'));
+    return (
+      <Link href={page.href} key={page.href}>
+        <span
+          className={`
+            block px-5 py-3 rounded-xl text-lg font-medium transition
+            ${isActive
+            ? 'bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400'
+            : 'text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800'}
+          `}
+          onClick={() => setDropdownOpen(false)}
+          role="menuitem"
+        >
+          {page.label}
+        </span>
+      </Link>
+    );
+  });
 
   return (
-    <motion.nav className="z-50 pt-4 pb-1 flex justify-between" initial={{opacity: 0}} animate={{opacity: 1}}
-                transition={{duration: .3}}>
-      <div className="z-50  relative inline-block text-left" ref={dropdownRef}>
-        <button
-          className="z-50 flex h-full items-center justify-center space-x-1 text-md sm:text-xl md:text-2xl dark:text-white focus:outline-none"
-          onClick={() => setDropdownOpen(!dropdownOpen)}>
-          <span>{currentPageName}</span>
-          <FiChevronDown className="z-50 w-4 h-4"/>
-        </button>
-
-        <motion.div
-          className={`z-50 origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black/5 ${darkMode ? 'bg-neutral-800 text-white shadow-neutral-900' : 'bg-white text-neutral-900'}`}
-          initial="closed" animate={dropdownOpen ? 'open' : 'closed'} variants={dropdownVariants}
-          transition={{duration: 0.2}}>
-          <div className="z-50 py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {navLinks}
-          </div>
-        </motion.div>
+    <nav className="z-50 flex items-center justify-between py-4 px-2 sm:px-6 top-0">
+      <div className="z-50 flex items-center">
+        {/* Hamburger for small screens */}
+        <div className="sm:hidden" ref={dropdownRef}>
+          <button
+            className="p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400"
+            aria-label={dropdownOpen ? "Close menu" : "Open menu"}
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            {dropdownOpen ? <FiX className="w-7 h-7 dark:text-white" /> : <FiMenu className="w-7 h-7 dark:text-white" />}
+          </button>
+          <AnimatePresence>
+            {dropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95, transition: { duration: 0.12 } }}
+                transition={{ duration: 0.12 }}
+                className="absolute left-2 top-16 w-56 min-w-[12rem] rounded-2xl bg-white dark:bg-neutral-800 shadow-lg border border-neutral-100 dark:border-neutral-700 py-2 flex flex-col"
+              >
+                {dropdownNavLinks}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        {/* Inline links for desktop */}
+        <div className="hidden sm:flex gap-3 md:gap-8">
+          {desktopNavLinks}
+        </div>
       </div>
-
-      <ul className="z-50 flex items-center">
+      <ul className="z-50 flex items-center gap-3 sm:gap-5">
         <li>
-          <BsFillMoonStarsFill onClick={() => {
-            setDarkMode(!darkMode)
-            darkToggleClicks.current++;
-
-            if (darkToggleClicks.current == 20)
-              toggleRGBMode();
-
-          }} className="cursor-pointer text-xl sm:text-2xl md:text-3xl dark:text-white"/>
+          <BsFillMoonStarsFill
+            onClick={() => {
+              setDarkMode(!darkMode);
+              darkToggleClicks.current++;
+              if (darkToggleClicks.current === 20) toggleRGBMode();
+            }}
+            className="cursor-pointer text-2xl sm:text-3xl md:text-4xl dark:text-white transition"
+            aria-label="Toggle dark mode"
+            tabIndex={0}
+            onKeyDown={e => { if (e.key === 'Enter') setDarkMode(!darkMode); }}
+          />
         </li>
         <li>
           <button
-            className="z-50 bg-gradient-to-r from-green-400 to-teal-400 text-white px-2 sm:px-4 py-1 rounded-md ml-4 sm:ml-8 md:text-lg lg:text-2xl"
-            onClick={openResume}>
+            className="bg-gradient-to-r from-green-400 to-teal-400 text-white px-6 sm:px-8 py-2.5 rounded-xl ml-2 text-lg sm:text-xl font-bold shadow-md transition"
+            onClick={openResume}
+          >
             Resume
           </button>
         </li>
       </ul>
-    </motion.nav>
+    </nav>
   );
 };
 
