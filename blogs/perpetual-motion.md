@@ -156,10 +156,10 @@ The new corresponding administrative UI allows us to control when leagues and sc
 as a whole, with specific configurations that are available for leagues individually for the cases where a schedule needs 
 to be rethought do to a team dropping out (or whatever other reason):
 
-### General Sport Controls:
+### General Sport Controls
 ![Timeline Controls](https://www.metallicgoat.ca/blogs/pmotion/TimelineControls.png)
 
-### League Specific Controls:
+### League Specific Controls
 ![Sport Settings UI](https://www.metallicgoat.ca/blogs/pmotion/SchedulesStandingsControls.png)
 
 Our admin server hosts a rest API that the user facing widgets on wordpress then pulls their data from. This allows us to 
@@ -175,7 +175,7 @@ tools I built. It's one thing to build something cool, and another thing to see 
 
 <br/>
 
-## Implementation - Waiver Tracking System:
+## Implementation - Waiver Tracking System
 
 All in all, the waiver tracking system was pretty simple compared to the rest of what I have worked on. It works as follows. 
 When people sign waivers, they are required to enter their name, and optionally their email address. When they do, they are 

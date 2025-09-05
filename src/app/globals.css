@@ -180,5 +180,5 @@ body {
 }
 
 .article > p > img {
-  @apply rounded-lg shadow-xl w-1/2 my-5 mx-auto;
+  @apply rounded-lg shadow-xl my-5 mx-auto w-full sm:w-3/4 xl:w-1/2  ;
 }
