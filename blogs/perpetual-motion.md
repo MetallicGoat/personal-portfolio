@@ -1,6 +1,6 @@
 ---
 title: "Perpetual Motion"
-summary: "My first real job Developing Software"
+summary: "My first real job developing software"
 date: "04-09-2025"
 edited: "05-09-2025"
 ---
@@ -15,7 +15,7 @@ let me tell you.
 
 The company is almost entirely managed by only three people on the day-to-day over the summer. 
 Dave, the owner of the company, a marketing co-op student, and a software developer co-op student 
-(me as of writing). That's right, three people managing over 580 teams across 8 different sports 
+(me as of this writing). That's right, three people managing over 580 teams across 8 different sports 
 over the summer, and just one person from fall through spring. How do we do this? Largely in part 
 by proprietary software built entirely by past and present University of Guelph software engineering 
 and computer science co-op students.
@@ -62,7 +62,7 @@ abilities. At the start of my work term this is what my initial list of “TODOs
 4. A slew of bug fixes and UI tweaks to make the admin control panel easier to use, and less cumbersome in certain areas. This included fixing various pages not loading, fixing certain buttons that were not working as expected, adding small missing features like the ability to move people on and off registration waitlists, opening player information quick edit pages when their names are clicked in various places though the control panel, and so much more.
 
 As I worked my way through the list, more and more ideas and tasks would pop up. Part of my job was to notice 
-what things could be improved, then tackle improving them. There was never a shortage of features to add, 
+which things could be improved, then tackle improving them. There was never a shortage of features to add, 
 or bugs to fix. There is always something.
 
 <br/>
@@ -139,7 +139,7 @@ The new UI is also built to be vastly more compact, and easier to read and navig
 various basic features the old system lacked such as back buttons (which previously would require used to reload 
 their page to go back)
 
-### Here is what the new system looks like:
+### The New System
 
 ![Schedules Standings Widget](https://www.metallicgoat.ca/blogs/pmotion/SchedulesStandingsWidget.png)
 
@@ -171,7 +171,7 @@ in PHP, the new client written in Typescript in React, as well as the old system
 I got to build the admin tools to control the widgets, including the admin UI, and the related databases. I also built the client 
 UI which interacts with data hosted on the rest API I just built. I actually got to see my work in action, with real people using 
 it and providing feedback. Over the summer I played in our volleyball leagues, becoming a user from both the admin, and client facing 
-tools I built. It's one thing to build something cool, and another thing to see something you build in real action, and I got too up close.
+tools I built. It's one thing to build something cool, and another thing to see something you build in real action, and I got to up close.
 
 <br/>
 

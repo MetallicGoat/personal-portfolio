@@ -170,5 +170,5 @@ const NavBar = () => {
 export default NavBar;
 
 function openResume() {
-  window.open("/pdfs/ResumeV3.pdf", '_blank');
+  window.open("/pdfs/ResumeV4.pdf", '_blank');
 }
