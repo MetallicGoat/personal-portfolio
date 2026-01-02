@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Portfolio",
+  title: "Emile Christian Azzam's Personal Portfolio",
   description: "A collection of things I have worked on, and my life as a whole.",
 };
 
