@@ -1,19 +1,14 @@
-import {useEffect, useMemo, useState} from "react";
-import Particles, {initParticlesEngine} from "@tsparticles/react";
-import {type Container, type ISourceOptions} from "@tsparticles/engine";
+import {useMemo} from "react";
+import Particles, {ParticlesProvider, useParticlesProvider} from "@tsparticles/react";
+import {type Container, type Engine, type ISourceOptions} from "@tsparticles/engine";
 import {loadSlim} from "@tsparticles/slim";
 
+const initParticlesEngine = async (engine: Engine) => {
+  await loadSlim(engine);
+};
 
-const BackgroundLinkParticles = () => {
-  const [init, setInit] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
+const BackgroundLinkParticlesInner = () => {
+  const {loaded} = useParticlesProvider();
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
     console.log(container);
@@ -68,7 +63,7 @@ const BackgroundLinkParticles = () => {
     [],
   );
 
-  if (init) {
+  if (loaded) {
     return (
       <Particles
         className="-z-10"
@@ -81,5 +76,11 @@ const BackgroundLinkParticles = () => {
 
   return <></>;
 };
+
+const BackgroundLinkParticles = () => (
+  <ParticlesProvider init={initParticlesEngine}>
+    <BackgroundLinkParticlesInner/>
+  </ParticlesProvider>
+);
 
 export default BackgroundLinkParticles;

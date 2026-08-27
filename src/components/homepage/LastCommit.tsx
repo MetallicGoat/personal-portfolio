@@ -19,7 +19,7 @@ interface GitHubEvent {
     name: string;
   };
   payload: {
-    commits: {
+    commits?: {
       author: {
         name: string;
       };
@@ -41,22 +41,25 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
         const {data} = await axios.get(`https://api.github.com/users/${username}/events`);
         const pushEvent = data.find((event: GitHubEvent) =>
           event.type === 'PushEvent' &&
-          !event.repo.name.match(`${username}/personal-portfolio`)
+          !event.repo.name.match(`${username}/personal-portfolio`) &&
+          (event.payload.commits?.length ?? 0) > 0
         );
 
-        if (pushEvent) {
+        const commits = pushEvent?.payload.commits;
+
+        if (pushEvent && commits) {
           let pos = 0;
 
           // Eg. for a pull request, show my merge, not someone else's work
           // Don't want to claim something that's not mine
-          while (pos + 1 < pushEvent.payload.commits.length) {
-            if (pushEvent.payload.commits[0].author.name === username)
+          while (pos + 1 < commits.length) {
+            if (commits[0].author.name === username)
               break;
 
             pos++;
           }
 
-          const latestCommit = pushEvent.payload.commits[pos];
+          const latestCommit = commits[pos];
 
           setCommit({
             created_at: pushEvent.created_at,
