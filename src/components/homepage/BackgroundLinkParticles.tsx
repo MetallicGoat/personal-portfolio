@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import Particles, {ParticlesProvider, useParticlesProvider} from "@tsparticles/react";
-import {type Container, type Engine, type ISourceOptions} from "@tsparticles/engine";
+import {type Engine, type ISourceOptions} from "@tsparticles/engine";
 import {loadSlim} from "@tsparticles/slim";
 
 const initParticlesEngine = async (engine: Engine) => {
@@ -10,20 +10,19 @@ const initParticlesEngine = async (engine: Engine) => {
 const BackgroundLinkParticlesInner = () => {
   const {loaded} = useParticlesProvider();
 
-  const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
-  };
-
   const options: ISourceOptions = useMemo(
     () => ({
       fpsLimit: 120,
+      hdr: false,
       style: {
         position: "absolute",
         index: -1
       },
       particles: {
-        color: {
-          value: "#c3c3c3",
+        paint: {
+          color: {
+            value: "#c3c3c3",
+          },
         },
         links: {
           color: "#9d9d9d",
@@ -68,7 +67,6 @@ const BackgroundLinkParticlesInner = () => {
       <Particles
         className="-z-10"
         id="tsparticles"
-        particlesLoaded={particlesLoaded}
         options={options}
       />
     );

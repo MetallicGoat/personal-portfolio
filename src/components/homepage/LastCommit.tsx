@@ -1,16 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import Image from "next/image";
 
 interface CommitProps {
   username: string;
-}
-
-interface CommitData {
-  created_at: string;
-  message: string;
-  repoName: string;
-  url: string;
 }
 
 interface GitHubEvent {
@@ -19,97 +11,124 @@ interface GitHubEvent {
     name: string;
   };
   payload: {
-    commits?: {
-      author: {
-        name: string;
-      };
-      message: string;
-      sha: string;
-    }[];
+    // PushEvent payloads no longer carry the commits themselves, only the SHAs
+    head?: string;
   };
   created_at: string;
 }
 
-
-const LastCommit: React.FC<CommitProps> = ({username}) => {
-  const [commit, setCommit] = useState<CommitData | null>(null);
-
-  useEffect(() => {
-    // API call to get the latest github stats
-    (async () => {
-      try {
-        const {data} = await axios.get(`https://api.github.com/users/${username}/events`);
-        const pushEvent = data.find((event: GitHubEvent) =>
-          event.type === 'PushEvent' &&
-          !event.repo.name.match(`${username}/personal-portfolio`) &&
-          (event.payload.commits?.length ?? 0) > 0
-        );
-
-        const commits = pushEvent?.payload.commits;
-
-        if (pushEvent && commits) {
-          let pos = 0;
-
-          // Eg. for a pull request, show my merge, not someone else's work
-          // Don't want to claim something that's not mine
-          while (pos + 1 < commits.length) {
-            if (commits[0].author.name === username)
-              break;
-
-            pos++;
-          }
-
-          const latestCommit = commits[pos];
-
-          setCommit({
-            created_at: pushEvent.created_at,
-            message: latestCommit.message,
-            repoName: pushEvent.repo.name,
-            url: `https://github.com/${pushEvent.repo.name}/commit/${latestCommit.sha}`,
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching commit data:', error);
-      }
-    })();
-  }, [username]);
-
-  const checkDayMatch = (date: Date, commitDate: Date) => {
-    return date.getFullYear() === commitDate.getFullYear() &&
-      date.getMonth() === commitDate.getMonth() &&
-      date.getDate() === commitDate.getDate();
+interface GitHubCommit {
+  html_url: string;
+  // The GitHub account behind the commit, null when the email matches no account
+  author: {
+    login: string;
+  } | null;
+  commit: {
+    message: string;
   };
-
-  const checkYesterdayMatch = (date: Date, commitDate: Date) => {
-    // Subtract one day from the current date
-    date.setDate(date.getDate() - 1);
-    return checkDayMatch(date, commitDate);
+  stats?: {
+    additions: number;
+    deletions: number;
   };
+  files?: unknown[];
+}
 
-  const formatTime = (date: Date) => {
-    const hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure two digits for minutes
-    return `${hours}:${minutes}`;
-  };
+// Each push event costs an extra request to resolve
+const MAX_PUSH_EVENTS_CHECKED = 5;
 
-  const getDateString = () => {
-    if (commit == null)
-      return "UNKNOWN";
+// One shared fetch per hour for every visitor, rather than two per page load per visitor
+const REVALIDATE_SECONDS = 3600;
 
-    const currentDate = new Date();
-    const commitDate = new Date(commit.created_at);
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-    if (checkDayMatch(currentDate, commitDate)) {
-      return `Today at ${formatTime(commitDate)}`;
-    } else if (checkYesterdayMatch(currentDate, commitDate)) {
-      return `Yesterday at ${formatTime(commitDate)}`;
-    } else {
-      return commitDate.toLocaleDateString();
+/* The page is prerendered, so there is no visitor clock to read. Commits are shown in my timezone */
+const DAY = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/Toronto',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+});
+
+const TIME = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/Toronto',
+  hour: 'numeric',
+  minute: '2-digit',
+  hourCycle: 'h23'
+});
+
+/*
+  GitHub rejects requests with no User-Agent (403), which the browser used to set for us.
+  Returns null rather than throwing, so an outage cannot take the whole page down.
+ */
+async function githubFetch<T>(path: string): Promise<T | null> {
+  try {
+    const response = await fetch(`https://api.github.com${path}`, {
+      cache: 'force-cache',
+      next: {revalidate: REVALIDATE_SECONDS},
+      headers: {'Accept': 'application/vnd.github+json', 'User-Agent': 'personal-portfolio'},
+    });
+
+    if (!response.ok) {
+      console.error(`GitHub API ${path} responded ${response.status}`);
+      return null;
     }
-  };
 
-  if (!commit)
-    return "";
+    return await response.json() as T;
+  } catch (error) {
+    console.error(`Error fetching ${path}:`, error);
+    return null;
+  }
+}
+
+const getDateString = (date: Date) => {
+  const now = Date.now();
+  const day = DAY.format(date);
+
+  if (day === DAY.format(now))
+    return `Today at ${TIME.format(date)}`;
+
+  if (day === DAY.format(now - MS_PER_DAY))
+    return `Yesterday at ${TIME.format(date)}`;
+
+  return day;
+};
+
+const LastCommit = async ({username}: CommitProps) => {
+  const events = await githubFetch<GitHubEvent[]>(`/users/${username}/events/public`);
+
+  const pushEvents = (events ?? [])
+    .filter((event) =>
+      event.type === 'PushEvent' &&
+      event.repo.name !== `${username}/personal-portfolio` &&
+      event.payload.head
+    )
+    .slice(0, MAX_PUSH_EVENTS_CHECKED);
+
+  // Eg. for a pull request, show my merge, not someone else's work
+  // Don't want to claim something that's not mine
+  let latest: { event: GitHubEvent, commit: GitHubCommit } | null = null;
+
+  for (const event of pushEvents) {
+    // Eg. null when the push was force pushed away, or the repo went private
+    const commit = await githubFetch<GitHubCommit>(`/repos/${event.repo.name}/commits/${event.payload.head}`);
+
+    if (!commit)
+      continue;
+
+    // Falls back to the most recent push when none of them turn out to be mine
+    latest ??= {event, commit};
+
+    if (commit.author?.login.toLowerCase() === username.toLowerCase()) {
+      latest = {event, commit};
+      break;
+    }
+  }
+
+  if (!latest)
+    return null;
+
+  const {event, commit} = latest;
+  const filesChanged = commit.files?.length ?? 0;
 
   return (
     <>
@@ -133,22 +152,35 @@ const LastCommit: React.FC<CommitProps> = ({username}) => {
               <tr className="border-b dark:border-neutral-700">
                 <th className="dark:text-white min-w-52 text-left px-4 py-1 whitespace-normal break-words">Project:</th>
                 <td
-                  className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.repoName.replace("MetallicGoat/", "")}</td>
+                  className="dark:text-white px-4 py-1 whitespace-normal break-words">{event.repo.name.replace("MetallicGoat/", "")}</td>
               </tr>
               <tr className="border-b dark:border-neutral-700">
                 <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Latest Contribution:
                 </th>
-                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{getDateString()}</td>
+                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">
+                  <time dateTime={event.created_at}>{getDateString(new Date(event.created_at))}</time>
+                </td>
               </tr>
               <tr className="border-b dark:border-neutral-700">
                 <th className="dark:text-white text-left text-wrap px-4 py-1 whitespace-normal break-words">Commit
                   Message:
                 </th>
-                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.message}</td>
+                <td
+                  className="dark:text-white px-4 py-1 whitespace-normal break-words">{commit.commit.message.split('\n')[0]}</td>
+              </tr>
+              <tr className="border-b dark:border-neutral-700">
+                <th className="dark:text-white text-left px-4 py-1 whitespace-normal break-words">Changes:</th>
+                <td className="dark:text-white px-4 py-1 whitespace-normal break-words">
+                  <span className="text-green-700 dark:text-green-400 font-bold">+{commit.stats?.additions ?? 0}</span>
+                  <span className="ml-2 text-red-700 dark:text-red-400 font-bold">&minus;{commit.stats?.deletions ?? 0}</span>
+                  <span className="ml-2">
+                    across {filesChanged} {filesChanged === 1 ? "file" : "files"}
+                  </span>
+                </td>
               </tr>
               </tbody>
             </table>
-            <a href={commit.url} target="_blank" rel="noopener noreferrer"
+            <a href={commit.html_url} target="_blank" rel="noopener noreferrer"
                className="text-blue-600 hover:text-blue-800 block text-center mt-2 font-bold">
               View Contribution on GitHub
             </a>

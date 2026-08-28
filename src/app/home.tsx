@@ -1,15 +1,19 @@
 'use client'
 
 import {BsChevronDoubleDown, BsGithub, BsInstagram, BsLinkedin} from 'react-icons/bs';
-import {FunctionComponent} from "react";
+import {FunctionComponent, ReactNode} from "react";
 import {motion} from 'framer-motion';
 import ProjectsSection from "@/components/homepage/ProjectsSection";
-import LastCommit from "@/components/homepage/LastCommit";
 import {InteractiveImage} from "@/components/homepage/InteractiveImage";
 import BackgroundLinkParticles from "@/components/homepage/BackgroundLinkParticles";
 import profile from "@/public/pofile.jpg";
 
-export default function Home() {
+interface HomeProps {
+  /* Rendered on the server, passed in because this component is client side */
+  lastCommit: ReactNode;
+}
+
+export default function Home({lastCommit}: HomeProps) {
 
   const yearsSince = (birthdate: Date) => Math.floor((Date.now() - birthdate.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
 
@@ -83,7 +87,7 @@ export default function Home() {
       {/*Last Contribution*/}
       <section>
         <div className="mt-10 mb-10">
-          <LastCommit username="MetallicGoat"/>
+          {lastCommit}
         </div>
       </section>
 

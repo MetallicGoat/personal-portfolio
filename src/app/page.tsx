@@ -1,7 +1,8 @@
 import Home from "@/app/home";
+import LastCommit from "@/components/homepage/LastCommit";
 
 export default function Page() {
   return (
-    <Home/>
+    <Home lastCommit={<LastCommit username="MetallicGoat"/>}/>
   );
 }

@@ -105,7 +105,8 @@ export const InteractiveImage: React.FC<InteractiveImageProps> = ({src, alt, cla
         whileTap={{scale: 0.95}}
         whileHover={{scale: 1.05}}
       >
-        <Image className={className} src={src} alt={alt} width={500} height={500} sizes="100vw"/>
+        <Image className={className} src={src} alt={alt} width={500} height={500}
+               sizes="(min-width: 768px) 33vw, 75vw" loading="eager"/>
       </motion.div>
     </motion.div>
   );

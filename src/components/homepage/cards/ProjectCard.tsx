@@ -1,12 +1,8 @@
 import Image, {StaticImageData} from "next/image";
 import React, {FunctionComponent} from "react";
-import java_icon from "@/public/logos/java.png";
-import javascript_icon from "@/public/logos/javascript.png";
-import mbedwars_icon from "@/public/logos/mbedwars.png";
-import spigot_icon from "@/public/logos/spigot.png";
-import papermc_icon from "@/public/logos/papermc.png";
 
-import {BsGithub} from 'react-icons/bs';
+import {BsBoxArrowUpRight, BsPeopleFill} from 'react-icons/bs';
+import {BlurBackdrop, CARD_IMAGE_SIZES} from "@/components/homepage/cards/BlurBackdrop";
 
 export enum ProjectStatus {
   Ongoing = 'ACTIVE DEVELOPMENT',
@@ -29,59 +25,99 @@ function getStatusClass(status: ProjectStatus) {
   }
 }
 
-export enum CompatibleBubble {
-  Java,
-  JavaScript,
-  MBedwars,
-  Spigot,
-  Paper
-}
-
-function getCompatibleBubbleImage(type: CompatibleBubble) {
-  switch (type) {
-    case CompatibleBubble.Java:
-      return java_icon;
-    case CompatibleBubble.JavaScript:
-      return javascript_icon;
-    case CompatibleBubble.MBedwars:
-      return mbedwars_icon;
-    case CompatibleBubble.Spigot:
-      return spigot_icon;
-    case CompatibleBubble.Paper:
-      return papermc_icon;
-  }
-}
-
 interface TileProps {
   title: string
   description: string;
   link: string;
   image: StaticImageData;
-  bubbles: CompatibleBubble[];
   status: ProjectStatus;
+  /* GitHub usernames of the people I built this with */
+  collaborators?: string[];
 }
 
-export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, description, bubbles, status}) => {
-  return (
-    <div className="relative w-full mx-auto max-w-sm bg-gray-200 rounded-xl overflow-hidden shadow-lg RGB:rgb-border">
-      <Bubbles
-        className="absolute inset-0 z-50"
-        bubbles={bubbles}
-        link={link}
+const CollaboratorLink: FunctionComponent<{ username: string }> = ({username}) => (
+  <a
+    className="font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+    href={`https://github.com/${username}`}
+    target="_blank"
+    rel="noreferrer noopener">
+    @{username}
+  </a>
+);
+
+/* Shared by the linked and unlinked versions of the image panel */
+const IMAGE_PANEL_CLASSES = "group relative flex justify-center bg-gray-300 dark:bg-neutral-700 max-h-60 sm:h-72 overflow-hidden";
+
+export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, description, status, collaborators}) => {
+  const hasCollaborators = !!collaborators && collaborators.length > 0;
+
+  const picture = (
+    <>
+      {/*Background*/}
+      <BlurBackdrop image={image}/>
+
+      {/*Real Image*/}
+      <Image
+        className="z-20 w-auto object-contain transition duration-300 group-hover:scale-105"
+        src={image}
+        sizes={CARD_IMAGE_SIZES}
+        alt={title}
       />
+    </>
+  );
 
-      <div className="relative flex justify-center bg-gray-300 dark:bg-neutral-700 max-h-60 sm:h-72 overflow-hidden">
-        {/*Background*/}
-        <Image className="absolute blur-xl inset-0 h-full w-full" src={image} alt="Image failed to load!"/>
+  return (
+    <div
+      className="relative flex h-full w-full max-w-sm mx-auto flex-col bg-gray-200 rounded-xl overflow-hidden shadow-lg dark:bg-neutral-900 RGB:rgb-border">
+      {link ? (
+        <a
+          className={`${IMAGE_PANEL_CLASSES} cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-inset`}
+          href={link}
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label={`Open the ${title} project page`}>
 
-        {/*Real Image*/}
-        <Image className="z-20 w-auto object-contain" src={image} alt="Image failed to load!"/>
-      </div>
+          {picture}
 
-      <h3 className={`font-bold text-center px-2 dark:text-white ${getStatusClass(status)}`}>Status: {status}</h3>
+          {/*Click affordance*/}
+          <span
+            className="z-30 absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+            <BsBoxArrowUpRight className="w-8 h-8 text-white drop-shadow"/>
+          </span>
+        </a>
+      ) : (
+        <div className={IMAGE_PANEL_CLASSES}>{picture}</div>
+      )}
 
-      <div className="px-1 md:p-3 py-2 h-full dark:bg-neutral-900">
-        <h1 className="font-bold text-lg sm:mb-1 dark:text-white">
+      {hasCollaborators && (
+        <div className="group/collab absolute top-2 right-2 z-40">
+          <span
+            tabIndex={0}
+            aria-label={`Built in collaboration with ${collaborators.join(', ')}`}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm ring-1 ring-white/25 cursor-help focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+            <BsPeopleFill className="h-4 w-4"/>
+          </span>
+
+          {/* pt-2 bridges the gap, so the panel stays hovered while the cursor travels onto it */}
+          <div
+            className="absolute right-0 top-full pt-2 w-max max-w-56 invisible opacity-0 transition-opacity duration-200 group-hover/collab:visible group-hover/collab:opacity-100 group-focus-within/collab:visible group-focus-within/collab:opacity-100">
+            <div
+              className="rounded-lg bg-white/95 dark:bg-neutral-800/95 px-3 py-2 text-sm shadow-lg ring-1 ring-black/10 dark:ring-white/10">
+              <p className="font-bold mb-1 dark:text-white">Built in collaboration with</p>
+              <ul>
+                {collaborators.map((username) => (
+                  <li key={username}><CollaboratorLink username={username}/></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <h3 className={`font-bold text-center px-2 py-1 dark:text-white ${getStatusClass(status)}`}>Status: {status}</h3>
+
+      <div className="flex-1 px-6 py-4">
+        <h1 className="font-bold text-xl mb-2 dark:text-white">
           {title}
         </h1>
 
@@ -93,40 +129,3 @@ export const ProjectCard: FunctionComponent<TileProps> = ({title, image, link, d
 
   )
 }
-
-interface BubblesProps {
-  bubbles: CompatibleBubble[];
-  link: string
-  className: string;
-}
-
-const Bubbles: FunctionComponent<BubblesProps> = ({bubbles, className, link}) => {
-  const tags: React.ReactNode[] = [];
-
-  let i = 1;
-
-  bubbles.forEach(bubble => {
-    tags.push(
-      <Image
-        className="rounded-full w-2/6 bg-white text-sm font-semibold text-gray-700"
-        width="1000"
-        height="1000"
-        src={getCompatibleBubbleImage(bubble)}
-        alt="X"
-        key={i}
-      />
-    )
-    i++;
-  });
-
-  return (
-    <div className={`flex justify-between  ${className}`}>
-      <a className="rounded-full bg-white w-16 h-16 p-2 m-2 xs:m-1 sm:m-2 ease-in duration-150 hover:bg-gray-200"
-         href={link} target="_blank" rel="noreferrer noopener">
-        <BsGithub className="w-full h-full text-neutral-700"/>
-      </a>
-
-      <div className=" w-1/2 flex flex-col items-end gap-2 xs:gap-1 sm:gap-2 p-2 xs:p-1 sm:p-2">{tags}</div>
-    </div>
-  )
-};
