@@ -30,7 +30,7 @@ export const photos: Photo[] = [
     slug: "hiking-the-valley",
     title: "Hiking the Valley",
     hashTags: ["hiking", "Alberta", "backpacking"],
-    description: "Avery and I part way up the Berh Lake trail",
+    description: "Avery and I part way up the Berg Lake trail",
     image: avery_hiking_img,
   },
   {
